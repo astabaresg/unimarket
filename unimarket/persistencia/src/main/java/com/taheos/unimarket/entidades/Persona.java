@@ -40,7 +40,7 @@ public class Persona implements Serializable {
 	 * identificacion de la persona
 	 */
 	@Id
-	@Column(name = "identificacion", length = 20)
+	@Column(length = 20)
 	private String id;
 
 	/**
@@ -53,16 +53,23 @@ public class Persona implements Serializable {
 	 */
 	@Column(length = 40, updatable = true)
 	private String correo;
+
+	/**
+	 * Numero de telefono asociado a la persona
+	 */
+	@Column(length = 15, updatable = true)
+	private String num_telefono;
+	/**
+	 * Direccion de la persona
+	 */
+	@Column(length = 30, updatable = true)
+	private String direccion;
+	
 	/**
 	 * clave de ingreso de la persona
 	 */
 	@Column(length = 15, updatable = true, unique = false)
 	private String clave;
-	/**
-	 * cargo de la persona
-	 */
-	@Column(length = 15, updatable = false)
-	private String rol;
 
 	public Persona() {
 		super();
@@ -124,18 +131,22 @@ public class Persona implements Serializable {
 		this.clave = clave;
 	}
 
-	/**
-	 * @return the rol
-	 */
-	public String getRol() {
-		return rol;
+	
+
+	public String getNum_telefono() {
+		return num_telefono;
 	}
 
-	/**
-	 * @param rol the rol to set
-	 */
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setNum_telefono(String num_telefono) {
+		this.num_telefono = num_telefono;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	/*
