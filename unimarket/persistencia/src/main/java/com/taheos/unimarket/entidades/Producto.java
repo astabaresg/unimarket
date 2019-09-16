@@ -49,11 +49,6 @@ public class Producto implements Serializable {
 	private byte[] imagen;
 
 	/**
-	 * Comentarios del productos
-	 */
-	@ElementCollection
-	private List<String> comentarios;
-	/**
 	 * Disponible o no
 	 */
 	@Enumerated(EnumType.STRING)
@@ -64,8 +59,26 @@ public class Producto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
+	/**
+	 * Productos de una compra
+	 */
 	@ManyToOne
 	private Compra compra;
+	
+	/**
+	 * Lista de favoritos donde se encuentra 
+	 */
+	@ManyToOne
+	private Favorito favorito;
+	
+	/**
+	 * Comentarios del producto
+	 */
+	@OneToMany(mappedBy = "producto")
+	private List<Comentario> comentarios;
+	
+	@OneToMany(mappedBy = "producto")
+	private List<Calificacion> calificaciones;
 	/**
 	 * Fecha limite del producto
 	 */
@@ -130,18 +143,6 @@ public class Producto implements Serializable {
 		this.imagen = imagen;
 	}
 
-	public List<String> getComentarios() {
-		return comentarios;
-	}
-
-	public void setComentarios(List<String> comentarios) {
-		this.comentarios = comentarios;
-	}
-
-	public void agregarComentario(String comentario) {
-		this.comentarios.add(comentario);
-	}
-
 	public Disponibilidad getDisponibilidad() {
 		return disponibilidad;
 	}
@@ -173,6 +174,39 @@ public class Producto implements Serializable {
 	public void setCalificacion(double calificacion) {
 
 		this.calificacion = calificacion;
+	}
+
+	
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+
+	public Favorito getFavorito() {
+		return favorito;
+	}
+
+	public void setFavorito(Favorito favorito) {
+		this.favorito = favorito;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public List<Calificacion> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(List<Calificacion> calificaciones) {
+		this.calificaciones = calificaciones;
 	}
 
 	@Override
