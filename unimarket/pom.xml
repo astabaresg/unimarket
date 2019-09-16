@@ -61,5 +61,6 @@
 	</build>
 	<modules>
 		<module>Persistencia</module>
+		<module>pruebas</module>
 	</modules>
 </project>
