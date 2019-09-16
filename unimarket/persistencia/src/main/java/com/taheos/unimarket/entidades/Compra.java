@@ -2,6 +2,8 @@ package com.taheos.unimarket.entidades;
 
 import java.io.Serializable;
 import java.lang.Long;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -20,6 +22,14 @@ public class Compra implements Serializable {
 	@Column(length = 50)
 	private Long id_compra;
 	
+	/**
+	 * Relacion de muchos productos en una compra
+	 */
+	@OneToMany(mappedBy = "compra")
+	private List<Producto> productos;
+	
+	@ManyToOne
+	private Usuario usuario;
 	private static final long serialVersionUID = 1L;
 
 	public Compra() {

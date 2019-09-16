@@ -3,6 +3,8 @@ package com.taheos.unimarket.entidades;
 import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.enums.Rol;
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -19,6 +21,9 @@ public class Usuario extends Persona implements Serializable {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Compra> compras;
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {

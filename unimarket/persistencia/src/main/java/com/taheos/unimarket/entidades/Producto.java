@@ -63,6 +63,9 @@ public class Producto implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
+	
+	@ManyToOne
+	private Compra compra;
 	/**
 	 * Fecha limite del producto
 	 */
