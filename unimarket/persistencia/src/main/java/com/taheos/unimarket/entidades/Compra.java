@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.taheos.unimarket.enums.MetodoPago;
+
 /**
  * Entity implementation class for Entity: Compra
  *
@@ -39,6 +41,12 @@ public class Compra implements Serializable {
 	 */
 	@Column(updatable = true)
 	private double total_compra;
+	
+	/**
+	 * Metodo de pago para la compra
+	 */
+	@Enumerated(EnumType.STRING)
+	private MetodoPago metodoPago;
 	private static final long serialVersionUID = 1L;
 
 	public Compra() {
@@ -68,6 +76,13 @@ public class Compra implements Serializable {
 	}
 	public void setTotal_compra(double total_compra) {
 		this.total_compra = total_compra;
+	}
+	
+	public MetodoPago getMetodoPago() {
+		return metodoPago;
+	}
+	public void setMetodoPago(MetodoPago metodoPago) {
+		this.metodoPago = metodoPago;
 	}
 	@Override
 	public int hashCode() {
