@@ -24,12 +24,16 @@ public class Compra implements Serializable {
 	@Column(length = 50)
 	private Long id_compra;
 	
+//	/**
+//	 * Relacion de muchos productos en una compra
+//	 */
+//	@OneToMany(mappedBy = "compra")
+//	private List<Producto> productos;
 	/**
-	 * Relacion de muchos productos en una compra
+	 * Una lista donde se muestra la informacion de la compra
 	 */
 	@OneToMany(mappedBy = "compra")
-	private List<Producto> productos;
-	
+	private List<DetalleCompra> detallesCompra;
 	/**
 	 * Usuario que realiza la compra
 	 */
@@ -59,12 +63,12 @@ public class Compra implements Serializable {
 	public void setId_compra(Long id_compra) {
 		this.id_compra = id_compra;
 	}
-	public List<Producto> getProductos() {
-		return productos;
-	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
+//	public List<Producto> getProductos() {
+//		return productos;
+//	}
+//	public void setProductos(List<Producto> productos) {
+//		this.productos = productos;
+//	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -83,6 +87,12 @@ public class Compra implements Serializable {
 	}
 	public void setMetodoPago(MetodoPago metodoPago) {
 		this.metodoPago = metodoPago;
+	}
+	public List<DetalleCompra> getDetallesCompra() {
+		return detallesCompra;
+	}
+	public void setDetallesCompra(List<DetalleCompra> detallesCompra) {
+		this.detallesCompra = detallesCompra;
 	}
 	@Override
 	public int hashCode() {

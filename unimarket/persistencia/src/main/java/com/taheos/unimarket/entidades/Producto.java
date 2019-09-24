@@ -41,7 +41,12 @@ public class Producto implements Serializable {
 	 */
 	@Column(updatable = true, nullable = false)
 	private double precio;
-
+	
+	/**
+	 * Muestra 
+	 */
+	@OneToMany(mappedBy = "producto")
+	private List<DetalleCompra> detalleCompra;
 	/**
 	 * representa la imagen que se desea almacenar en la base de datos
 	 */
@@ -85,7 +90,10 @@ public class Producto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, updatable = true)
 	private Date fecha_limite;
-
+	/**
+	 * cantidad que se tiene de el productom actual 
+	 */
+	private int cantidad;
 	/**
 	 * Calificacion del producto
 	 */
@@ -207,6 +215,23 @@ public class Producto implements Serializable {
 
 	public void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
+	}
+
+	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public List<DetalleCompra> getDetalleCompra() {
+		return detalleCompra;
+	}
+
+	public void setDetalleCompra(List<DetalleCompra> detalleCompra) {
+		this.detalleCompra = detalleCompra;
 	}
 
 	@Override

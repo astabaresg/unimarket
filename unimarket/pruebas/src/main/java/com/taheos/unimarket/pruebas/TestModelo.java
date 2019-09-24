@@ -45,10 +45,14 @@ public class TestModelo {
 	 */
 	@Deployment
 	public static Archive<?> createTestArchive() {
-		return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Persona.class.getPackage())
+		return ShrinkWrap.create(WebArchive.class, "prueba.war").addPackage(Persona.class.getPackage())
 				.addAsResource("persistenceForTest.xml", "META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
+	}
+	@Test
+	public void generarTest() {
+		
 	}
 
 	@Test
