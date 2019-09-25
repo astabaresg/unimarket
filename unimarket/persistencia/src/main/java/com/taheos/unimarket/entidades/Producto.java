@@ -64,11 +64,7 @@ public class Producto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
-	/**
-	 * Productos de una compra
-	 */
-	@ManyToOne
-	private Compra compra;
+
 	
 	/**
 	 * Lista de favoritos donde se encuentra 
@@ -185,14 +181,7 @@ public class Producto implements Serializable {
 	}
 
 	
-	public Compra getCompra() {
-		return compra;
-	}
-
-	public void setCompra(Compra compra) {
-		this.compra = compra;
-	}
-
+	
 	public Favorito getFavorito() {
 		return favorito;
 	}
