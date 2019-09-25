@@ -5,10 +5,14 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -47,7 +51,7 @@ public class TestJames {
 	public void agregarProductoTest() {
 		
 		Producto nuevoP = new Producto();
-		nuevoP.setId(1000301L);
+		nuevoP.setId(new Long(12345));
 		nuevoP.setNombre("Reloj Rolex");
 		nuevoP.setDescripcion("Reloj Rolex Original");
 		nuevoP.setPrecio(1000000.0);
@@ -57,4 +61,14 @@ public class TestJames {
 		
 		
 	}
+	
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Producto.json"})
+	public void buscarTest(){
+	Producto producto = entityManager.find(Producto.class, "1234");
+	Assert.assertEquals("Pc ASUS", producto.getNombre());
+	}
+	
+	
 }
