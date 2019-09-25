@@ -7,13 +7,21 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Comentario
  *
  */
+@NamedQueries({ @NamedQuery(name = Comentario.LISTAR_TODOS, query = "select c from Comentario c"),
+	@NamedQuery(name = Comentario.LISTAR_POR_CREDENCIALES, query = "select c from Comentario c where c.id_comentario =:id_comentario")})
 @Entity
-
 public class Comentario implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * constante que representa la consulta LISTARTODOS
+	 */
+	public static final String LISTAR_TODOS = "ListarComentarios";
+	/**
+	 * constante que representa la consulta LISTARPORCREDENCIALES
+	 */
+	public static final String LISTAR_POR_CREDENCIALES = "ListarComentariosPorCredenciales";
 
 	/**
 	 * Identificador unico de la compra
