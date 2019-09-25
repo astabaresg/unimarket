@@ -1,0 +1,25 @@
+{
+	"DETALLECOMPRA": [
+		{
+			"id_detalleCompra": 9876,
+			"cantidad": 7,
+			"precioCompra": 20000.0,
+			"compra_Id_Compra": 1324,
+			"producto_Id": 1234
+		},
+		{
+			"id_detalleCompra": 9786,
+			"cantidad": 6,
+			"precioCompra": 30000.0,
+			"compra_Id_Compra": 4321,
+			"producto_Id": 4321
+		},
+		{
+			"id_detalleCompra": 5678,
+			"cantidad": 9,
+			"precioCompra": 40000.0,
+			"compra_Id_Compra": 12345,
+			"producto_Id": 6789
+		}
+	]
+}
