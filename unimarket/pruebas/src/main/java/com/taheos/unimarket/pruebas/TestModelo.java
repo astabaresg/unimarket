@@ -24,7 +24,6 @@ import com.taheos.unimarket.enums.Rol;
 /**
  * Clase de pruebas dedicada para la pruebas de las entidades
  * 
- * @author EinerZG
  * @version 1.0
  */
 @RunWith(Arquillian.class)
@@ -33,7 +32,6 @@ public class TestModelo {
 	/**
 	 * instancia para realizar las transaciones con las entidades
 	 * 
-	 * BRUTAL (INVESTIGAR)
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -1,7 +1,6 @@
  package com.taheos.unimarket.entidades;
 
 import java.io.Serializable;
-import java.lang.String;
 import javax.persistence.*;
 
 /**
