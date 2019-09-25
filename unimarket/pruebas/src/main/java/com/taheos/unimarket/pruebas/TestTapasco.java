@@ -80,6 +80,7 @@ public class TestTapasco {
 	 */
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
 	public void buscarPersona(){
 		
 		Persona a= entityManager.find(Persona.class, "02");
@@ -94,21 +95,20 @@ public class TestTapasco {
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Persona.json"})
-	public void crearAdministrador(Persona p){
+	public void crearAdministrador(){
+		Persona  admin= new Administrador();
+		admin.setNombre("nuevo");
+		admin.setId("04");
+		admin.setNum_telefono("322454353");
+		admin.setClave("nuevopepito123");
+		admin.setCorreo("nuevopepito@gmail.com");
+		admin.setDireccion("la casa el nuevo cliente");
 		
-//		Administrador admin= new Administrador();
-//		admin.setNombre("nuevo");
-//		admin.setId("04");
-//		admin.setNum_telefono("322454353");
-//		admin.setClave("nuevopepito123");
-//		admin.setCorreo("nuevopepito@gmail.com");
-//		admin.setDireccion("la casa el nuevo cliente");
-//		
-//		entityManager.persist(p);
-//		
-//		Persona buscada= entityManager.find(Administrador.class, "04");
-//	
-//		Assert.assertEquals("nuevo", buscada.getNombre());
+		entityManager.persist(admin);
+		
+		Administrador buscada= entityManager.find(Administrador.class, "04");
+	
+		Assert.assertEquals("nuevo", buscada.getNombre());
 		
 	}
 }
