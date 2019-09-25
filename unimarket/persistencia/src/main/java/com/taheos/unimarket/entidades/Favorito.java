@@ -34,8 +34,8 @@ public class Favorito implements Serializable {
 	/**
 	 * Lista de productos en favoritos
 	 */
-	@OneToMany(mappedBy = "favorito")
-	private List<Producto> productos;
+	@OneToOne
+	private Producto producto;
 	public Favorito() {
 		super();
 	}
@@ -51,11 +51,11 @@ public class Favorito implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public List<Producto> getProductos() {
-		return productos;
+	public Producto getProductos() {
+		return producto;
 	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 	@Override
 	public int hashCode() {
