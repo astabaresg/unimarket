@@ -13,6 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.taheos.unimarket.entidades.Persona;
+import com.taheos.unimarket.entidades.Producto;
+import com.taheos.unimarket.enums.Categoria;
+import com.taheos.unimarket.enums.Disponibilidad;
 
 /**
  * Clase de pruebas dedicada para la pruebas de las entidades
@@ -41,7 +44,17 @@ public class TestJames {
 
 	}
 	@Test
-	public void generarTest() {
+	public void agregarProductoTest() {
+		
+		Producto nuevoP = new Producto();
+		nuevoP.setId(1000301L);
+		nuevoP.setNombre("Reloj Rolex");
+		nuevoP.setDescripcion("Reloj Rolex Original");
+		nuevoP.setPrecio(1000000.0);
+		nuevoP.setDisponibilidad(Disponibilidad.DISPONIBLE);
+		nuevoP.setCategoria(Categoria.JOYAS);
+		nuevoP.setCalificacion(10);
+		
 		
 	}
 }
