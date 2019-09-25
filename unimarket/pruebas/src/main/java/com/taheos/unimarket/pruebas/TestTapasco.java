@@ -20,7 +20,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.taheos.unimarket.entidades.Administrador;
+import com.taheos.unimarket.entidades.Calificacion;
 import com.taheos.unimarket.entidades.Persona;
+import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Rol;
 
@@ -56,6 +58,12 @@ public class TestTapasco {
 	public void generarTest() {
 		
 	}
+	
+	//////////////////////////////////////
+	/*
+	* Persona 	
+	*/
+	//////////////////////////////////////	
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -77,21 +85,53 @@ public class TestTapasco {
 		Assert.assertNotNull(aux);
 	}
 	/**
-	 * buscar Persona
+	 * Modificar Administrador
 	 */
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Persona.json"})
-	public void buscarPersona(){
+	public void modificarUsuario(){
 		
-		Persona a= entityManager.find(Persona.class, "02");
+		Usuario cambioPersona=entityManager.find(Usuario.class, "03");
+		
+		System.out.println("Correo viejo: " + cambioPersona.getCorreo());
+		
+		cambioPersona.setCorreo("nuevoCorreo@gmail.com");
+		entityManager.merge(cambioPersona);
+		
+		Usuario cambiado= entityManager.find(Usuario.class, "03");
+		System.out.println("Correo viejo: " + cambiado.getCorreo());
+		
+	}
+	/**
+	 * buscar Usuario
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
+	public void buscarUsuario(){
+		
+		Usuario a= entityManager.find(Usuario.class, "02");
 		System.out.println("La persona que trajo fue la : "+ a.getNombre());
 		
 		Assert.assertEquals("pepito@gmail.com", a.getCorreo());
 		
 	}
 	/**
-	 * registrar Persona
+	 * eliminar Usuario
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
+	public void borrarUsuario(){
+		
+		entityManager.remove(entityManager.find(Usuario.class, "02"));
+	
+		Assert.assertNull( entityManager.find(Usuario.class, "02"));
+		
+	}
+	/**
+	 * registrar Adminsitrador
 	 */
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
@@ -113,37 +153,113 @@ public class TestTapasco {
 		
 	}
 	/**
-	 * eliminar Persona
+	 * eliminar Administrador
 	 */
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Persona.json"})
-	public void borrarPersona(){
+	public void borrarAdministrador(){
 		
-		entityManager.remove(entityManager.find(Persona.class, "02"));
+		entityManager.remove(entityManager.find(Administrador.class, "01"));
 	
-		Assert.assertNull( entityManager.find(Persona.class, "02"));
+		Assert.assertNull( entityManager.find(Administrador.class, "01"));
 		
 	}
 	/**
-	 * eliminar Persona
+	 * Modificar Administrador
 	 */
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Persona.json"})
-	public void modificaPersona(){
+	public void modificarAdministrador(){
 		
-		Persona cambioPersona=entityManager.find(Persona.class, "03");
+		Administrador cambioPersona=entityManager.find(Administrador.class, "01");
 		
 		System.out.println("Correo viejo: " + cambioPersona.getCorreo());
 		
 		cambioPersona.setCorreo("nuevoCorreo@gmail.com");
 		entityManager.merge(cambioPersona);
 		
-		Persona cambiado= entityManager.find(Persona.class, "03");
+		Administrador cambiado= entityManager.find(Administrador.class, "01");
 		System.out.println("Correo viejo: " + cambiado.getCorreo());
 		
 	}
 	
+	//////////////////////////////////////
+	/*
+	 * Calificacion 	
+	 */
+	//////////////////////////////////////
+	/**
+	 * buscar calificicaion
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Calificacion.json"})
+	public void buscarCalificación(){
+	
+		Calificacion a= entityManager.find(Calificacion.class, 100L);
+		System.out.println("La calificiacion que trajo fue la : "+ a.getId_calificacion());
+		Assert.assertNotNull("Es null", a);
+		
+	}
+	
+	/**
+	 * registrar Calificacion
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Calificacion.json"})
+	public void crearCalificacion(){
+		
+		Calificacion nueva= new Calificacion();
+		
+		nueva.setId_calificacion(103L);
+		nueva.setProducto(new Producto());
+		nueva.setPuntaje(33.9);
+		nueva.setUsuario(new Usuario());
+		
+		entityManager.persist(nueva);
+		
+		Calificacion buscada= entityManager.find(Calificacion.class, 103L);
+	
+		Assert.assertNotNull("No hallo a : " + 103L,buscada);
+		
+	}
+	
+	/**
+	 * modificar calificacion
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Calificacion.json"})
+	public void modificarCalificación(){
+	
+		Calificacion a= entityManager.find(Calificacion.class, 100L);
+		System.out.println("puntaje actual:  " + a.getPuntaje());
+		a.setPuntaje(100.0);
+		
+		entityManager.merge(a);
+		
+		Calificacion b= entityManager.find(Calificacion.class, 100L);
+		System.out.println("puntaje posterior:  " + b.getPuntaje());
+		
+	}
+	
+	/**
+	 * eliminar calificacion
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Calificacion.json"})
+	public void eliminarCalificación(){
+	
+		entityManager.remove(entityManager.find(Calificacion.class, 102L));
+		
+		Calificacion buscada=entityManager.find(Calificacion.class, 102L);
+		
+		Assert.assertNotNull("Si eliminio ",buscada);
+		
+	}
 	
 }
