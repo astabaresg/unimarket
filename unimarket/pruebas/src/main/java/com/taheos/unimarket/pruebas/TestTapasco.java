@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.glassfish.enterprise.iiop.impl.PEORBConfigurator;
+import org.glassfish.jersey.gf.ejb.internal.EjbComponentInterceptor;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
@@ -111,4 +112,38 @@ public class TestTapasco {
 		Assert.assertEquals("nuevo", buscada.getNombre());
 		
 	}
+	/**
+	 * eliminar Persona
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
+	public void borrarPersona(){
+		
+		entityManager.remove(entityManager.find(Persona.class, "02"));
+	
+		Assert.assertNull( entityManager.find(Persona.class, "02"));
+		
+	}
+	/**
+	 * eliminar Persona
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
+	public void modificaPersona(){
+		
+		Persona cambioPersona=entityManager.find(Persona.class, "03");
+		
+		System.out.println("Correo viejo: " + cambioPersona.getCorreo());
+		
+		cambioPersona.setCorreo("nuevoCorreo@gmail.com");
+		entityManager.merge(cambioPersona);
+		
+		Persona cambiado= entityManager.find(Persona.class, "03");
+		System.out.println("Correo viejo: " + cambiado.getCorreo());
+		
+	}
+	
+	
 }
