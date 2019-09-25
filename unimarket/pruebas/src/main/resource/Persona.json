@@ -1,0 +1,51 @@
+{
+"persona":
+	[
+	{
+	"ID":"01",	
+	"DTYPE":"Administrador",
+	"CLAVE":"taheos123",
+	"CORREO":"taheos@gmail.com",
+	"DIRECCION":"la casa de taheos",
+	"NOMBRE":"taheos",	
+	"NUM_TELEFONO":"3245623546"
+	},
+	{
+	"ID":"02",	
+	"DTYPE":"Usuario",
+	"CLAVE":"pepito123",
+	"CORREO":"pepito@gmail.com",
+	"DIRECCION":"la casa de pepito",
+	"NOMBRE":"pepito",	
+	"NUM_TELEFONO":"3245620934"
+	},
+	{
+	"ID":"03",	
+	"DTYPE":"Usuario",
+	"CLAVE":"camila123",
+	"CORREO":"camila@gmail.com",
+	"DIRECCION":"la casa de camila",
+	"NOMBRE":"camila",	
+	"NUM_TELEFONO":"324562011"
+	}
+	]
+	,
+"Administrador":
+	[
+	{
+	"ID":"01"
+	}
+	]
+	,
+"Usuario":
+	[
+	{
+	"ID":"02",
+	"ROL":"VENDEDOR"
+	},
+	{
+	"ID":"03",
+	"ROL":"COMPRADOR"
+	}
+	]
+}

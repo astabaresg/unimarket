@@ -4,8 +4,10 @@ package com.taheos.unimarket.pruebas;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.glassfish.enterprise.iiop.impl.PEORBConfigurator;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.Archive;
@@ -16,6 +18,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.taheos.unimarket.entidades.Administrador;
 import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Rol;
@@ -74,5 +77,40 @@ public class TestModelo {
 		
 		Assert.assertNotNull(aux);
 	}
-
+	/**
+	 * buscar Persona
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	public void buscarPersona(){
+		
+		Persona a= entityManager.find(Persona.class, "02");
+		System.out.println("La persona que trajo fue la : "+ a.getNombre());
+		
+		Assert.assertEquals("pepito@gmail.com", a.getCorreo());
+		
+	}
+	/**
+	 * registrar Persona
+	 */
+	@Test
+	@Transactional(value=TransactionMode.ROLLBACK)
+	@UsingDataSet({"Persona.json"})
+	public void crearAdministrador(Persona p){
+		
+//		Administrador admin= new Administrador();
+//		admin.setNombre("nuevo");
+//		admin.setId("04");
+//		admin.setNum_telefono("322454353");
+//		admin.setClave("nuevopepito123");
+//		admin.setCorreo("nuevopepito@gmail.com");
+//		admin.setDireccion("la casa el nuevo cliente");
+//		
+//		entityManager.persist(p);
+//		
+//		Persona buscada= entityManager.find(Administrador.class, "04");
+//	
+//		Assert.assertEquals("nuevo", buscada.getNombre());
+		
+	}
 }

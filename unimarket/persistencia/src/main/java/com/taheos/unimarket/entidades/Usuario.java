@@ -14,14 +14,12 @@ import javax.persistence.*;
 @Entity
 
 public class Usuario extends Persona implements Serializable {
-
 	/**
 	 * Rol del usuario
 	 */
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
-	
 	/**
 	 * Compras realizadas por un usuario
 	 */
@@ -81,5 +79,7 @@ public class Usuario extends Persona implements Serializable {
 	public void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
+	
+	
    
 }
