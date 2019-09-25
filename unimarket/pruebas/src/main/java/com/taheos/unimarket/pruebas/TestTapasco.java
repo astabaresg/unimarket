@@ -30,7 +30,7 @@ import com.taheos.unimarket.enums.Rol;
  * @version 1.0
  */
 @RunWith(Arquillian.class)
-public class TestModelo {
+public class TestTapasco {
 
 	/**
 	 * instancia para realizar las transaciones con las entidades
