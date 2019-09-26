@@ -43,6 +43,12 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	private List<Calificacion> calificaciones;
+	
+	/**
+	 * Productos subidos por un usuario en el rol de vendedor
+	 */
+	@OneToMany(mappedBy = "usuario")
+	private List<Producto> productos;
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
@@ -78,6 +84,12 @@ public class Usuario extends Persona implements Serializable {
 	}
 	public void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
+	}
+	public List<Producto> getProductos() {
+		return productos;
+	}
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 	
 	

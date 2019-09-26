@@ -95,6 +95,12 @@ public class Producto implements Serializable {
 	 */
 	@Column(nullable = false, updatable = true, scale = 1)
 	private double calificacion;
+	
+	/**
+	 * Usuario que sube productos
+	 */
+	@ManyToOne
+	private Usuario usuario;
 	private static final long serialVersionUID = 1L;
 
 	public Producto() {
@@ -221,6 +227,15 @@ public class Producto implements Serializable {
 
 	public void setDetalleCompra(List<DetalleCompra> detalleCompra) {
 		this.detalleCompra = detalleCompra;
+	}
+
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
