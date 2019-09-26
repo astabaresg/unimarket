@@ -196,7 +196,7 @@ public class TestTapasco {
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Calificacion.json"})
-	public void buscarCalificación(){
+	public void buscarCalificacion(){
 	
 		Calificacion a= entityManager.find(Calificacion.class, 100L);
 		System.out.println("La calificiacion que trajo fue la : "+ a.getId_calificacion());
@@ -233,7 +233,7 @@ public class TestTapasco {
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Calificacion.json"})
-	public void modificarCalificación(){
+	public void modificarCalificacion(){
 	
 		Calificacion a= entityManager.find(Calificacion.class, 100L);
 		System.out.println("puntaje actual:  " + a.getPuntaje());
@@ -252,7 +252,7 @@ public class TestTapasco {
 	@Test
 	@Transactional(value=TransactionMode.ROLLBACK)
 	@UsingDataSet({"Calificacion.json"})
-	public void eliminarCalificación(){
+	public void eliminarCalificacion(){
 	
 		entityManager.remove(entityManager.find(Calificacion.class, 102L));
 		
