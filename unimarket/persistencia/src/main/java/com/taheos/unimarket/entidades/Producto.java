@@ -69,7 +69,7 @@ public class Producto implements Serializable {
 	/**
 	 * Lista de favoritos donde se encuentra 
 	 */
-	@ManyToOne
+	@OneToOne(mappedBy = "producto")
 	private Favorito favorito;
 	
 	/**
