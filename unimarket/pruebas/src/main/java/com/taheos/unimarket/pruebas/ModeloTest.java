@@ -258,7 +258,7 @@ public class ModeloTest {
 
 		Calificacion buscada = entityManager.find(Calificacion.class, 102L);
 
-		Assert.assertNotNull("Si elimino ", buscada);
+		Assert.assertNull("Si elimino ", buscada);
 
 	}
 	
