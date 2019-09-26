@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.taheos.unimarket.entidades.Comentario;
+import com.taheos.unimarket.entidades.Favorito;
 import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
@@ -110,5 +111,73 @@ public class TestTabares {
 		Assert.assertEquals("Esta es una prueba", c.getTexto());
 	}
 	
+	/**
+	 * permite probar CREARFAVORITO
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "Persona.json","Producto.json"})
+	public void crearFavoritoTest() {
+
+		Favorito f = new Favorito();
+		
+		f.setId_favoritos(new Long(21));
+		f.setProducto(entityManager.find(Producto.class, new Long(1234)));
+		f.setUsuario(entityManager.find(Usuario.class, "02"));
+		entityManager.persist(f);
+		
+		Favorito f2 = entityManager.find(Favorito.class, new Long(21));
+		
+		Assert.assertNotNull(f2);
+		
+	}
 	
+	/**
+	 * permite probar BUSCARFAVORITO
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "Persona.json","Producto.json", "Favorito.json"})
+	public void buscarFavoritoTest() {
+
+		Favorito f = entityManager.find(Favorito.class, new Long(1));
+		
+		Assert.assertNotNull(f);
+		
+	}
+	
+	/**
+	 * permite probar ELIMINARFAVORITO
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "Persona.json","Producto.json", "Favorito.json"})
+	public void eliminarFavoritoTest() {
+		
+		entityManager.remove(entityManager.find(Favorito.class, new Long(2)));
+
+		Favorito f = entityManager.find(Favorito.class, new Long(2));
+		
+		Assert.assertNull(f);
+		
+	}
+	
+	/**
+	 * permite probar MODIFICARFAVORITO
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "Persona.json","Producto.json", "Favorito.json"})
+	public void modificarFavoritoTest() {
+		
+
+		Favorito f = entityManager.find(Favorito.class, new Long(3));
+		
+		f.setProducto(entityManager.find(Producto.class, new Long(4321)));
+		entityManager.merge(f);
+		
+		
+		Assert.assertEquals("Celular Samsung", f.getProductos().getNombre());
+		
+	}
 }
