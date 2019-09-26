@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 		@NamedQuery(name = Persona.PERSONA_POR_CREDENCIALES, query = "select p from Persona p where p.correo =:correo and p.clave = :clave"),
+		@NamedQuery(name = Persona.INICIAR_SESION, query = "select p from Persona p where p.correo= :correo and p.clave= :clave"),
 		@NamedQuery(name = Persona.BUSCAR_PERSONA_POR_CORREO, query = "select p from Persona p where p.correo =:correo")})
 public class Persona implements Serializable {
 
@@ -35,7 +36,10 @@ public class Persona implements Serializable {
 	 */
 	public static final String BUSCAR_PERSONA_POR_CORREO = "PersonaPorCorreo";
 
-
+	/**
+	 * Constante con la que se pueden obtener las credenciales de una persona para iniciar sesion
+	 */
+	public static final String INICIAR_SESION = "ObtenerCredenciales";
 	/**
 	 * identificacion de la persona
 	 */
