@@ -105,6 +105,12 @@
 			<artifactId>persistencia</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.taheos</groupId>
+			<artifactId>negocio</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
 	</dependencies>
 
 </project>
