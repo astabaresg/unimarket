@@ -63,5 +63,6 @@
 		<module>Persistencia</module>
 		<module>pruebas</module>
 		<module>negocio</module>
+		<module>ear</module>
 	</modules>
 </project>

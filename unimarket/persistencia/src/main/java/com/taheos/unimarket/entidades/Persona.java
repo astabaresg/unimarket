@@ -19,7 +19,6 @@ public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	/**
 	 * constante que representa la consulta PersonaPorCredenciales
 	 */
