@@ -13,26 +13,25 @@ import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Usuario;
 
 
-
-
 /**
- * Session Bean implementation class AdminEJB
+ * Maneja todas las operaciones asociadas a los adminstradores
+ * 
+ * @author Alvaro Sebastian Tabares G
+ * @version 1.0
  */
 @Stateless
 @LocalBean
 public class AdminEJB implements AdminEJBRemote {
 
+	/**
+	 * permite hacer todas las transacciones de la base de datos
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/**
-	 * Default constructor.
-	 */
 	public AdminEJB() {
-
 	}
 
-	
 	/**
 	 * Permite iniciar sesion para acceder al programa
 	 * @param email email de la persona que va a entrar
@@ -91,4 +90,5 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 
 	}
+
 }

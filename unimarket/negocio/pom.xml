@@ -21,7 +21,6 @@
 			<groupId>com.taheos</groupId>
 			<artifactId>persistencia</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
