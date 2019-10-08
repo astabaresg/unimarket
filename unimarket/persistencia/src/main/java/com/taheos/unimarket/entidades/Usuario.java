@@ -14,11 +14,16 @@ import javax.persistence.*;
 
 
 @Entity
-@NamedQueries({@NamedQuery(name = Usuario.BUSCAR_USUARIO_POR_CORREO, query = "select u from Usuario u where u.correo =:correo") })
+@NamedQueries({@NamedQuery(name = Usuario.BUSCAR_USUARIO_POR_CORREO, query = "select u from Usuario u where u.correo =:correo"),
+	           @NamedQuery(name = Usuario.LISTAR_TODOS_LOS_USUARIOS, query = "select u from Usuario u")})
 public class Usuario extends Persona implements Serializable {
 
 
 
+	/**
+	 * Constante que representa la consulta listar todo los usuarios
+	 */
+	public static final String LISTAR_TODOS_LOS_USUARIOS= "UsuariosListados";
 	/**
 	 * constante que representa la consulta PersonaPorCorreo
 	 */
