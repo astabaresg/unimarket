@@ -1,6 +1,17 @@
 package com.taheos.modelo;
 
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,7 +19,9 @@ import javax.naming.NamingException;
 import com.taheos.ejbs.AdminEJBRemote;
 import com.taheos.excepciones.ElementoNoEncontradoExcepcion;
 import com.taheos.excepciones.ElementoRepetidoExcepcion;
+import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
+import com.taheos.unimarket.enums.Categoria;
 import com.taheos.util.Utilidades;
 
 import javafx.collections.FXCollections;
@@ -95,17 +108,122 @@ public class AdministradorDelegado {
 	}
 
 	/**
+	 * Permite listar todos los productos de una categoria
+	 * 
+	 * @param categoria
+	 * @return
+	 */
+	public List<Producto> listarProductosCategoria(Categoria categoria) {
+		return adminEJB.listarProductosPorCategoria(categoria);
+	}
+
+	/**
+	 * Permite listar todos los productos
+	 * 
+	 * @return
+	 */
+	public List<Producto> listarTodosLosProductos() {
+		return adminEJB.listarProductos();
+	}
+
+	/**
+	 * Permite ver el detalle de un producto especifico
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public String verDetalleProducto(String codigo) {
+		try {
+			return adminEJB.verDetalleProducto(codigo);
+		} catch (ElementoNoEncontradoExcepcion e) {
+			Utilidades.mostrarMensaje("Error", e.getMessage());
+			return null;
+		}
+	}
+
+	/**
 	 * genera una lista de usuarios observables
 	 * 
 	 * @return todos los usuarios obsevables
 	 */
 	public ObservableList<UsuarioObservable> listarEmpleadosObservables() {
 		List<Usuario> usuarios = listarUsuarios();
-		ObservableList<UsuarioObservable> empleadosObservables = FXCollections.observableArrayList();
+		ObservableList<UsuarioObservable> usuariosObservables = FXCollections.observableArrayList();
 		for (Usuario usuario : usuarios) {
-			empleadosObservables.add(new UsuarioObservable(usuario));
+			usuariosObservables.add(new UsuarioObservable(usuario));
 		}
-		return empleadosObservables;
+		return usuariosObservables;
 	}
 
+	/**
+	 * Genera una lista de productos observables
+	 * 
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservables() {
+		List<Producto> productos = listarTodosLosProductos();
+		ObservableList<ProductoObservable> productosObservables = FXCollections.observableArrayList();
+		for (Producto producto : productos) {
+			productosObservables.add(new ProductoObservable(producto));
+		}
+		return productosObservables;
+	}
+	
+	/**
+	 * Genera una lista de productos observables por categoria
+	 * 
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservablesCategoria(Categoria c) {
+		List<Producto> productos = listarProductosCategoria(c);
+		ObservableList<ProductoObservable> productosObservables = FXCollections.observableArrayList();
+		for (Producto producto : productos) {
+			productosObservables.add(new ProductoObservable(producto));
+		}
+		return productosObservables;
+	}
+	
+	public void enviarCorreo(String email) {
+
+		// Para la direccion nomcuenta@gmail.com
+		Properties props = System.getProperties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
+		props.put("mail.smtp.user", "herbariomasteruq@gmail.com");
+		props.put("mail.smtp.clave", "herbariouniquindio"); // La clave de la cuenta
+		props.put("mail.smtp.auth", "true"); // Usar autenticaci�n mediante usuario y clave
+		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
+		props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage message = new MimeMessage(session);
+		BodyPart texto = new MimeBodyPart();
+		MimeMultipart multiParte = new MimeMultipart();
+
+		try {
+			texto.setText(
+					"la clave asociada con el correo proporcionado es " + adminEJB.obtenerClave(email));
+			
+			multiParte.addBodyPart(texto);
+
+			message.setFrom(new InternetAddress("herbariomasteruq@gmail.com"));
+			message.addRecipients(Message.RecipientType.TO, email);
+
+			message.setSubject("Recuperacion de clave uniMarket:");
+			message.setText("prueba");
+			message.setContent(multiParte);
+
+			Transport transport = session.getTransport("smtp");
+			transport.connect("smtp.gmail.com", "herbariomasteruq@gmail.com", "herbariouniquindio");
+
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
+			
+			Utilidades.mostrarMensaje("Bien", "Se ha enviado el mensaje a su correo");
+
+		} catch (MessagingException | ElementoNoEncontradoExcepcion me) {
+			me.printStackTrace();
+			Utilidades.mostrarMensaje("Error", "No se ha podido enviar el mensaje");
+		}
+	}
 }

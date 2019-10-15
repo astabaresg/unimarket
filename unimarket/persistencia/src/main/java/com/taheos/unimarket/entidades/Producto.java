@@ -16,9 +16,28 @@ import com.taheos.unimarket.enums.Disponibilidad;
  *
  */
 @Entity
-
+@NamedQueries({ @NamedQuery(name = Producto.LISTAR_TODOS, query = "select p from Producto p"),
+	@NamedQuery(name = Producto.LISTAR_DISPONIBLES, query = "select p from Producto p where p.fecha_limite between :fecha_inicio and :fecha_fin"),
+	@NamedQuery(name = Producto.LISTAR_DISPONIBLES_CATEGORIA, query = "select p from Producto p where p.categoria= :categoria"),
+	@NamedQuery(name = Producto.BUSCAR_POR_ID, query = "select p from Producto p where p.id= :id")})
 public class Producto implements Serializable {
 
+	/**
+	 * Referencia al query de listar todos los productos
+	 */
+	public static final String LISTAR_TODOS = "ListarTodosLosProductos";
+	/**
+	 * Referencia al query de listar los productos disponibles
+	 */
+	public static final String LISTAR_DISPONIBLES = "ListarTodosLosProductosDisponibles";
+	/**
+	 * Referencia al query de listar los productos disponibles por categoria
+	 */
+	public static final String LISTAR_DISPONIBLES_CATEGORIA = "ListarTodosLosProductosDisponiblesPorCategoria";
+	/**
+	 * Referencia al query de buscar un producto mediante su ID
+	 */
+	public static final String BUSCAR_POR_ID = "ListarProductoPorID";
 	/**
 	 * Id del producto, se genera automaticamente
 	 */
