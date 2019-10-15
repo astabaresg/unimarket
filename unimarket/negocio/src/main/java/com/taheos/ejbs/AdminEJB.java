@@ -47,7 +47,7 @@ public class AdminEJB implements AdminEJBRemote {
 		try {
 
 			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.INICIAR_SESION, Persona.class);
-			query.setParameter("email", email);
+			query.setParameter("correo", email);
 			query.setParameter("clave", clave);
 			return query.getSingleResult();
 
@@ -68,7 +68,7 @@ public class AdminEJB implements AdminEJBRemote {
 		try {
 			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_CORREO,
 					Persona.class);
-			query.setParameter("email", email);
+			query.setParameter("correo", email);
 			return query.getSingleResult();
 
 		} catch (NoResultException e) {
@@ -362,7 +362,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 */
 	public String verDetalleProducto(String codigo) throws ElementoNoEncontradoExcepcion{
 		if (buscarProducto(codigo) == null) {
-			throw new ElementoNoEncontradoExcepcion("Ya existe un producto con ese nombre");
+			throw new ElementoNoEncontradoExcepcion("No existe un producto con ese nombre");
 		} else {
 			try {
 				
