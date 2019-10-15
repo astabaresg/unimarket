@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.taheos.controlador;
 
 import com.taheos.modelo.UsuarioObservable;

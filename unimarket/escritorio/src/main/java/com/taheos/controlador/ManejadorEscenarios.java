@@ -58,7 +58,7 @@ public class ManejadorEscenarios {
 
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/inicio.fxml"));
+			loader.setLocation(Main.class.getResource("../vista/inicio.fxml"));
 
 			bordePanel = (BorderPane) loader.load();
 
@@ -118,9 +118,9 @@ public class ManejadorEscenarios {
 			escenarioCrear.setScene(scene);
 
 			// se carga el controlador
-			EdicionUsuarioControlador empleadoControlador = loader.getController();
-			empleadoControlador.setEscenarioEditar(escenarioCrear);
-			empleadoControlador.setManejador(this);
+			EdicionUsuarioControlador usuarioControlador = loader.getController();
+			usuarioControlador.setEscenarioEditar(escenarioCrear);
+			usuarioControlador.setManejador(this);
 
 			// se crea el escenario
 			escenarioCrear.showAndWait();
