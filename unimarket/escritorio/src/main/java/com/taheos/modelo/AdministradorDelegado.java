@@ -9,6 +9,7 @@ import com.taheos.ejbs.AdminEJBRemote;
 import com.taheos.excepciones.ElementoNoEncontradoExcepcion;
 import com.taheos.excepciones.ElementoRepetidoExcepcion;
 import com.taheos.unimarket.entidades.Usuario;
+import com.taheos.util.Utilidades;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,7 @@ import javafx.collections.ObservableList;
 /**
  * Delegado que permite conectar la capa de negocio con la de presentación
  * 
- * @author EinerZG
+ * @author com.taheos
  * @version 1.0
  */
 public class AdministradorDelegado {
@@ -65,7 +66,7 @@ public class AdministradorDelegado {
 		try {
 			return adminEJB.registrarUsuario(usuario) != null;
 		} catch (ElementoRepetidoExcepcion e) {
-			e.printStackTrace();
+			Utilidades.mostrarMensaje("Error al registrar un usuario", e.getMessage());
 			return false;
 		}
 	}
@@ -88,7 +89,7 @@ public class AdministradorDelegado {
 		try {
 			return adminEJB.eliminarUsuario(usuario.getId());
 		} catch (ElementoNoEncontradoExcepcion e) {
-			e.printStackTrace();
+			Utilidades.mostrarMensaje("Error al eliminar un usuario", e.getMessage());
 			return false;
 		}
 	}

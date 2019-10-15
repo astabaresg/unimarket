@@ -1,6 +1,5 @@
 package com.taheos.modelo;
 
-
 import com.taheos.unimarket.entidades.Usuario;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -15,23 +14,22 @@ import javafx.beans.property.StringProperty;
 public class UsuarioObservable {
 
 	/**
-	 * cedula observable de un empleado
+	 * cedula observable de un usuario
 	 */
 	private StringProperty cedula;
 	/**
-	 * nombre observable de una persona
+	 * nombre observable de una usuario
 	 */
 	private StringProperty nombre;
 
 	/**
-	 * email observable de un empleado
+	 * email observable de un usuario
 	 */
 	private StringProperty email;
 	/**
-	 * clave observable de un empleado
+	 * numero de telefono observable de un usuario
 	 */
-	private StringProperty clave;
-
+	private StringProperty num_telefono;
 	/**
 	 * usuario asociado
 	 */
@@ -48,7 +46,7 @@ public class UsuarioObservable {
 		this.nombre = new SimpleStringProperty(nombre);
 
 		this.email = new SimpleStringProperty("algo@mail.com");
-		this.clave = new SimpleStringProperty("12345");
+		this.num_telefono = new SimpleStringProperty("12312312");
 
 	}
 
@@ -63,8 +61,7 @@ public class UsuarioObservable {
 		this.cedula = new SimpleStringProperty(usuario.getId());
 		this.nombre = new SimpleStringProperty(usuario.getNombre());
 		this.email = new SimpleStringProperty(usuario.getCorreo());
-		this.clave = new SimpleStringProperty(usuario.getClave());
-
+		this.num_telefono = new SimpleStringProperty(usuario.getNum_telefono());
 	}
 
 	/**
@@ -77,13 +74,12 @@ public class UsuarioObservable {
 	 * @param clave
 	 * @param fecha
 	 */
-	public UsuarioObservable(String cedula, String nombre, String email, String clave) {
+	public UsuarioObservable(String cedula, String nombre, String email, String clave, String num_telefono) {
 
 		this.cedula = new SimpleStringProperty(cedula);
 		this.nombre = new SimpleStringProperty(nombre);
 		this.email = new SimpleStringProperty(email);
-		this.clave = new SimpleStringProperty(clave);
-
+		this.num_telefono = new SimpleStringProperty(num_telefono);
 	}
 
 	/**
@@ -128,18 +124,12 @@ public class UsuarioObservable {
 		this.email = email;
 	}
 
-	/**
-	 * @return the clave
-	 */
-	public StringProperty getClave() {
-		return clave;
+	public StringProperty getNum_telefono() {
+		return num_telefono;
 	}
 
-	/**
-	 * @param clave the clave to set
-	 */
-	public void setClave(StringProperty clave) {
-		this.clave = clave;
+	public void setNum_telefono(StringProperty num_telefono) {
+		this.num_telefono = num_telefono;
 	}
 
 	public Usuario getUsuario() {
@@ -149,6 +139,5 @@ public class UsuarioObservable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 
 }
