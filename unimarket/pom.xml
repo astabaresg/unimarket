@@ -66,5 +66,6 @@
 		<module>pruebas</module>
 		<module>negocio</module>
 		<module>ear</module>
+		<module>escritorio</module>
 	</modules>
 </project>
