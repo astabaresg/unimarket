@@ -5,6 +5,12 @@
         <dependent-module archiveName="negocio.jar" deploy-path="/" handle="module:/resource/negocio/negocio">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="javax.mail-api.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/mail/javax.mail-api/1.4.7/javax.mail-api-1.4.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="activation.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/activation/activation/1.1/activation-1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="persistencia.jar" deploy-path="/lib" handle="module:/resource/persistencia/persistencia">
             <dependency-type>uses</dependency-type>
         </dependent-module>
