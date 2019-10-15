@@ -31,6 +31,10 @@ public class UsuarioObservable {
 	 */
 	private StringProperty num_telefono;
 	/**
+	 * Direccion observable de un usuario
+	 */
+	private StringProperty direccion;
+	/**
 	 * usuario asociado
 	 */
 	private Usuario usuario;
@@ -62,6 +66,7 @@ public class UsuarioObservable {
 		this.nombre = new SimpleStringProperty(usuario.getNombre());
 		this.email = new SimpleStringProperty(usuario.getCorreo());
 		this.num_telefono = new SimpleStringProperty(usuario.getNum_telefono());
+		this.direccion = new SimpleStringProperty(usuario.getDireccion());
 	}
 
 	/**
@@ -74,12 +79,13 @@ public class UsuarioObservable {
 	 * @param clave
 	 * @param fecha
 	 */
-	public UsuarioObservable(String cedula, String nombre, String email, String clave, String num_telefono) {
+	public UsuarioObservable(String cedula, String nombre, String email, String clave, String num_telefono, String direccion) {
 
 		this.cedula = new SimpleStringProperty(cedula);
 		this.nombre = new SimpleStringProperty(nombre);
 		this.email = new SimpleStringProperty(email);
 		this.num_telefono = new SimpleStringProperty(num_telefono);
+		this.direccion = new SimpleStringProperty(direccion);
 	}
 
 	/**
@@ -130,6 +136,15 @@ public class UsuarioObservable {
 
 	public void setNum_telefono(StringProperty num_telefono) {
 		this.num_telefono = num_telefono;
+	}
+
+	
+	public StringProperty getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(StringProperty direccion) {
+		this.direccion = direccion;
 	}
 
 	public Usuario getUsuario() {
