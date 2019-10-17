@@ -13,18 +13,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.LoginController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField layoutX="101.0" layoutY="173.0" prefHeight="27.0" prefWidth="174.0" promptText="User" />
-                  <JFXPasswordField layoutX="101.0" layoutY="216.0" prefHeight="27.0" prefWidth="174.0" promptText="Password" />
+                  <JFXTextField fx:id="textUser" layoutX="101.0" layoutY="173.0" prefHeight="27.0" prefWidth="174.0" promptText="User" />
+                  <JFXPasswordField fx:id="textPassword" layoutX="101.0" layoutY="216.0" prefHeight="27.0" prefWidth="174.0" promptText="Password" />
                   <JFXCheckBox checkedColor="#4059a9" layoutX="101.0" layoutY="263.0" text="Keep me conected" />
                   <AnchorPane layoutX="124.0" layoutY="303.0" opacity="0.2" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: #000000; -fx-background-radius: 20 20 20 20;" />
-                  <JFXButton layoutX="124.0" layoutY="294.0" prefHeight="38.0" prefWidth="128.0" style="-fx-background-color: #00da8a; -fx-background-radius: 20 20 20 20;" text="Login" textFill="WHITE">
+                  <JFXButton fx:id="buttonLogin" layoutX="124.0" layoutY="294.0" onAction="#onLoginButton" prefHeight="38.0" prefWidth="128.0" style="-fx-background-color: #00da8a; -fx-background-radius: 20 20 20 20;" text="Login" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
