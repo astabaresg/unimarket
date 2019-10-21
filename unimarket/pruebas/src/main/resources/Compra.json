@@ -8,7 +8,7 @@
 		},
 		{
 			"id_compra": 4321,
-			"usuario_id": "02",
+			"usuario_id": "03",
 			"total_compra": 30000.0,
 			"metodoPago": "CREDITO"
 		},

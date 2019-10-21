@@ -40,6 +40,13 @@ public class DetalleCompra implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * hallamos el total de la compra realizada
+	 * @return
+	 */
+	public double totalDetalleCompra() {
+		return precioCompra*(double)cantidad;
+	}
 	public DetalleCompra() {
 		super();
 	}   

@@ -2,7 +2,7 @@
 	"COMENTARIO": [
 		{
 			"id_comentario": 1,
-			"usuario_id": "01",
+			"usuario_id": "02",
 			"producto_id": 1234,
 			"texto": "El mejor"
 		},
