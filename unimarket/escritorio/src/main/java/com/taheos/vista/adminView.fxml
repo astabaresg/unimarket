@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
+   <children>
+      <BorderPane layoutX="214.0" layoutY="65.0" prefHeight="500.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="160.0" style="-fx-background-color: #38404b;" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icons/man.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label text="Administrador" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="\@Admin" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="btnGestionarUsuario" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#onGestionarUsuario" prefHeight="35.0" prefWidth="145.0" ripplerFill="WHITE" text="Gestionar Usuario" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/users.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <Separator disable="true" maxHeight="-Infinity" minHeight="1.0" opacity="0.4" prefHeight="1.0" />
+                  <JFXButton fx:id="btnListaProductos" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#onListaProductos" prefHeight="35.0" prefWidth="145.0" ripplerFill="WHITE" text="Lista Productos" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/groceries.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <Separator disable="true" maxHeight="-Infinity" minHeight="1.0" opacity="0.4" prefHeight="1.0" />
+               </children>
+               <padding>
+                  <Insets top="25.0" />
+               </padding>
+            </VBox>
+         </left>
+         <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="701.0" style="-fx-background-color: #2a343d;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="147.0" style="-fx-background-radius: 20 20 20 20;">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../icons/search.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../icons/settings.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="panelGestionarUsuario" prefHeight="465.0" prefWidth="541.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <GridPane prefHeight="501.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="200.0" prefHeight="277.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="188.0" vgrow="ALWAYS" />
+                           </rowConstraints>
+                           <children>
+                              <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                                 <columns>
+                                    <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" text="C2" />
+                                 </columns>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TableView>
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="521.0" style="-fx-background-color: #38404b;">
+                                       <children>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icons/user.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Label fx:id="lblUsuario" text="Label" textFill="WHITE">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="521.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../icons/location-sign.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="lblDireccion" text="Label">
+                                             <HBox.margin>
+                                                <Insets left="18.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="521.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../icons/black-back-closed-envelope-shape.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="lblCorreo" text="Label">
+                                             <HBox.margin>
+                                                <Insets left="18.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="521.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../icons/id-card.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="lblIdentificacion" text="Label">
+                                             <HBox.margin>
+                                                <Insets left="18.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="521.0">
+                                       <children>
+                                          <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <image>
+                                                <Image url="@../icons/telephone-handle-silhouette.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="lblTelefono" text="Label">
+                                             <HBox.margin>
+                                                <Insets left="18.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="521.0">
+                                       <children>
+                                          <JFXButton fx:id="btnAgregarUsuario" onAction="#onAgregarUsuario" style="-fx-background-color: #38404b;" text="Agregar" textFill="WHITE">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../icons/add.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton fx:id="btnModificarUsuario" onAction="#onModificarUsuario" style="-fx-background-color: #38404b;" text="Modificar" textFill="WHITE">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../icons/refresh.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton fx:id="btnEliminarUsuario" onAction="#onEliminarUsuario" style="-fx-background-color: #EB3939;" text="Eliminar" textFill="WHITE">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../icons/delete.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="panelListaProductos" prefHeight="465.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

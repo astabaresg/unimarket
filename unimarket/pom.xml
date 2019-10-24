@@ -62,7 +62,7 @@
 		</pluginManagement>
 	</build>
 	<modules>
-		<module>Persistencia</module>
+		<module>persistencia</module>
 		<module>pruebas</module>
 		<module>negocio</module>
 		<module>ear</module>
