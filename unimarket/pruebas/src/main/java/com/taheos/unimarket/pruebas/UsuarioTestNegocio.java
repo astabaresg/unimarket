@@ -1,6 +1,7 @@
 package com.taheos.unimarket.pruebas;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,11 +15,9 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.taheos.ejbs.AdminEJB;
 import com.taheos.ejbs.UsuarioEJB;
 import com.taheos.unimarket.entidades.Calificacion;
 import com.taheos.unimarket.entidades.Comentario;
@@ -28,6 +27,8 @@ import com.taheos.unimarket.entidades.Favorito;
 import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
+import com.taheos.unimarket.enums.Categoria;
+import com.taheos.unimarket.enums.Disponibilidad;
 
 /**
  * Clase de pruebas dedicada para la pruebas de las entidades de usuario
@@ -213,9 +214,8 @@ public class UsuarioTestNegocio {
 		System.out.println("\n Antes");
 
 		for (DetalleCompra d : actual.getDetallesCompra()) {
-			System.out.println(
-					"Id_detalleCompra " + d.getId_detalleCompra() + " Producto: " + d.getProducto().getNombre()+
-					 "Cantidad: " + d.getCantidad());
+			System.out.println("Id_detalleCompra " + d.getId_detalleCompra() + " Producto: "
+					+ d.getProducto().getNombre() + "Cantidad: " + d.getCantidad());
 		}
 		try {
 			ArrayList<DetalleCompra> dc = new ArrayList<DetalleCompra>();
@@ -247,9 +247,8 @@ public class UsuarioTestNegocio {
 		System.out.println("\n Despues");
 
 		for (DetalleCompra d : siguiente.getDetallesCompra()) {
-			System.out.println(
-					"Id_detalleCompra " + d.getId_detalleCompra() + " Producto: " + d.getProducto().getNombre()+
-					 "Cantidad: " + d.getCantidad());
+			System.out.println("Id_detalleCompra " + d.getId_detalleCompra() + " Producto: "
+					+ d.getProducto().getNombre() + "Cantidad: " + d.getCantidad());
 		}
 	}
 
@@ -261,28 +260,28 @@ public class UsuarioTestNegocio {
 	public void calificarProducto() {
 
 		Usuario usu = (Usuario) entityManager.find(Persona.class, "02");
-		Producto p= entityManager.find(Producto.class, 1234L);
-		
+		Producto p = entityManager.find(Producto.class, 1234L);
+
 		System.out.println("\n Antes \n");
-		
+
 		for (Calificacion c : usu.getCalificaciones()) {
-			
-			System.out.println("Producto: "+ c.getProducto().getNombre()+" - Calificacion " +c.getPuntaje());
-			
+
+			System.out.println("Producto: " + c.getProducto().getNombre() + " - Calificacion " + c.getPuntaje());
+
 		}
-		
+
 		try {
 
 			usuEJB.calificarProducto(usu, p, 4.5);
-			
+
 			Usuario ac = (Usuario) entityManager.find(Persona.class, "02");
-			
+
 			System.out.println("\n Despues \n");
 
 			for (Calificacion c : ac.getCalificaciones()) {
-				
-				System.out.println("Producto: "+ c.getProducto().getNombre()+" - Calificacion " +c.getPuntaje());
-				
+
+				System.out.println("Producto: " + c.getProducto().getNombre() + " - Calificacion " + c.getPuntaje());
+
 			}
 
 		} catch (Exception e) {
@@ -291,4 +290,93 @@ public class UsuarioTestNegocio {
 		}
 
 	}
+
+	/**
+	 * Permite listar los productos dada una condicion
+	 */
+	@Test
+	@UsingDataSet({ "Producto.json", "Persona.json", "Calificacion.json" })
+	public void listarProductos() {
+
+		try {
+
+			List<Producto> listaCategoria = usuEJB.ListarProductosPorCategoria(Categoria.TECNOLOGIA);
+			System.out.println("\n Categoria \n");
+
+			for (Producto p : listaCategoria) {
+
+				System.out.println(p.getNombre() + " - " + p.getCategoria());
+			}
+
+			List<Producto> listaCategoria2 = usuEJB.ListarProductosPorPrecio(0, 1000000.0, Disponibilidad.DISPONIBLE);
+			System.out.println("\n Precio \n");
+
+			for (Producto p : listaCategoria2) {
+
+				System.out.println(p.getNombre() + " - " + p.getPrecio());
+			}
+
+			List<Producto> listaCategoria3 = usuEJB.ListarProductosPorCantidad(2, Disponibilidad.DISPONIBLE);
+			System.out.println("\n Cantidad \n");
+
+			for (Producto p : listaCategoria3) {
+
+				System.out.println(p.getNombre() + " - " + p.getCantidad());
+			}
+
+		} catch (Exception e) {
+			System.out.println("/n no funciona calificar producto \n");
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * permite hacer manejo de las listas de un usuario
+	 */
+	@Test
+	@UsingDataSet({ "Persona.json", "Producto.json", "Compra.json" })
+	public void gestionarListaUsuario() {
+		
+		Producto prod = entityManager.find(Producto.class, 1234L);
+
+		try {
+			List<Compra> compras = usuEJB.ListarCompras("02");
+			System.out.println("\n Compras \n");
+
+			for (Compra compra : compras) {
+				System.out.println(compra.getId_compra() + " - " + compra.getMetodoPago());
+			}
+			/////////
+			List<Producto> productos = usuEJB.ListarVentas("02");
+			System.out.println("\n Productos venta 1 \n");
+
+			for (Producto producto : productos) {
+				System.out.println(producto.getNombre());
+			}
+			
+			usuEJB.agregarProductoVenta("02", prod);
+			
+			List<Producto> productos2 = usuEJB.ListarVentas("02");
+			System.out.println("\n Productos venta 2 \n");
+
+			for (Producto producto : productos2) {
+				System.out.println(producto.getNombre());
+			}
+			
+			usuEJB.eliminarProductoVenta("02", 1234L);
+			
+			List<Producto> productos3 = usuEJB.ListarVentas("02");
+			System.out.println("\n Productos venta 3 \n");
+
+			for (Producto producto : productos3) {
+				System.out.println(producto.getNombre());
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
