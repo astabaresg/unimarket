@@ -4,6 +4,7 @@ import com.taheos.controlador.ManejadorEscenarios;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Clase encargada de iniciar la ejecución de la aplicacion y cargar la ventana
@@ -31,6 +32,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		
 		new ManejadorEscenarios(primaryStage);
 	}
 

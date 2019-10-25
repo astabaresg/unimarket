@@ -27,7 +27,7 @@
                <children>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons/man.png" />
+                        <Image url="@../icons/man.png" />
                      </image>
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -125,17 +125,24 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="188.0" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                              <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" text="C2" />
+                                    <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFF;" text="Cedula" />
+                                    <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Nombre" />
+                                    <TableColumn fx:id="columnDireccion" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Direccion" />
+                                    <TableColumn fx:id="columnEmail" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Email" />
+                                    <TableColumn fx:id="columnTelefono" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Telefono" />
                                  </columns>
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                                  </GridPane.margin>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                               </TableView>
                               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="521.0" style="-fx-background-color: #38404b;">
@@ -148,7 +155,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </ImageView>
-                                          <Label fx:id="lblUsuario" text="Label" textFill="WHITE">
+                                          <Label fx:id="lblNombre" text="Label" textFill="WHITE">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -191,7 +198,7 @@
                                                 <Image url="@../icons/black-back-closed-envelope-shape.png" />
                                              </image>
                                           </ImageView>
-                                          <Label fx:id="lblCorreo" text="Label">
+                                          <Label fx:id="lblEmail" text="Label">
                                              <HBox.margin>
                                                 <Insets left="18.0" />
                                              </HBox.margin>
@@ -211,7 +218,7 @@
                                                 <Image url="@../icons/id-card.png" />
                                              </image>
                                           </ImageView>
-                                          <Label fx:id="lblIdentificacion" text="Label">
+                                          <Label fx:id="lblCedula" text="Label">
                                              <HBox.margin>
                                                 <Insets left="18.0" />
                                              </HBox.margin>

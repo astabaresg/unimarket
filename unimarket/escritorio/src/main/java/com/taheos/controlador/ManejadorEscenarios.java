@@ -9,11 +9,18 @@ import com.taheos.unimarket.entidades.Usuario;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Permite manejar los escenarios que tiene la aplicacion
@@ -23,14 +30,19 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
+	private double xOffSet, yOffSet;
+
 	/**
 	 * contenedor prinpipal de la aplicacion
 	 */
-	private Stage escenario;
+	private Stage escenario,s2;
 	/**
 	 * tipo de panel inicial
 	 */
-	private BorderPane bordePanel;
+	public Pane loginPane, adminPane;
+
+	public static FXMLLoader loader, loginP;
+
 	/**
 	 * para almacenar usuarios observables
 	 */
@@ -49,27 +61,79 @@ public class ManejadorEscenarios {
 
 		this.escenario = escenario;
 
+		try {
+			
+			// se inicializa el escenario
+			// se carga la vista
+			loader = new FXMLLoader(getClass().getResource("/views/loginView.fxml"));
+			loginPane = loader.load();
+
+			
+			// permite mover la vista
+			loginPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+
+					xOffSet = event.getSceneX();
+					yOffSet = event.getSceneY();
+
+				}
+			});
+
+			loginPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					escenario.setX(event.getScreenX() - xOffSet);
+					escenario.setY(event.getScreenY() - yOffSet);
+				}
+			});
+
+			LoginController controlador = loader.getController();
+			controlador.setManejador(this);
+
+			// se carga la escena
+
+			escenario.initStyle(StageStyle.TRANSPARENT);
+			Scene scene = new Scene(loginPane);
+			scene.setFill(Color.TRANSPARENT);
+			escenario.setScene(scene);
+			escenario.show();
+			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+			escenario.setX((primScreenBounds.getWidth() - escenario.getWidth()) / 2);
+			escenario.setY((primScreenBounds.getHeight() - escenario.getHeight()) / 2);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+
+	/**
+	 * muestra el escenario del administrador
+	 */
+
+	public void cargarEscenarioAdmin() {
+
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
 
 		try {
-			// se inicializa el escenario
-			escenario.setTitle("UniMarket");
+			s2 = new Stage();
+			loginP = new FXMLLoader(getClass().getResource("/views/adminView.fxml"));
+			loginPane = loginP.load();
+			((AdminController) loginP.getController()).setManejador(this);
+			((AdminController) loginP.getController()).setEscenarioInicial(this);;
 
-			// se carga la vista
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("../vista/inicio.fxml"));
-
-			bordePanel = (BorderPane) loader.load();
-
-			// se carga la escena
-			Scene scene = new Scene(bordePanel);
-			escenario.setScene(scene);
-			escenario.show();
-
-			cargarEscena();
-
+			s2.setScene(new Scene(loginPane));
+			s2.setTitle("uniMarket");
+			s2.show();
+			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+			s2.setX((primScreenBounds.getWidth() - s2.getWidth()) / 2);
+			s2.setY((primScreenBounds.getHeight() - s2.getHeight()) / 2);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -82,13 +146,11 @@ public class ManejadorEscenarios {
 
 		try {
 
-			
 			usuariosObservables = administradorDelegado.listarEmpleadosObservables();
 
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("../vista/detalle_usuario.fxml"));
-			AnchorPane panelAncho = (AnchorPane) loader2.load();
-			bordePanel.setCenter(panelAncho);
+			loader2.setLocation(Main.class.getResource("/detalle_usuario.fxml"));
+			adminPane = loader2.load();
 
 			UsuarioControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
@@ -108,7 +170,7 @@ public class ManejadorEscenarios {
 
 			// se carga la interfaz
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("../vista/editar_usuario.fxml"));
+			loader.setLocation(Main.class.getResource("/editar_usuario.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// se crea el escenario
@@ -131,10 +193,9 @@ public class ManejadorEscenarios {
 
 	}
 
-
-
 	/**
 	 * Generar usuarios observables
+	 * 
 	 * @return
 	 */
 	public ObservableList<UsuarioObservable> getUsuariosObservables() {
@@ -180,8 +241,10 @@ public class ManejadorEscenarios {
 	 * @param usuario a ser eliminado
 	 * @return true si fue eliminado false si no
 	 */
-	public boolean eliminarEmpleado(Usuario usuario) {
+	public boolean eliminarUsuario(Usuario usuario) {
 		return administradorDelegado.eliminarUsuario(usuario);
 	}
+	
+	
 
 }

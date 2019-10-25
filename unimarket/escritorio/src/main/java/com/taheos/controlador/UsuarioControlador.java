@@ -137,7 +137,7 @@ public class UsuarioControlador {
 	
 		Usuario usuario = tablaUsuarios.getItems().get(indice).getUsuario();
 
-		if (escenarioInicial.eliminarEmpleado(usuario)) {
+		if (escenarioInicial.eliminarUsuario(usuario)) {
 			tablaUsuarios.getItems().remove(indice);
 			Utilidades.mostrarMensaje("Borrar", "El usuario ha sido eliminado con exito");
 		} else {
