@@ -1,6 +1,8 @@
 package com.taheos.controlador;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.taheos.modelo.UsuarioObservable;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.util.Utilidades;
@@ -11,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class AdminController {
 
@@ -19,6 +22,15 @@ public class AdminController {
 
 	@FXML
 	private JFXButton btnListaProductos;
+
+	@FXML
+	private VBox contenedorUsuarioDetalle;
+
+	@FXML
+	private VBox contenedorUsuarioModificar;
+
+	@FXML
+	private VBox contenedorUsuarioCrear;
 
 	@FXML
 	private AnchorPane panelGestionarUsuario;
@@ -42,6 +54,39 @@ public class AdminController {
 	private Label lblTelefono;
 
 	@FXML
+	private Label lblCedulaModificar;
+
+	@FXML
+	private JFXTextField txtNombre;
+
+	@FXML
+	private JFXTextField txtDireccion;
+
+	@FXML
+	private JFXTextField txtEmail;
+
+	@FXML
+	private JFXTextField txtTelefono;
+
+	@FXML
+	private JFXTextField txtCrearNombre;
+
+	@FXML
+	private JFXTextField txtCrearCedula;
+
+	@FXML
+	private JFXTextField txtCrearDireccion;
+
+	@FXML
+	private JFXTextField txtCrearEmail;
+
+	@FXML
+	private JFXTextField txtCrearTelefono;
+
+	@FXML
+	private JFXPasswordField txtCrearContraseña;
+
+	@FXML
 	private JFXButton btnAgregarUsuario;
 
 	@FXML
@@ -49,6 +94,18 @@ public class AdminController {
 
 	@FXML
 	private JFXButton btnEliminarUsuario;
+
+	@FXML
+	private JFXButton btnModificarUsuarioDone;
+
+	@FXML
+	private JFXButton btnCrearUsuarioDone;
+
+	@FXML
+	private JFXButton btnCancelarCrear;
+
+	@FXML
+	private JFXButton btnCancelarModificar;
 
 	private UsuarioObservable usuarioObservable;
 
@@ -112,17 +169,34 @@ public class AdminController {
 	}
 
 	/**
-	 * permite obtener una instancia del escenario general
-	 * 
-	 * @param escenarioInicial
+	 * OnAction botones del panel principal del administrador
 	 */
-	public void setEscenarioInicial(ManejadorEscenarios manejador) {
-		this.manejador = manejador;
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+
+	@FXML
+	void onGestionarUsuario(ActionEvent event) {
+
+		panelListaProductos.setVisible(false);
+		panelGestionarUsuario.setVisible(true);
+
 	}
 
 	@FXML
+	void onListaProductos(ActionEvent event) {
+
+		panelGestionarUsuario.setVisible(false);
+		panelListaProductos.setVisible(true);
+
+	}
+
+	/**
+	 * OnAction botones del panel detallesUsuario
+	 */
+
+	@FXML
 	void onAgregarUsuario(ActionEvent event) {
+
+		contenedorUsuarioDetalle.setVisible(false);
+		contenedorUsuarioCrear.setVisible(true);
 
 	}
 
@@ -143,23 +217,61 @@ public class AdminController {
 	}
 
 	@FXML
-	void onGestionarUsuario(ActionEvent event) {
-
-		panelListaProductos.setVisible(false);
-		panelGestionarUsuario.setVisible(true);
-
-	}
-
-	@FXML
-	void onListaProductos(ActionEvent event) {
-
-		panelGestionarUsuario.setVisible(false);
-		panelListaProductos.setVisible(true);
-
-	}
-
-	@FXML
 	void onModificarUsuario(ActionEvent event) {
+
+		contenedorUsuarioDetalle.setVisible(false);
+		contenedorUsuarioModificar.setVisible(true);
+
+		txtDireccion.setText(lblDireccion.getText());
+		txtEmail.setText(lblEmail.getText());
+		txtNombre.setText(lblNombre.getText());
+		txtTelefono.setText(lblTelefono.getText());
+		lblCedulaModificar.setText(lblCedula.getText());
+
+	}
+
+	/**
+	 * OnAction botones del panel modificarUsuario
+	 */
+
+	@FXML
+	void onCancelarModificar(ActionEvent event) {
+
+		contenedorUsuarioModificar.setVisible(false);
+		contenedorUsuarioDetalle.setVisible(true);
+		txtDireccion.setText("");
+		txtEmail.setText("");
+		txtNombre.setText("");
+		txtTelefono.setText("");
+		lblCedulaModificar.setText("");
+
+	}
+
+	@FXML
+	void onModificarUsuarioDone(ActionEvent event) {
+
+	}
+
+	/**
+	 * OnAction botones del panel crearUsuario
+	 */
+
+	@FXML
+	void onCrearUsuarioDone(ActionEvent event) {
+
+	}
+
+	@FXML
+	void onCancelarCrear(ActionEvent event) {
+
+		contenedorUsuarioCrear.setVisible(false);
+		contenedorUsuarioDetalle.setVisible(true);
+		txtCrearCedula.setText("");
+		txtCrearContraseña.setText("");
+		txtCrearDireccion.setText("");
+		txtCrearEmail.setText("");
+		txtCrearNombre.setText("");
+		txtCrearTelefono.setText("");
 
 	}
 
@@ -170,6 +282,16 @@ public class AdminController {
 	 */
 	public void setManejador(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
+	}
+
+	/**
+	 * permite obtener una instancia del escenario general
+	 * 
+	 * @param escenarioInicial
+	 */
+	public void setEscenarioInicial(ManejadorEscenarios manejador) {
+		this.manejador = manejador;
+		tablaUsuarios.setItems(manejador.getUsuariosObservables());
 	}
 
 }
