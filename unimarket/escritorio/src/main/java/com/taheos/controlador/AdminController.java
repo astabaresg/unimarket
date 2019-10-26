@@ -57,6 +57,21 @@ public class AdminController {
 	private Label lblCedulaModificar;
 
 	@FXML
+	private Label lblNombreProducto;
+
+	@FXML
+	private Label lblPrecio;
+
+	@FXML
+	private Label lblCategoria;
+
+	@FXML
+	private Label lblDisponibilidad;
+
+	@FXML
+	private Label lblFecha;
+
+	@FXML
 	private JFXTextField txtNombre;
 
 	@FXML
@@ -126,6 +141,25 @@ public class AdminController {
 
 	@FXML
 	private TableColumn<UsuarioObservable, String> columnTelefono;
+	
+    @FXML
+    private TableView<?> tablaProducto;
+
+    @FXML
+    private TableColumn<?, ?> columnNombreProducto;
+
+    @FXML
+    private TableColumn<?, ?> columnPrecioProducto;
+
+    @FXML
+    private TableColumn<?, ?> columnCategoriaProducto;
+
+    @FXML
+    private TableColumn<?, ?> columnDisponibilidadProducto;
+
+    @FXML
+    private TableColumn<?, ?> columnFechaProducto;
+
 
 	private ManejadorEscenarios manejador;
 
