@@ -1,11 +1,15 @@
 package com.taheos.controlador;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.sun.enterprise.module.bootstrap.Main;
 import com.taheos.modelo.AdministradorDelegado;
+import com.taheos.modelo.ProductoObservable;
 import com.taheos.modelo.UsuarioObservable;
+import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
+import com.taheos.unimarket.enums.Categoria;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -245,6 +249,72 @@ public class ManejadorEscenarios {
 		return administradorDelegado.eliminarUsuario(usuario);
 	}
 	
+	/**
+	 * devuelve la lista de usuario que estan en la base de datos
+	 * 
+	 * @return todos los usuario
+	 */
+	public List<Usuario> listarUsuarios() {
+		return administradorDelegado.listarUsuarios();
+	}
+	/**
+	 * Permite listar todos los productos de una categoria
+	 * 
+	 * @param categoria
+	 * @return
+	 */
+	public List<Producto> listarProductosCategoria(Categoria categoria) {
+		return administradorDelegado.listarProductosCategoria(categoria);
+	}
+	
+	/**
+	 * Permite listar todos los productos
+	 * 
+	 * @return
+	 */
+	public List<Producto> listarTodosLosProductos() {
+		return administradorDelegado.listarTodosLosProductos();
+	}
+	/**
+	 * Permite ver el detalle de un producto especifico
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public String verDetalleProducto(String codigo) {
+		return administradorDelegado.verDetalleProducto(codigo);
+	}
+	/**
+	 * genera una lista de usuarios observables
+	 * 
+	 * @return todos los usuarios obsevables
+	 */
+	public ObservableList<UsuarioObservable> listarEmpleadosObservables() {
+		return administradorDelegado.listarEmpleadosObservables();
+	}
+	/**
+	 * Genera una lista de productos observables
+	 * 
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservables() {
+		return administradorDelegado.listarProductosObservables();
+	}
+	/**
+	 * Genera una lista de productos observables por categoria
+	 * 
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservablesCategoria(Categoria c) {
+		return administradorDelegado.listarProductosObservablesCategoria(c);
+	}
+	/**
+	 * Permite enviar el email a una persona
+	 * @param email
+	 */
+	public void enviarCorreo(String email) {
+		administradorDelegado.enviarCorreo(email);
+	}
 	
 
 }
