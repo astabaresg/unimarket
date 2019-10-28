@@ -322,7 +322,7 @@ public class AdminController {
 		
 		if(manejador.registrarUsuario(u)) {
 			Utilidades.mostrarMensaje("Exito", "El usuario se ha registrado correctamente");
-			tablaUsuarios.refresh();
+			actualizarTabla();
 			contenedorUsuarioDetalle.setVisible(true);
 			contenedorUsuarioCrear.setVisible(false);
 			
@@ -345,6 +345,10 @@ public class AdminController {
 
 	}
 
+	public void actualizarTabla() {
+		tablaUsuarios.setItems(null);
+		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+	}
 	/**
 	 * permite cargar el manejador de escenarios
 	 * 

@@ -136,7 +136,6 @@ public class ManejadorEscenarios{
 			s2.setY((primScreenBounds.getHeight() - s2.getHeight()) / 2);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

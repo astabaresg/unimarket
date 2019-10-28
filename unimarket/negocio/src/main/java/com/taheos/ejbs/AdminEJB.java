@@ -205,13 +205,7 @@ public class AdminEJB implements AdminEJBRemote {
 	public List<Usuario> listarUsuarios() {
 		TypedQuery<Usuario> query = entityManager.createNamedQuery(Usuario.LISTAR_TODOS_LOS_USUARIOS,
 				Usuario.class);
-		List<Usuario> usuarios = query.getResultList();
-		try {
-			return usuarios;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+			return query.getResultList();
 	}
 
 	/**

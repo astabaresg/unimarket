@@ -30,6 +30,8 @@ import com.taheos.unimarket.enums.Rol;
 @LocalBean
 public class UsuarioEJB implements UsuarioEJBRemote {
 
+	@PersistenceContext
+	private EntityManager entityManager;
 	/**
 	 * Default constructor.
 	 */
@@ -37,8 +39,7 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		// TODO Auto-generated constructor stub
 	}
 
-	@PersistenceContext
-	private EntityManager entityManager;
+
 
 	/**
 	 * Permite iniciar sesion a un usuario

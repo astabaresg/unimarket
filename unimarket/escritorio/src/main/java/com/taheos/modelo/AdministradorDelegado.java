@@ -95,7 +95,14 @@ public class AdministradorDelegado  {
 	 * @return todos los usuario
 	 */
 	public List<Usuario> listarUsuarios() {
-		return adminEJB.listarUsuarios();
+		try {
+			return adminEJB.listarUsuarios();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	/**
@@ -160,7 +167,7 @@ public class AdministradorDelegado  {
 	 * @return todos los usuarios obsevables
 	 */
 	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
-		List<Usuario> usuarios = adminEJB.listarUsuarios();
+		List<Usuario> usuarios = listarUsuarios();
 		ObservableList<UsuarioObservable> usuariosObservables = FXCollections.observableArrayList();
 		for (Usuario usuario : usuarios) {
 			usuariosObservables.add(new UsuarioObservable(usuario));
