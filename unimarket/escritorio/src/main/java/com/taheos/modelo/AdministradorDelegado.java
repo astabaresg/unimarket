@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
  * @author com.taheos
  * @version 1.0
  */
-public class AdministradorDelegado implements AdminEJBRemote {
+public class AdministradorDelegado  {
 
 	/**
 	 * instancia que representa el ejb remoto de administrador
@@ -112,6 +112,14 @@ public class AdministradorDelegado implements AdminEJBRemote {
 		}
 	}
 
+	public boolean modificarUsuario(Usuario u) {
+		try {
+			return adminEJB.modificarUsuario(u)!=null;
+		} catch (Exception e) {
+			Utilidades.mostrarMensaje("Error al modificar un usuario", e.getMessage());
+			return false;
+		}
+	}
 	/**
 	 * Permite listar todos los productos de una categoria
 	 * 
@@ -152,7 +160,7 @@ public class AdministradorDelegado implements AdminEJBRemote {
 	 * @return todos los usuarios obsevables
 	 */
 	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
-		List<Usuario> usuarios = listarUsuarios();
+		List<Usuario> usuarios = adminEJB.listarUsuarios();
 		ObservableList<UsuarioObservable> usuariosObservables = FXCollections.observableArrayList();
 		for (Usuario usuario : usuarios) {
 			usuariosObservables.add(new UsuarioObservable(usuario));
@@ -232,70 +240,5 @@ public class AdministradorDelegado implements AdminEJBRemote {
 		}
 	}
 
-	@Override
-	public Usuario registrarUsuario(Usuario usuario) throws ElementoRepetidoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean eliminarUsuario(String cedula) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Usuario modificarUsuario(Usuario usuario) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Usuario buscarUsuario(String cedula) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String obtenerClave(String email) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Producto registrarProducto(Producto producto)
-			throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean eliminarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Producto modificarProducto(Producto producto) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Producto buscarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Producto> listarProductos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Producto> listarProductosPorCategoria(Categoria categoria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

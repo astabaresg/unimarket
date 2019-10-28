@@ -3,7 +3,6 @@ package com.taheos.controlador;
 import java.io.IOException;
 import java.util.List;
 
-import com.sun.enterprise.module.bootstrap.Main;
 import com.taheos.modelo.AdministradorDelegado;
 import com.taheos.modelo.ProductoObservable;
 import com.taheos.modelo.UsuarioObservable;
@@ -18,8 +17,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -173,6 +170,12 @@ public class ManejadorEscenarios{
 		return escenario;
 	}
 
+	/**
+	 * Permite modificar un usuario
+	 */
+	public boolean modificarUsuario(Usuario u) {
+		return administradorDelegado.modificarUsuario(u);
+	}
 	/**
 	 * permite registrar una persona en la base de datos
 	 * 

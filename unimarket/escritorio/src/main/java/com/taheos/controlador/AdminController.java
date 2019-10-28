@@ -8,7 +8,6 @@ import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Rol;
 import com.taheos.util.Utilidades;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -176,8 +175,6 @@ public class AdminController {
 		columnTelefono.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNum_telefono());
 
 		mostrarDetalleUsuario(null);
-		
-		
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
@@ -267,6 +264,7 @@ public class AdminController {
 		txtNombre.setText(lblNombre.getText());
 		txtTelefono.setText(lblTelefono.getText());
 		lblCedulaModificar.setText(lblCedula.getText());
+		
 
 	}
 
@@ -289,7 +287,21 @@ public class AdminController {
 
 	@FXML
 	void onModificarUsuarioDone(ActionEvent event) {
-
+		Usuario u = new Usuario();
+		u.setNombre(txtNombre.getText());
+		u.setDireccion(txtDireccion.getText());
+		u.setCorreo(txtEmail.getText());
+		u.setNum_telefono(txtTelefono.getText());
+		u.setId(lblCedulaModificar.getText());
+		u.setRol(Rol.COMPRADOR);
+		
+		
+		if (manejador.modificarUsuario(u)) {
+			Utilidades.mostrarMensaje("Borrar", "El usuario ha sido modificado con exito");
+			tablaUsuarios.refresh();
+		} else {
+			Utilidades.mostrarMensaje("Error", "El usuario no pudo ser modificado");
+		}
 	}
 
 	/**
@@ -340,7 +352,8 @@ public class AdminController {
 	 */
 	public void setManejador(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
-		
+		tablaUsuarios.setItems(null);
+		tablaUsuarios.setItems(manejador.getUsuariosObservables());
 	}
 
 	/**
@@ -350,7 +363,8 @@ public class AdminController {
 	 */
 	public void setEscenarioInicial(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
-		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
+		tablaUsuarios.setItems(null);
+		tablaUsuarios.setItems(manejador.getUsuariosObservables());
 	}
 
 }
