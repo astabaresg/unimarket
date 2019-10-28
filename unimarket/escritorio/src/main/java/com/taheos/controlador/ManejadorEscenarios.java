@@ -1,5 +1,8 @@
 package com.taheos.controlador;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,7 +19,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -49,6 +55,10 @@ public class ManejadorEscenarios{
 	 */
 	private ObservableList<UsuarioObservable> usuariosObservables;
 	/**
+	 * para almacenar productos observables
+	 */
+	private ObservableList<ProductoObservable> productosObservables;
+	/**
 	 * conexion con capa de negocio
 	 */
 	private AdministradorDelegado administradorDelegado;
@@ -63,6 +73,7 @@ public class ManejadorEscenarios{
 
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
+		productosObservables = FXCollections.observableArrayList();
 		this.escenario = escenario;
 
 		try {
@@ -114,6 +125,33 @@ public class ManejadorEscenarios{
 	}
 	
 
+	public void cargarEscenaImagen(final File imageFile) {
+        try { 
+	           BorderPane borderPane = new BorderPane(); 
+	           ImageView imageView = new ImageView(); 
+	           Image image = new Image(new FileInputStream(imageFile)); 
+	           imageView.setImage(image); 
+	           imageView.setStyle("-fx-background-color: BLACK"); 
+	           imageView.setFitHeight(s2.getHeight() - 10); 
+	           imageView.setPreserveRatio(true); 
+	           imageView.setSmooth(true); 
+	           imageView.setCache(true); 
+	           borderPane.setCenter(imageView); 
+	           borderPane.setStyle("-fx-background-color: BLACK"); 
+	           Stage newStage = new Stage(); 
+	           newStage.setWidth(s2.getWidth()); 
+	           newStage.setHeight(s2.getHeight()); 
+	           newStage.setTitle(imageFile.getName()); 
+	           Scene scene = new Scene(borderPane,Color.BLACK); 
+	           newStage.setScene(scene); 
+	           newStage.show(); 
+	          } catch (FileNotFoundException e) { 
+	           e.printStackTrace(); 
+	          } 
+
+	         
+	        
+	}
 	/**
 	 * muestra el escenario del administrador
 	 */
@@ -122,6 +160,7 @@ public class ManejadorEscenarios{
 
 		try {
 			usuariosObservables = administradorDelegado.listarUsuariosObservables();
+			productosObservables = administradorDelegado.listarProductosObservables();
 			s2 = new Stage();
 			loginP = new FXMLLoader(getClass().getResource("/views/adminView.fxml"));
 			loginPane = loginP.load();
@@ -150,6 +189,12 @@ public class ManejadorEscenarios{
 	public ObservableList<UsuarioObservable> getUsuariosObservables() {
 		return usuariosObservables;
 	}
+
+	
+	public ObservableList<ProductoObservable> getProductosObservables() {
+		return productosObservables;
+	}
+
 
 	/**
 	 * permite agrega un usuario a la lista obsevable

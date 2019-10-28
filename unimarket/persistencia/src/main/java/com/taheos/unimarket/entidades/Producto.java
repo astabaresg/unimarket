@@ -3,6 +3,7 @@ package com.taheos.unimarket.entidades;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -87,8 +88,8 @@ public class Producto implements Serializable {
 	/**
 	 * representa la imagen que se desea almacenar en la base de datos
 	 */
-	@Lob
-	private byte[] imagen;
+	@ElementCollection
+	private ArrayList<String> imagen;
 
 	/**
 	 * Disponible o no
@@ -175,18 +176,11 @@ public class Producto implements Serializable {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-
-	/**
-	 * @return the imagen
-	 */
-	public byte[] getImagen() {
+	public ArrayList<String> getImagen() {
 		return imagen;
 	}
 
-	/**
-	 * @param imagen the imagen to set
-	 */
-	public void setImagen(byte[] imagen) {
+	public void setImagen(ArrayList<String> imagen) {
 		this.imagen = imagen;
 	}
 

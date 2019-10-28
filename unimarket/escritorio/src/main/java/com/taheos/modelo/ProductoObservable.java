@@ -2,6 +2,10 @@ package com.taheos.modelo;
 
 import com.taheos.unimarket.entidades.Producto;
 
+import java.util.Date;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -25,15 +29,19 @@ public class ProductoObservable {
 	 */
 	private StringProperty precio;
 	/**
-	 * numero de telefono observable de un producto
+	 * fecha limite observable de un producto
 	 */
-	private StringProperty cantidad;
+	private ObjectProperty<Date> fechaLimite;
 	/**
 	 * Categoria observable de un producto
 	 */
 	private StringProperty categoria;
 	/**
-	 * usuario asociado
+	 * disponibilidad observable de un producto
+	 */
+	private StringProperty disponibilidad;
+	/**
+	 * producto asociado
 	 */
 	private Producto producto;
 
@@ -48,25 +56,9 @@ public class ProductoObservable {
 		this.id = new SimpleStringProperty(producto.getId() + "");
 		this.nombre = new SimpleStringProperty(producto.getNombre());
 		this.precio = new SimpleStringProperty(producto.getPrecio() + "");
-		this.cantidad = new SimpleStringProperty(producto.getCantidad() + "");
+		this.fechaLimite = new SimpleObjectProperty<>(producto.getFecha_limite());
 		this.categoria = new SimpleStringProperty(producto.getCategoria().name());
-	}
-
-	/**
-	 * constructor que genera un producto observable a partir de unos parametros
-	 * @param id
-	 * @param nombre
-	 * @param precio
-	 * @param cantidad
-	 * @param categoria
-	 */
-	public ProductoObservable(String id, String nombre, String precio, String cantidad,
-			String categoria) {
-		this.id = new SimpleStringProperty(id);
-		this.nombre = new SimpleStringProperty(nombre);
-		this.precio = new SimpleStringProperty(precio);
-		this.cantidad = new SimpleStringProperty(cantidad);
-		this.categoria = new SimpleStringProperty(categoria);
+		this.disponibilidad = new SimpleStringProperty(producto.getDisponibilidad().name());
 	}
 
 	public StringProperty getId() {
@@ -93,12 +85,12 @@ public class ProductoObservable {
 		this.precio = precio;
 	}
 
-	public StringProperty getCantidad() {
-		return cantidad;
+	public ObjectProperty<Date> getFechaLimite() {
+		return fechaLimite;
 	}
 
-	public void setCantidad(StringProperty cantidad) {
-		this.cantidad = cantidad;
+	public void setFechaLimite(ObjectProperty<Date> fechaLimite) {
+		this.fechaLimite = fechaLimite;
 	}
 
 	public StringProperty getCategoria() {
@@ -117,5 +109,16 @@ public class ProductoObservable {
 		this.producto = producto;
 	}
 
+	public StringProperty devolverFechaLimite() {
+		return new SimpleStringProperty(fechaLimite.toString());
+	}
+
+	public StringProperty getDisponibilidad() {
+		return disponibilidad;
+	}
+
+	public void setDisponibilidad(StringProperty disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
 	
 }

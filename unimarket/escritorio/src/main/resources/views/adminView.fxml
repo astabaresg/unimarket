@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
    <children>
       <BorderPane layoutX="214.0" layoutY="65.0" prefHeight="500.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -127,13 +127,13 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="215.0" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                              <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-text-fill: #FFFFFF;" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFF;" text="Cedula" />
-                                    <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Nombre" />
-                                    <TableColumn fx:id="columnDireccion" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Direccion" />
-                                    <TableColumn fx:id="columnEmail" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Email" />
-                                    <TableColumn fx:id="columnTelefono" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Telefono" />
+                                    <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Cedula" />
+                                    <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Nombre" />
+                                    <TableColumn fx:id="columnDireccion" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Direccion" />
+                                    <TableColumn fx:id="columnEmail" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Email" />
+                                    <TableColumn fx:id="columnTelefono" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Telefono" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
@@ -640,13 +640,13 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="183.0" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tablaProducto" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                              <TableView fx:id="tablaProducto" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #38404b;" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn fx:id="columnNombreProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFF;" text="Nombre" />
-                                    <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Precio" />
-                                    <TableColumn fx:id="columnCategoriaProducto" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Categoria" />
-                                    <TableColumn fx:id="columnDisponibilidadProducto" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Disponibilidad" />
-                                    <TableColumn fx:id="columnFechaProducto" prefWidth="75.0" style="-fx-background-color: #38404b;" text="Fecha Limite" />
+                                    <TableColumn fx:id="columnNombreProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Nombre" />
+                                    <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Precio" />
+                                    <TableColumn fx:id="columnCategoriaProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Categoria" />
+                                    <TableColumn fx:id="columnDisponibilidadProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Disponibilidad" />
+                                    <TableColumn fx:id="columnFechaProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Fecha Limite" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
@@ -694,7 +694,7 @@
                                                             <Image url="@../icons/dollar-sign-and-piles-of-coins.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label fx:id="lblPrecio" text="Label">
+                                                      <Label fx:id="lblPrecio">
                                                          <HBox.margin>
                                                             <Insets left="18.0" />
                                                          </HBox.margin>
@@ -717,7 +717,7 @@
                                                             <Image url="@../icons/delivery-packages-on-a-trolley.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label fx:id="lblCategoria" text="Label">
+                                                      <Label fx:id="lblCategoria">
                                                          <HBox.margin>
                                                             <Insets left="18.0" />
                                                          </HBox.margin>
@@ -740,7 +740,7 @@
                                                             <Image url="@../icons/tick-inside-circle.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label fx:id="lblDisponibilidad" text="Label">
+                                                      <Label fx:id="lblDisponibilidad">
                                                          <HBox.margin>
                                                             <Insets left="18.0" />
                                                          </HBox.margin>
@@ -763,7 +763,7 @@
                                                             <Image url="@../icons/timetable.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label fx:id="lblFecha" text="Label">
+                                                      <Label fx:id="lblFecha">
                                                          <HBox.margin>
                                                             <Insets left="18.0" />
                                                          </HBox.margin>
@@ -780,7 +780,7 @@
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="270.0">
                                              <children>
-                                                <ImageView fitHeight="248.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="lblImagen" fitHeight="248.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </VBox>
                                        </children>

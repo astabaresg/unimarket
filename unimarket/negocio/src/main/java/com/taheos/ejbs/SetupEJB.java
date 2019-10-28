@@ -1,6 +1,9 @@
 package com.taheos.ejbs;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -10,6 +13,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.taheos.unimarket.entidades.Administrador;
+import com.taheos.unimarket.entidades.Producto;
+import com.taheos.unimarket.enums.Categoria;
+import com.taheos.unimarket.enums.Disponibilidad;
 
 
 /**
@@ -51,7 +57,6 @@ public class SetupEJB {
 			entityManager.persist(admin);
 
 		}
-
 	}
 
 }

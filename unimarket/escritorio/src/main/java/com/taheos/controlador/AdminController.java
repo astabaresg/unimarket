@@ -1,18 +1,28 @@
 package com.taheos.controlador;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.taheos.modelo.ProductoObservable;
 import com.taheos.modelo.UsuarioObservable;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Rol;
 import com.taheos.util.Utilidades;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -124,6 +134,7 @@ public class AdminController {
 	private JFXButton btnCancelarModificar;
 
 	private UsuarioObservable usuarioObservable;
+	private ProductoObservable productoObservable;
 
 	@FXML
 	private TableView<UsuarioObservable> tablaUsuarios;
@@ -142,32 +153,32 @@ public class AdminController {
 
 	@FXML
 	private TableColumn<UsuarioObservable, String> columnTelefono;
-	
-    @FXML
-    private TableView<?> tablaProducto;
 
-    @FXML
-    private TableColumn<?, ?> columnNombreProducto;
+	@FXML
+	private TableView<ProductoObservable> tablaProducto;
 
-    @FXML
-    private TableColumn<?, ?> columnPrecioProducto;
+	@FXML
+	private TableColumn<ProductoObservable, String> columnNombreProducto;
 
-    @FXML
-    private TableColumn<?, ?> columnCategoriaProducto;
+	@FXML
+	private TableColumn<ProductoObservable, String> columnPrecioProducto;
 
-    @FXML
-    private TableColumn<?, ?> columnDisponibilidadProducto;
+	@FXML
+	private TableColumn<ProductoObservable, String> columnCategoriaProducto;
 
-    @FXML
-    private TableColumn<?, ?> columnFechaProducto;
+	@FXML
+	private TableColumn<ProductoObservable, String> columnDisponibilidadProducto;
 
+	@FXML
+	private TableColumn<ProductoObservable, String> columnFechaProducto;
 
+	@FXML
+	private ImageView lblImagen;
 	private ManejadorEscenarios manejador;
 
 	@FXML
 	void initialize() {
 
-		
 		columnCedula.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getCedula());
 		columnNombre.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNombre());
 		columnDireccion.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getDireccion());
@@ -178,7 +189,16 @@ public class AdminController {
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
-		
+
+		columnNombreProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getNombre());
+		columnPrecioProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getPrecio());
+		columnCategoriaProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getCategoria());
+		columnDisponibilidadProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getDisponibilidad());
+		columnFechaProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().devolverFechaLimite());
+
+		tablaProducto.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> mostrarDetalleProducto(newValue));
+
 	}
 
 	/**
@@ -201,6 +221,35 @@ public class AdminController {
 			lblEmail.setText("");
 			lblTelefono.setText("");
 			lblDireccion.setText("");
+		}
+
+	}
+
+	/**
+	 * permite mostrar la informacion del usuario seleccionado
+	 * 
+	 * @param usuario usuario al que se le desea mostrar el detalle
+	 */
+	public void mostrarDetalleProducto(ProductoObservable producto) {
+
+		if (producto != null) {
+			productoObservable = producto;
+
+			lblNombreProducto.setText(producto.getNombre().getValue());
+			lblPrecio.setText(producto.getPrecio().getValue());
+			lblCategoria.setText(producto.getCategoria().getValue());
+			lblDisponibilidad.setText(producto.getDisponibilidad().getValue());
+			lblFecha.setText(producto.getFechaLimite().getValue().toString());
+			
+			File path = new File(producto.getProducto().getImagen().get(0));
+			createImageView(path);
+
+		} else {
+			lblNombreProducto.setText("");
+			lblPrecio.setText("");
+			lblCategoria.setText("");
+			lblDisponibilidad.setText("");
+			lblFecha.setText("");
 		}
 
 	}
@@ -264,7 +313,6 @@ public class AdminController {
 		txtNombre.setText(lblNombre.getText());
 		txtTelefono.setText(lblTelefono.getText());
 		lblCedulaModificar.setText(lblCedula.getText());
-		
 
 	}
 
@@ -294,11 +342,17 @@ public class AdminController {
 		u.setNum_telefono(txtTelefono.getText());
 		u.setId(lblCedulaModificar.getText());
 		u.setRol(Rol.COMPRADOR);
-		
-		
+
 		if (manejador.modificarUsuario(u)) {
 			Utilidades.mostrarMensaje("Borrar", "El usuario ha sido modificado con exito");
-			tablaUsuarios.refresh();
+			actualizarTabla();
+			txtDireccion.setText("");
+			txtEmail.setText("");
+			txtNombre.setText("");
+			txtTelefono.setText("");
+			lblCedulaModificar.setText("");
+			contenedorUsuarioDetalle.setVisible(true);
+			contenedorUsuarioModificar.setVisible(false);
 		} else {
 			Utilidades.mostrarMensaje("Error", "El usuario no pudo ser modificado");
 		}
@@ -319,14 +373,20 @@ public class AdminController {
 		u.setNombre(txtCrearNombre.getText());
 		u.setNum_telefono(txtCrearTelefono.getText());
 		u.setRol(Rol.COMPRADOR);
-		
-		if(manejador.registrarUsuario(u)) {
+
+		if (manejador.registrarUsuario(u)) {
 			Utilidades.mostrarMensaje("Exito", "El usuario se ha registrado correctamente");
 			actualizarTabla();
 			contenedorUsuarioDetalle.setVisible(true);
 			contenedorUsuarioCrear.setVisible(false);
-			
-		}else {
+			txtCrearCedula.setText("");
+			txtCrearContrasena.setText("");
+			txtCrearDireccion.setText("");
+			txtCrearEmail.setText("");
+			txtCrearNombre.setText("");
+			txtCrearTelefono.setText("");
+
+		} else {
 			Utilidades.mostrarMensaje("Error", "Fallo algo a la hora de registrar");
 		}
 	}
@@ -347,8 +407,9 @@ public class AdminController {
 
 	public void actualizarTabla() {
 		tablaUsuarios.setItems(null);
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
 	}
+
 	/**
 	 * permite cargar el manejador de escenarios
 	 * 
@@ -357,7 +418,9 @@ public class AdminController {
 	public void setManejador(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
 		tablaUsuarios.setItems(null);
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
+		tablaProducto.setItems(null);
+		tablaProducto.setItems(manejador.getProductosObservables());
 	}
 
 	/**
@@ -368,7 +431,36 @@ public class AdminController {
 	public void setEscenarioInicial(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
 		tablaUsuarios.setItems(null);
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
+		tablaProducto.setItems(null);
+		tablaProducto.setItems(manejador.getProductosObservables());
 	}
 
+	private void createImageView(final File imageFile) {
+		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
+		// The last two arguments are: preserveRatio, and use smooth (slower)
+		// resizing
+
+		try {
+			final Image image = new Image(new FileInputStream(imageFile), 150, 0, true, true);
+			lblImagen = new ImageView(image);
+			lblImagen.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+
+					if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+
+						if (mouseEvent.getClickCount() == 2) {
+
+							manejador.cargarEscenaImagen(imageFile);
+
+						}
+					}
+				}
+			});
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+	}
 }
