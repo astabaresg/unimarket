@@ -123,11 +123,8 @@ public class ManejadorEscenarios{
 
 	public void cargarEscenarioAdmin() {
 
-		
-
 		try {
 			usuariosObservables = administradorDelegado.listarUsuariosObservables();
-			
 			s2 = new Stage();
 			loginP = new FXMLLoader(getClass().getResource("/views/adminView.fxml"));
 			loginPane = loginP.load();
@@ -148,59 +145,6 @@ public class ManejadorEscenarios{
 
 	}
 
-	/**
-	 * carga una escena en el centro del escenario
-	 */
-	public void cargarEscena() {
-
-		try {
-
-			usuariosObservables = administradorDelegado.listarUsuariosObservables();
-
-			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("/detalle_usuario.fxml"));
-			adminPane = loader2.load();
-
-			UsuarioControlador controlador = loader2.getController();
-			controlador.setEscenarioInicial(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * muestra el escenario para crear un empleado nuevo
-	 */
-	public void cargarEscenarioCrearEmpleado() {
-
-		try {
-
-			// se carga la interfaz
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/editar_usuario.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-
-			// se crea el escenario
-			Stage escenarioCrear = new Stage();
-			escenarioCrear.setTitle("Crear");
-			Scene scene = new Scene(page);
-			escenarioCrear.setScene(scene);
-
-			// se carga el controlador
-			EdicionUsuarioControlador usuarioControlador = loader.getController();
-			usuarioControlador.setEscenarioEditar(escenarioCrear);
-			usuarioControlador.setManejador(this);
-
-			// se crea el escenario
-			escenarioCrear.showAndWait();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * Generar usuarios observables

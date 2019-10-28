@@ -350,7 +350,7 @@ public class AdminController {
 	 */
 	public void setEscenarioInicial(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
+		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
 	}
 
 }
