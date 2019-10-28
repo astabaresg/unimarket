@@ -165,11 +165,9 @@ public class AdminController {
 
 	private ManejadorEscenarios manejador;
 
-	private ObservableList<UsuarioObservable> usuariosObservables;
 	@FXML
 	void initialize() {
 
-//		usuariosObservables = manejador.listarUsuariosObservables();
 		
 		columnCedula.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getCedula());
 		columnNombre.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNombre());
@@ -184,8 +182,6 @@ public class AdminController {
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
 		
-//		tablaUsuarios.setItems(manejador.retornarUsuariosObservables());
-		tablaUsuarios.setItems(usuariosObservables);
 	}
 
 	/**
@@ -314,7 +310,6 @@ public class AdminController {
 		
 		if(manejador.registrarUsuario(u)) {
 			Utilidades.mostrarMensaje("Exito", "El usuario se ha registrado correctamente");
-			usuariosObservables = manejador.listarUsuariosObservables();
 			tablaUsuarios.refresh();
 			contenedorUsuarioDetalle.setVisible(true);
 			contenedorUsuarioCrear.setVisible(false);
@@ -345,6 +340,7 @@ public class AdminController {
 	 */
 	public void setManejador(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
+		
 	}
 
 	/**

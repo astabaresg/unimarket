@@ -123,8 +123,11 @@ public class ManejadorEscenarios{
 
 	public void cargarEscenarioAdmin() {
 
+		
 
 		try {
+			usuariosObservables = administradorDelegado.listarUsuariosObservables();
+			
 			s2 = new Stage();
 			loginP = new FXMLLoader(getClass().getResource("/views/adminView.fxml"));
 			loginPane = loginP.load();
