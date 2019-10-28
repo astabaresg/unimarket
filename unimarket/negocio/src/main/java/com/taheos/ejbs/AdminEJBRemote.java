@@ -51,7 +51,7 @@ public interface AdminEJBRemote {
 	 * @throws ElementoRepetidoExcepcion
 	 * @throws ElementoNoEncontradoExcepcion
 	 */
-	Producto registrarProducto(Producto producto) throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion;
+	Producto registrarProducto(Producto producto) throws  ElementoNoEncontradoExcepcion;
 
 	/**
 	 * Metodo para eliminar un producto de la base de datos

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.taheos.modelo.AdministradorDelegado;
@@ -12,6 +14,7 @@ import com.taheos.modelo.UsuarioObservable;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Categoria;
+import com.taheos.unimarket.enums.Disponibilidad;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,7 +76,7 @@ public class ManejadorEscenarios{
 
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
-		productosObservables = FXCollections.observableArrayList();
+		productosObservables = FXCollections.observableArrayList(); 
 		this.escenario = escenario;
 
 		try {

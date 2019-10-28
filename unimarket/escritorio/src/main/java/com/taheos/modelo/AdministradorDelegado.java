@@ -88,6 +88,22 @@ public class AdministradorDelegado  {
 			return false;
 		}
 	}
+	
+	/**
+	 * pemite registar un nuevo usuario
+	 * 
+	 * @param usuario empleado a agregar
+	 * @return devuelve true si el usuario fue registrado
+	 */
+	public boolean registrarP(Producto p) {
+		try {
+			return adminEJB.registrarProducto(p) != null;
+		} catch (ElementoNoEncontradoExcepcion e) {
+			Utilidades.mostrarMensaje("Error al registrar un producto", e.getMessage());
+			return false;
+		}
+	}
+
 
 	/**
 	 * devuelve la lista de usuario que estan en la base de datos

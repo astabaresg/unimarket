@@ -216,9 +216,9 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @throws ElementoRepetidoExcepcion
 	 * @throws ElementoNoEncontradoExcepcion 
 	 */
-	public Producto registrarProducto(Producto producto) throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
+	public Producto registrarProducto(Producto producto) throws  ElementoNoEncontradoExcepcion {
 		if (buscarProducto(producto.getId() + "") != null) {
-			throw new ElementoRepetidoExcepcion("Ya existe un producto con ese nombre");
+			throw new ElementoNoEncontradoExcepcion("Ya existe un producto con ese id");
 		} else {
 			try {
 				entityManager.persist(producto);
