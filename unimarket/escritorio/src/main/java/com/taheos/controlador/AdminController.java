@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.taheos.modelo.UsuarioObservable;
 import com.taheos.unimarket.entidades.Usuario;
+import com.taheos.unimarket.enums.Rol;
 import com.taheos.util.Utilidades;
 
 import javafx.collections.ObservableList;
@@ -168,6 +169,8 @@ public class AdminController {
 	@FXML
 	void initialize() {
 
+//		usuariosObservables = manejador.listarUsuariosObservables();
+		
 		columnCedula.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getCedula());
 		columnNombre.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNombre());
 		columnDireccion.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getDireccion());
@@ -176,7 +179,7 @@ public class AdminController {
 
 		mostrarDetalleUsuario(null);
 		
-		usuariosObservables = manejador.getUsuariosObservables();
+		
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
@@ -300,6 +303,25 @@ public class AdminController {
 	@FXML
 	void onCrearUsuarioDone(ActionEvent event) {
 
+		Usuario u = new Usuario();
+		u.setClave(txtCrearContrasena.getText());
+		u.setCorreo(txtCrearEmail.getText());
+		u.setDireccion(txtCrearDireccion.getText());
+		u.setId(txtCrearCedula.getText());
+		u.setNombre(txtCrearNombre.getText());
+		u.setNum_telefono(txtCrearTelefono.getText());
+		u.setRol(Rol.COMPRADOR);
+		
+		if(manejador.registrarUsuario(u)) {
+			Utilidades.mostrarMensaje("Exito", "El usuario se ha registrado correctamente");
+			usuariosObservables = manejador.listarUsuariosObservables();
+			tablaUsuarios.refresh();
+			contenedorUsuarioDetalle.setVisible(true);
+			contenedorUsuarioCrear.setVisible(false);
+			
+		}else {
+			Utilidades.mostrarMensaje("Error", "Fallo algo a la hora de registrar");
+		}
 	}
 
 	@FXML

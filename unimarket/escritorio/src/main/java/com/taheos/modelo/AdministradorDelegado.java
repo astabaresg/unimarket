@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
  * @author com.taheos
  * @version 1.0
  */
-public class AdministradorDelegado {
+public class AdministradorDelegado implements AdminEJBRemote {
 
 	/**
 	 * instancia que representa el ejb remoto de administrador
@@ -80,7 +80,7 @@ public class AdministradorDelegado {
 	 * @param usuario empleado a agregar
 	 * @return devuelve true si el usuario fue registrado
 	 */
-	public boolean registrarUsuario(Usuario usuario) {
+	public boolean registrarU(Usuario usuario) {
 		try {
 			return adminEJB.registrarUsuario(usuario) != null;
 		} catch (ElementoRepetidoExcepcion e) {
@@ -230,5 +230,72 @@ public class AdministradorDelegado {
 			me.printStackTrace();
 			Utilidades.mostrarMensaje("Error", "No se ha podido enviar el mensaje");
 		}
+	}
+
+	@Override
+	public Usuario registrarUsuario(Usuario usuario) throws ElementoRepetidoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean eliminarUsuario(String cedula) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Usuario modificarUsuario(Usuario usuario) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Usuario buscarUsuario(String cedula) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String obtenerClave(String email) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto registrarProducto(Producto producto)
+			throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean eliminarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Producto modificarProducto(Producto producto) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto buscarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> listarProductos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> listarProductosPorCategoria(Categoria categoria) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

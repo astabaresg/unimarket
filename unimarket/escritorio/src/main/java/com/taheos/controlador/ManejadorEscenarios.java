@@ -63,6 +63,9 @@ public class ManejadorEscenarios{
 	 */
 	public ManejadorEscenarios(Stage escenario) {
 
+
+		administradorDelegado = AdministradorDelegado.administradorDelegado;
+		usuariosObservables = FXCollections.observableArrayList();
 		this.escenario = escenario;
 
 		try {
@@ -120,8 +123,6 @@ public class ManejadorEscenarios{
 
 	public void cargarEscenarioAdmin() {
 
-		administradorDelegado = AdministradorDelegado.administradorDelegado;
-		usuariosObservables = administradorDelegado.listarUsuariosObservables();
 
 		try {
 			s2 = new Stage();
@@ -233,7 +234,7 @@ public class ManejadorEscenarios{
 	 */
 	public boolean registrarUsuario(Usuario usuario) {
 		try {
-			return administradorDelegado.registrarUsuario(usuario);
+			return administradorDelegado.registrarU(usuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -326,4 +327,8 @@ public class ManejadorEscenarios{
 		}
 		
 	}
+	public AdministradorDelegado getAdministradorDelegado() {
+		return administradorDelegado;
+	}
+	
 }

@@ -109,12 +109,11 @@ public class TestNegocio {
 	}
 	
 	@Test
-	@UsingDataSet({ "Persona.json" })
 	public void listarUsuariosTest() {
 		
 		List<Usuario> usuarios = adminEJB.listarUsuarios();
 		
-		Assert.assertEquals( 2, usuarios.size());
+		Assert.assertEquals( 1, usuarios.size());
 	}
 	@Test
 	@UsingDataSet({ "Producto.json" })
@@ -136,48 +135,48 @@ public class TestNegocio {
 			e.printStackTrace();
 		}
 	}
-	@Test
-	@UsingDataSet({ "Persona.json" })
-	public void enviarCorreoTest() {
-		// Para la direccion nomcuenta@gmail.com
-				Properties props = System.getProperties();
-				props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
-				props.put("mail.smtp.user", "herbariomasteruq@gmail.com");
-				props.put("mail.smtp.clave", "unimarket"); // La clave de la cuenta
-				props.put("mail.smtp.auth", "true"); // Usar autenticaci�n mediante usuario y clave
-				props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
-				props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
-				props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-				Session session = Session.getDefaultInstance(props);
-				MimeMessage message = new MimeMessage(session);
-				BodyPart texto = new MimeBodyPart();
-				MimeMultipart multiParte = new MimeMultipart();
-
-				try {
-					texto.setText(
-							"la clave asociada con el correo proporcionado es " + adminEJB.obtenerClave("astg0616@gmail.com"));
-					
-					multiParte.addBodyPart(texto);
-
-					message.setFrom(new InternetAddress("herbariomasteruq@gmail.com"));
-					message.addRecipients(Message.RecipientType.TO, "astg0616@gmail.com");
-
-					message.setSubject("Recuperacion de clave uniMarket:");
-					message.setText("prueba");
-					message.setContent(multiParte);
-
-					Transport transport = session.getTransport("smtp");
-					transport.connect("smtp.gmail.com", "herbariomasteruq@gmail.com", "unimarket");
-
-					transport.sendMessage(message, message.getAllRecipients());
-					transport.close();
-					
-					Utilidades.mostrarMensaje("Bien", "Se ha enviado el mensaje a su correo");
-
-				} catch (MessagingException | ElementoNoEncontradoExcepcion me) {
-					me.printStackTrace();
-					Utilidades.mostrarMensaje("Error", "No se ha podido enviar el mensaje");
-				}
-			}
+//	@Test
+//	@UsingDataSet({ "Persona.json" })
+//	public void enviarCorreoTest() {
+//		// Para la direccion nomcuenta@gmail.com
+//				Properties props = System.getProperties();
+//				props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
+//				props.put("mail.smtp.user", "herbariomasteruq@gmail.com");
+//				props.put("mail.smtp.clave", "unimarket"); // La clave de la cuenta
+//				props.put("mail.smtp.auth", "true"); // Usar autenticaci�n mediante usuario y clave
+//				props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
+//				props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
+//				props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+//
+//				Session session = Session.getDefaultInstance(props);
+//				MimeMessage message = new MimeMessage(session);
+//				BodyPart texto = new MimeBodyPart();
+//				MimeMultipart multiParte = new MimeMultipart();
+//
+//				try {
+//					texto.setText(
+//							"la clave asociada con el correo proporcionado es " + adminEJB.obtenerClave("astg0616@gmail.com"));
+//					
+//					multiParte.addBodyPart(texto);
+//
+//					message.setFrom(new InternetAddress("herbariomasteruq@gmail.com"));
+//					message.addRecipients(Message.RecipientType.TO, "astg0616@gmail.com");
+//
+//					message.setSubject("Recuperacion de clave uniMarket:");
+//					message.setText("prueba");
+//					message.setContent(multiParte);
+//
+//					Transport transport = session.getTransport("smtp");
+//					transport.connect("smtp.gmail.com", "herbariomasteruq@gmail.com", "unimarket");
+//
+//					transport.sendMessage(message, message.getAllRecipients());
+//					transport.close();
+//					
+//					Utilidades.mostrarMensaje("Bien", "Se ha enviado el mensaje a su correo");
+//
+//				} catch (MessagingException | ElementoNoEncontradoExcepcion me) {
+//					me.printStackTrace();
+//					Utilidades.mostrarMensaje("Error", "No se ha podido enviar el mensaje");
+//				}
+//			}
 }
