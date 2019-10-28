@@ -35,14 +35,5 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/rock0/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/5.0/glassfish-embedded-all-5.0.jar" sourcepath="C:/Users/rock0/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/5.0/glassfish-embedded-all-5.0-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.glassfish.main.extras"/>
-			<attribute name="maven.artifactId" value="glassfish-embedded-all"/>
-			<attribute name="maven.version" value="5.0"/>
-			<attribute name="maven.scope" value="provided"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

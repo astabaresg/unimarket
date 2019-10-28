@@ -7,6 +7,7 @@ import com.taheos.modelo.UsuarioObservable;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.util.Utilidades;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -99,7 +100,7 @@ public class AdminController {
 	private JFXTextField txtCrearTelefono;
 
 	@FXML
-	private JFXPasswordField txtCrearContraseña;
+	private JFXPasswordField txtCrearContrasena;
 
 	@FXML
 	private JFXButton btnAgregarUsuario;
@@ -163,6 +164,7 @@ public class AdminController {
 
 	private ManejadorEscenarios manejador;
 
+	private ObservableList<UsuarioObservable> usuariosObservables;
 	@FXML
 	void initialize() {
 
@@ -173,9 +175,14 @@ public class AdminController {
 		columnTelefono.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNum_telefono());
 
 		mostrarDetalleUsuario(null);
+		
+		usuariosObservables = manejador.getUsuariosObservables();
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
+		
+//		tablaUsuarios.setItems(manejador.retornarUsuariosObservables());
+		tablaUsuarios.setItems(usuariosObservables);
 	}
 
 	/**
@@ -301,7 +308,7 @@ public class AdminController {
 		contenedorUsuarioCrear.setVisible(false);
 		contenedorUsuarioDetalle.setVisible(true);
 		txtCrearCedula.setText("");
-		txtCrearContraseña.setText("");
+		txtCrearContrasena.setText("");
 		txtCrearDireccion.setText("");
 		txtCrearEmail.setText("");
 		txtCrearNombre.setText("");

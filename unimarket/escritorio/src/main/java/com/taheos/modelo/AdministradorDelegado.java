@@ -19,6 +19,7 @@ import javax.naming.NamingException;
 import com.taheos.ejbs.AdminEJBRemote;
 import com.taheos.excepciones.ElementoNoEncontradoExcepcion;
 import com.taheos.excepciones.ElementoRepetidoExcepcion;
+import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Categoria;
@@ -69,6 +70,10 @@ public class AdministradorDelegado {
 		return administradorDelegado;
 	}
 
+
+	public Persona iniciarSesion (String email, String clave) {
+		return adminEJB.iniciarSesion(email, clave);
+	}
 	/**
 	 * pemite registar un nuevo usuario
 	 * 
@@ -146,7 +151,7 @@ public class AdministradorDelegado {
 	 * 
 	 * @return todos los usuarios obsevables
 	 */
-	public ObservableList<UsuarioObservable> listarEmpleadosObservables() {
+	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
 		List<Usuario> usuarios = listarUsuarios();
 		ObservableList<UsuarioObservable> usuariosObservables = FXCollections.observableArrayList();
 		for (Usuario usuario : usuarios) {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.taheos.util.Utilidades;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +42,11 @@ public class LoginController {
     void onLoginButton(ActionEvent event) throws IOException {
 
 
+//    	if(manejador.iniciciarSesion(textUser.getText(), textPassword.getText())) {
+//
+//    	}else {
+//    		Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor verifique");
+//    	}
     	manejador.getEscenario().close();
     	manejador.cargarEscenarioAdmin();
     	

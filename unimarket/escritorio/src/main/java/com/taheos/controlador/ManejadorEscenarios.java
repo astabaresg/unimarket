@@ -32,7 +32,7 @@ import javafx.stage.StageStyle;
  * @author com.taheos
  * @version 1.0
  */
-public class ManejadorEscenarios {
+public class ManejadorEscenarios{
 
 	private double xOffSet, yOffSet;
 
@@ -121,7 +121,7 @@ public class ManejadorEscenarios {
 	public void cargarEscenarioAdmin() {
 
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
-		usuariosObservables = FXCollections.observableArrayList();
+		usuariosObservables = administradorDelegado.listarUsuariosObservables();
 
 		try {
 			s2 = new Stage();
@@ -136,6 +136,7 @@ public class ManejadorEscenarios {
 			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 			s2.setX((primScreenBounds.getWidth() - s2.getWidth()) / 2);
 			s2.setY((primScreenBounds.getHeight() - s2.getHeight()) / 2);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,7 +151,7 @@ public class ManejadorEscenarios {
 
 		try {
 
-			usuariosObservables = administradorDelegado.listarEmpleadosObservables();
+			usuariosObservables = administradorDelegado.listarUsuariosObservables();
 
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("/detalle_usuario.fxml"));
@@ -289,8 +290,8 @@ public class ManejadorEscenarios {
 	 * 
 	 * @return todos los usuarios obsevables
 	 */
-	public ObservableList<UsuarioObservable> listarEmpleadosObservables() {
-		return administradorDelegado.listarEmpleadosObservables();
+	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
+		return administradorDelegado.listarUsuariosObservables();
 	}
 	/**
 	 * Genera una lista de productos observables
@@ -316,5 +317,13 @@ public class ManejadorEscenarios {
 		administradorDelegado.enviarCorreo(email);
 	}
 	
-
+	public boolean iniciciarSesion (String email, String clave) {
+		
+		if(administradorDelegado.iniciarSesion(email, clave)== null) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
 }

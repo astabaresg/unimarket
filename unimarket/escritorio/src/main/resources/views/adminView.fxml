@@ -579,7 +579,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </ImageView>
-                                          <JFXPasswordField fx:id="txtCrearContraseña" focusColor="#2a343d" prefHeight="30.0" prefWidth="180.0" promptText="contraseña" unFocusColor="#38404b">
+                                          <JFXPasswordField fx:id="txtCrearContrasena" focusColor="#2a343d" prefHeight="30.0" prefWidth="180.0" promptText="contraseña" unFocusColor="#38404b">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
