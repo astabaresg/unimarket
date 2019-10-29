@@ -2,10 +2,6 @@ package com.taheos.modelo;
 
 import com.taheos.unimarket.entidades.Producto;
 
-import java.util.Date;
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -31,7 +27,7 @@ public class ProductoObservable {
 	/**
 	 * fecha limite observable de un producto
 	 */
-	private ObjectProperty<Date> fechaLimite;
+	private StringProperty fechaLimite;
 	/**
 	 * Categoria observable de un producto
 	 */
@@ -56,7 +52,7 @@ public class ProductoObservable {
 		this.id = new SimpleStringProperty(producto.getId() + "");
 		this.nombre = new SimpleStringProperty(producto.getNombre());
 		this.precio = new SimpleStringProperty(producto.getPrecio() + "");
-		this.fechaLimite = new SimpleObjectProperty<>(producto.getFecha_limite());
+		this.fechaLimite = new SimpleStringProperty(producto.getFecha_limite().toString());
 		this.categoria = new SimpleStringProperty(producto.getCategoria().name());
 		this.disponibilidad = new SimpleStringProperty(producto.getDisponibilidad().name());
 	}
@@ -85,11 +81,13 @@ public class ProductoObservable {
 		this.precio = precio;
 	}
 
-	public ObjectProperty<Date> getFechaLimite() {
+	
+
+	public StringProperty getFechaLimite() {
 		return fechaLimite;
 	}
 
-	public void setFechaLimite(ObjectProperty<Date> fechaLimite) {
+	public void setFechaLimite(StringProperty fechaLimite) {
 		this.fechaLimite = fechaLimite;
 	}
 

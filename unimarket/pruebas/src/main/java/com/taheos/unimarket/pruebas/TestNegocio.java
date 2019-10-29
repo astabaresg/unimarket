@@ -109,11 +109,12 @@ public class TestNegocio {
 	}
 	
 	@Test
+	@UsingDataSet({ "Persona.json" })
 	public void listarUsuariosTest() {
 		
 		List<Usuario> usuarios = adminEJB.listarUsuarios();
 		
-		Assert.assertEquals( 1, usuarios.size());
+		Assert.assertNotNull(usuarios);
 	}
 	@Test
 	@UsingDataSet({ "Producto.json" })

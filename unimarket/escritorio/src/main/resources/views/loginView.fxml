@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="escenarioLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="818.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.LoginController">
+<AnchorPane fx:id="escenarioLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="818.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.LoginController">
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
@@ -121,11 +120,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXPasswordField>
-                        <Hyperlink text="Forgot Password?" visited="true">
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Hyperlink>
+                        <JFXButton fx:id="btnRecuperar" onAction="#onRecuperarButton" style="-fx-background-radius: 20 20 20 20;" text="Recuperar contraseña" />
                         <JFXButton fx:id="buttonLogin" onAction="#onLoginButton" prefHeight="38.0" prefWidth="128.0" style="-fx-background-color: #00da8a; -fx-background-radius: 20 20 20 20;" text="Login" textFill="WHITE">
                            <font>
                               <Font size="16.0" />

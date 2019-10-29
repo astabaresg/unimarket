@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
    <children>
       <BorderPane layoutX="214.0" layoutY="65.0" prefHeight="500.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -122,7 +122,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="panelGestionarUsuario" prefHeight="465.0" prefWidth="541.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="panelGestionarUsuario" prefHeight="465.0" prefWidth="541.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <GridPane prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
@@ -133,7 +133,7 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="215.0" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-text-fill: #FFFFFF;" GridPane.rowIndex="1">
+                              <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1">
                                  <columns>
                                     <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Cedula" />
                                     <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Nombre" />
@@ -635,7 +635,7 @@
                         </GridPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panelListaProductos" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="panelListaProductos" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
@@ -676,7 +676,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </ImageView>
-                                          <Label fx:id="lblNombreProducto" text="Label" textFill="WHITE">
+                                          <Label fx:id="lblNombreProducto" textFill="WHITE">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>

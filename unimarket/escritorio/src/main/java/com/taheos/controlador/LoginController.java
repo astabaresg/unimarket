@@ -18,43 +18,55 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class LoginController {
-	
-    @FXML
-    private AnchorPane escenarioLogin;
 
-    @FXML
-    private JFXTextField textUser;
+	@FXML
+	private AnchorPane escenarioLogin;
 
-    @FXML
-    private JFXPasswordField textPassword;
+	@FXML
+	private JFXTextField textUser;
 
-    @FXML
-    private JFXButton buttonLogin;
-    
+	@FXML
+	private JFXPasswordField textPassword;
+
+	@FXML
+	private JFXButton buttonLogin;
+
+	@FXML
+	private JFXButton btnRecuperar;
+
 	private ManejadorEscenarios manejador;
 
+	public FXMLLoader loginP;
+	public static Pane loginPane;
 
-    public FXMLLoader loginP;
-    public static Pane loginPane;
-	
+	@FXML
+	void onLoginButton(ActionEvent event) throws IOException {
 
-    @FXML
-    void onLoginButton(ActionEvent event) throws IOException {
+		if (manejador.iniciciarSesion(textUser.getText(), textPassword.getText())) {
+
+			manejador.getEscenario().close();
+			manejador.cargarEscenarioAdmin();
+
+		} else {
+			Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor verifique");
+		}
+
+	}
+
+	@FXML
+	void onRecuperarButton(ActionEvent event) {
 
 
-    	if(manejador.iniciciarSesion(textUser.getText(), textPassword.getText())) {
+		if(!textUser.getText().isEmpty()) {
+			manejador.enviarCorreo(textUser.getText());
+			Utilidades.mostrarMensaje("Atencion", "Se ha enviado un correo a la direccion " + textUser.getText()
+					+ " con la clave asociado en tal caso de estar registrado.");
+		}else {
+			Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor ingrese un correo");
 
-        	manejador.getEscenario().close();
-        	manejador.cargarEscenarioAdmin();
-        	
-    	}else {
-    		Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor verifique");
-    	}
+		}
+	}
 
-    	
-    }
-
-    
 	/**
 	 * permite cargar el manejador de escenarios
 	 * 
@@ -63,5 +75,5 @@ public class LoginController {
 	public void setManejador(ManejadorEscenarios manejador) {
 		this.manejador = manejador;
 	}
-    
+
 }

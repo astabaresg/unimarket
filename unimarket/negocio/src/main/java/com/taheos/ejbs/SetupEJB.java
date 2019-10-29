@@ -2,6 +2,8 @@ package com.taheos.ejbs;
 
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -63,19 +65,26 @@ public class SetupEJB {
 			
 			im1.add(img1);
 			
-			Producto p1 = new Producto();
-			p1.setCantidad(5);
-			p1.setCategoria(Categoria.TECNOLOGIA);
-			p1.setDescripcion("PC gamer");
-			p1.setDisponibilidad(Disponibilidad.DISPONIBLE);
-			p1.setFecha_limite(new Date());
-			p1.setId(new Long(1));
-			p1.setImagen(im1);
-			p1.setNombre("PC Gamer");
-			p1.setPrecio(123000);
-		
+			SimpleDateFormat converter = new SimpleDateFormat("dd-MM-yyyy");
+			try {
+				Date a = converter.parse("12-12-2019");
+				Producto p1 = new Producto();
+				p1.setCantidad(5);
+				p1.setCategoria(Categoria.TECNOLOGIA);
+				p1.setDescripcion("PC gamer");
+				p1.setDisponibilidad(Disponibilidad.DISPONIBLE);
+				p1.setFecha_limite(a);
+				p1.setId(new Long(2));
+				p1.setImagen(im1);
+				p1.setNombre("PC Gamer");
+				p1.setPrecio(123000);
 			
-			entityManager.persist(p1);
+				
+				entityManager.persist(p1);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
 
 		}
 	}

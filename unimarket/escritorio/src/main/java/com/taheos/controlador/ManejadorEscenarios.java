@@ -248,6 +248,13 @@ public class ManejadorEscenarios{
 		return administradorDelegado.eliminarUsuario(usuario);
 	}
 	
+	public List<String> devolverCategorias(){
+		return administradorDelegado.devolverCategorias();
+	}
+
+	public Categoria devolverCategoria (String nombre) {
+		return administradorDelegado.devolverCategoria(nombre);
+	}
 	/**
 	 * devuelve la lista de usuario que estan en la base de datos
 	 * 

@@ -182,8 +182,7 @@ public class AdminController {
 	private ImageView lblImagen;
 	private ManejadorEscenarios manejador;
 
-	private ObservableList<String> productosItems = FXCollections.observableArrayList("Todos","Tecnologia", "Deporte", "Moda",
-			"Libros", "Joyas");
+	private ObservableList<String> productosItems;
 
 	@FXML
 	void initialize() {
@@ -194,7 +193,11 @@ public class AdminController {
 		columnEmail.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getEmail());
 		columnTelefono.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNum_telefono());
 
+		productosItems = FXCollections.observableArrayList("TECNOLOGIA","DEPORTE","MODA","LIBROS","JOYAS","Todos");
+
 		comboBoxProductos.setItems(productosItems);
+		
+		comboBoxProductos.setVisible(false);
 		mostrarDetalleUsuario(null);
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
@@ -204,7 +207,7 @@ public class AdminController {
 		columnPrecioProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getPrecio());
 		columnCategoriaProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getCategoria());
 		columnDisponibilidadProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getDisponibilidad());
-		columnFechaProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().devolverFechaLimite());
+		columnFechaProducto.setCellValueFactory(productoCelda -> productoCelda.getValue().getFechaLimite());
 
 		tablaProducto.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> mostrarDetalleProducto(newValue));
@@ -274,7 +277,7 @@ public class AdminController {
 
 		panelListaProductos.setVisible(false);
 		panelGestionarUsuario.setVisible(true);
-
+		comboBoxProductos.setVisible(false);
 	}
 
 	@FXML
@@ -282,6 +285,7 @@ public class AdminController {
 
 		panelGestionarUsuario.setVisible(false);
 		panelListaProductos.setVisible(true);
+		comboBoxProductos.setVisible(true);
 
 	}
 
@@ -418,41 +422,30 @@ public class AdminController {
 
 	/**
 	 * Filtra los productos por categoria
+	 * 
 	 * @param event
 	 */
 	@FXML
 	void onComboProductos(ActionEvent event) {
 
-		
-		if(comboBoxProductos.getValue().equals("Todos")) {
-			
+		if (comboBoxProductos.getValue().equals("Todos")) {
+			actualizarTablaProductos();
+		} else {
+			tablaProducto.setItems(null);
+			tablaProducto.setItems(manejador
+					.listarProductosObservablesCategoria(manejador.devolverCategoria(comboBoxProductos.getValue().toString())));
 		}
-		
-		if(comboBoxProductos.getValue().equals("Tecnologia")) {
-			
-		}
-		
-		if(comboBoxProductos.getValue().equals("Deporte")) {
-			
-		}
-		
-		if(comboBoxProductos.getValue().equals("Moda")) {
-			
-		}
-		
-		if(comboBoxProductos.getValue().equals("Libros")) {
-			
-		}
-		
-		if(comboBoxProductos.getValue().equals("Joyas")) {
-			
-		}
-		
+
 	}
 
 	public void actualizarTabla() {
 		tablaUsuarios.setItems(null);
 		tablaUsuarios.setItems(manejador.listarUsuariosObservables());
+	}
+
+	public void actualizarTablaProductos() {
+		tablaProducto.setItems(null);
+		tablaProducto.setItems(manejador.listarProductosObservables());
 	}
 
 	/**

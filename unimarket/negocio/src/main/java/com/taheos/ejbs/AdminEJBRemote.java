@@ -96,4 +96,16 @@ public interface AdminEJBRemote {
 	 * @throws ElementoNoEncontradoExcepcion
 	 */
 	String verDetalleProducto(String codigo) throws ElementoNoEncontradoExcepcion;
+	/**
+	 * Retorna las categorias de productos disponibles
+	 * @return
+	 */
+	List<String> devolverCategorias();
+	
+	/**
+	 * Retorna una categoria a partir de un nombre
+	 * @param nombre
+	 * @return
+	 */
+	Categoria devolverCategoria (String nombre) ;
 }

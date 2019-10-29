@@ -5,7 +5,7 @@
 		datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
 		res-type="javax.sql.DataSource">
 		<property name="user" value="root" />
-		<property name="password" value="tapasco" />
+		<property name="password" value="sebastian2616" />
 		<property name="url" value="jdbc:mysql://localhost:3306/unimarket" />
 	</jdbc-connection-pool>
 	<jdbc-resource enabled="true" jndi-name="jdbc/unimarket"

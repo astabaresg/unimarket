@@ -1,5 +1,6 @@
 package com.taheos.ejbs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -369,4 +370,29 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 	}
 
+	public List<String> devolverCategorias(){
+		List<String> categorias = new ArrayList<String>();
+		categorias.add("TECNOLOGIA");
+		categorias.add("DEPORTE");
+		categorias.add("MODA");
+		categorias.add("LIBROS");
+		categorias.add("JOYAS");
+		return categorias;
+	}
+	public Categoria devolverCategoria (String nombre) {
+		switch (nombre) {
+		case "TECNOLOGIA":
+			return Categoria.TECNOLOGIA;
+		case "DEPORTE":
+			return Categoria.DEPORTE;
+		case "MODA":
+			return Categoria.MODA;
+		case "LIBROS":
+			return Categoria.LIBROS;
+		case "JOYAS":
+			return Categoria.JOYAS;
+		default:
+			return null;
+		}
+	}
 }
