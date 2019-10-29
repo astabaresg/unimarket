@@ -10,6 +10,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.taheos.excepciones.ElementoNoEncontradoExcepcion;
+import com.taheos.excepciones.ElementoRepetidoExcepcion;
 import com.taheos.unimarket.entidades.Administrador;
 import com.taheos.unimarket.entidades.Calificacion;
 import com.taheos.unimarket.entidades.Comentario;
@@ -40,6 +42,31 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 
+	public List<String> devolverCategorias(){
+		List<String> categorias = new ArrayList<String>();
+		categorias.add("TECNOLOGIA");
+		categorias.add("DEPORTE");
+		categorias.add("MODA");
+		categorias.add("LIBROS");
+		categorias.add("JOYAS");
+		return categorias;
+	}
+	public Categoria devolverCategoria (String nombre) {
+		switch (nombre) {
+		case "TECNOLOGIA":
+			return Categoria.TECNOLOGIA;
+		case "DEPORTE":
+			return Categoria.DEPORTE;
+		case "MODA":
+			return Categoria.MODA;
+		case "LIBROS":
+			return Categoria.LIBROS;
+		case "JOYAS":
+			return Categoria.JOYAS;
+		default:
+			return null;
+		}
+	}
 
 	/**
 	 * Permite iniciar sesion a un usuario
@@ -512,6 +539,130 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		entityManager.merge(buscado);
 
 	}
+	/**
+	 * Sirve para registrar un producto
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws ElementoRepetidoExcepcion
+	 * @throws ElementoNoEncontradoExcepcion 
+	 */
+	public Producto registrarProducto(Producto producto) throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
+		if (buscarProducto(producto.getId() + "") != null) {
+			throw new ElementoRepetidoExcepcion("Ya existe un producto con ese nombre");
+		} else {
+			try {
+				entityManager.persist(producto);
+				return producto;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * Metodo para eliminar un producto de la base de datos
+	 * @param codigo
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public boolean eliminarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
+
+		if (buscarProducto(codigo) == null) {
+			throw new ElementoNoEncontradoExcepcion(
+					"El producto con el codigo: " + codigo + "no se encuentra registrado");
+		}
+		
+		try {
+			TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.BUSCAR_POR_ID, Producto.class);
+			query.setParameter("id", Long.parseLong(codigo));
+			Producto aux = query.getSingleResult();
+			entityManager.remove(aux);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	/**
+	 * Metodo que permite modificar un usuario
+	 * @param usuario
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public Producto modificarProducto(Producto producto) throws ElementoNoEncontradoExcepcion {
+		
+		if (buscarProducto(producto.getId() + "")== null) {
+			throw new ElementoNoEncontradoExcepcion("El producto:" + producto.getNombre() + "no se encuentra registrado");
+		} else {
+
+			try {
+				
+				Producto aux = buscarProducto(producto.getId() + "");
+				
+				aux.setCalificacion(producto.getCalificacion());
+				aux.setCalificaciones(producto.getCalificaciones());
+				aux.setCantidad(producto.getCantidad());
+				aux.setCategoria(producto.getCategoria());
+				aux.setComentarios(producto.getComentarios());
+				aux.setDescripcion(producto.getDescripcion());
+				aux.setDetalleCompra(producto.getDetalleCompra());
+				aux.setDisponibilidad(producto.getDisponibilidad());
+				aux.setFavorito(producto.getFavorito());
+				aux.setFecha_limite(producto.getFecha_limite());
+				aux.setId(producto.getId());
+				aux.setImagen(producto.getImagen());
+				aux.setNombre(producto.getNombre());
+				aux.setPrecio(producto.getPrecio());
+				aux.setUsuario(producto.getUsuario());
+				entityManager.merge(aux);
+
+				return aux;
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				return null;
+			}
+		}
+
+	}
+	/**
+	 * Metodo que permite buscar un Producto
+	 * @param codigo
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public Producto buscarProducto(String codigo) throws ElementoNoEncontradoExcepcion {
+		if (entityManager.find(Producto.class, Long.parseLong(codigo)) == null) {
+			throw new ElementoNoEncontradoExcepcion("El producto que está buscando no se encuentra registrado");
+		}
+
+		try {
+			TypedQuery<Producto> producto = entityManager.createNamedQuery(Producto.BUSCAR_POR_ID, Producto.class);
+			producto.setParameter("id", Long.parseLong(codigo));
+			return producto.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 	
+	/**
+	 * Metodo que sirve para listar todos los Productos registrados
+	 * @return
+	 */
+	public List<Producto> listarProductos() {
+		try {
+			TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.LISTAR_TODOS,
+					Producto.class);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
 	
 }

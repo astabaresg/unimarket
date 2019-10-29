@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">UniMarket</ui:insert></title>
+</h:head>
+<h:body>
+	<div align="center">
+		<div name="cabecera">
+			<!-- 			
+			<p:graphicImage value="#{resource['banner.jpg']}" stream="false" />
+			 -->
+		</div>
+		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+			<ui:insert name="login">
+				<h:form>
+					<p:panelGrid columns="2">
+						<f:facet name="header">Iniciar sesion</f:facet>
+						<p:outputLabel value="Login" />
+						<p:inputText value="#{seguridadBean.usuario.correo}" />
+						<p:outputLabel value="Clave" />
+						<p:password value="#{seguridadBean.usuario.clave}" feedback="true"
+							inline="true" />
+						<f:facet name="footer">
+							<p:commandButton value="Aceptar"
+								action="#{seguridadBean.iniciarSesion}" ajax="false" />
+							<p:commandButton value="Recuperar Clave"
+								action="/admin/recuperar_clave" ajax="false" />
+							<p:commandButton value="Registrarse"
+								action="/usuario/registrar_usuario" ajax="false" />
+						</f:facet>
+
+					</p:panelGrid>
+				</h:form>
+				<p:growl id="growl" life="2000" />
+			</ui:insert>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{seguridadBean.autenticado}">
+			<ui:insert name="menu">
+				<h:form>
+					<p:menubar>
+						<f:facet name="options">
+							<p:commandButton value="Inicio" action="/index" ajax="false" />
+							<p:commandButton value="Cerrar Sesión"
+								action="#{seguridadBean.cerrarSesion}" ajax="false" />
+						</f:facet>
+						<p:submenu label="Producto" rendered="#{seguridadBean.usuarios}">
+							<p:menuitem value="Productos" action="/producto/productos"
+								ajax="false" />
+							<p:menuitem value="Registrar producto"
+								action="/producto/registrar_productos" ajax="false" />
+						</p:submenu>
+						<p:submenu label="Usuario" rendered="#{seguridadBean.usuarios}">
+							<p:menuitem value="Listar usuario"
+								action="/usuario/detalle_usuario" ajax="false" />
+						</p:submenu>
+					</p:menubar>
+				</h:form>
+			</ui:insert>
+			<ui:insert name="contenido" />
+		</h:panelGroup>
+	</div>
+</h:body>
+</html>

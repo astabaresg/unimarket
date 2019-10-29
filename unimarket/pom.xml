@@ -67,5 +67,6 @@
 		<module>negocio</module>
 		<module>ear</module>
 		<module>escritorio</module>
+	    <module>web</module>
 	</modules>
 </project>
