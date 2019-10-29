@@ -241,7 +241,8 @@ public class AdminController {
 			lblDisponibilidad.setText(producto.getDisponibilidad().getValue());
 			lblFecha.setText(producto.getFechaLimite().getValue().toString());
 			
-			File path = new File(producto.getProducto().getImagen().get(0));
+			String img = "/Users/astar/git/unimarket/unimarket/escritorio/src/main/resources/img/pc.jpg";
+			File path = new File(img);
 			createImageView(path);
 
 		} else {
@@ -443,7 +444,7 @@ public class AdminController {
 
 		try {
 			final Image image = new Image(new FileInputStream(imageFile), 150, 0, true, true);
-			lblImagen = new ImageView(image);
+			lblImagen.setImage(image);
 			lblImagen.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 				@Override

@@ -57,7 +57,7 @@ public class SetupEJB {
 			
 			entityManager.persist(admin);
 			
-			String img1 = "/img/pc.jpg";
+			String img1 = "/src/main/resources/img/pc.jpg";
 			
 			ArrayList<String> im1 = new ArrayList<String>();
 			
