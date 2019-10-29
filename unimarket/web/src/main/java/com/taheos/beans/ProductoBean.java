@@ -1,5 +1,6 @@
 package com.taheos.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,7 +86,7 @@ public class ProductoBean {
 			p.setDescripcion(descripcion);
 			p.setCategoria(usuarioEJB.devolverCategoria(categoria));
 			p.setCantidad(cantidad);
-			p.setImagen(imagen.getContents());
+			p.setImagen(new ArrayList<String>(imagen.getFileNames()));
 			p.setCalificacion(5);
 			usuarioEJB.registrarProducto(p);
 			Util.mostrarMensaje("Exito", "Registro Existoso");
@@ -116,7 +117,6 @@ public class ProductoBean {
 
 	@PostConstruct
 	private void init() {
-		usuarios = usuarioEJB.listarUsuarios();
 		productos = usuarioEJB.listarProductos();
 	}
 

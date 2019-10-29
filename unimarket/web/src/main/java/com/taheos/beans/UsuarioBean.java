@@ -72,7 +72,6 @@ public class UsuarioBean implements Serializable {
 	 */
 	@PostConstruct
 	private void init() {
-		usuarios = usuarioEJB.listarUsuarios();
 	}
 
 	public String agregarU() {
@@ -89,7 +88,6 @@ public class UsuarioBean implements Serializable {
 		try {
 			usuarioEJB.registrarUsuario(u);
 			
-			usuarios = usuarioEJB.listarUsuarios();
 			return "/index";
 		} catch (Exception e) {
 			return null;
