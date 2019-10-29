@@ -21,13 +21,14 @@
 				<p:outputLabel value="Correo" />
 				<p:inputText value="#{usuarioBean.email}" />
 				<p:outputLabel value="Clave" />
-				<h:outputText value="Feedback: " />
-				<p:password id="feedback" value="#{usuarioBean.clave}"
-					feedback="true" />
+				<p:password value="#{usuarioBean.clave}" feedback="true"
+					inline="true" />
 				<p:outputLabel value="Direccion" />
 				<p:inputText value="#{usuarioBean.direccion}" />
 				<f:facet name="footer">
 					<p:commandButton action="#{usuarioBean.agregarU}" value="Aceptar"
+						ajax="false" />
+					<p:commandButton action="/index" value="Cancelar"
 						ajax="false" />
 				</f:facet>
 			</p:panelGrid>
