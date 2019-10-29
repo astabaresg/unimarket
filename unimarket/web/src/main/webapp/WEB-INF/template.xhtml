@@ -23,15 +23,14 @@
 						<p:outputLabel value="Login" />
 						<p:inputText value="#{seguridadBean.usuario.correo}" />
 						<p:outputLabel value="Clave" />
-						<p:password value="#{seguridadBean.usuario.clave}" feedback="true"
-							inline="true" />
+						<p:password value="#{seguridadBean.usuario.clave}" id="nonFeedback"/>
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
 							<p:commandButton value="Recuperar Clave"
 								action="/admin/recuperar_clave" ajax="false" />
 							<p:commandButton value="Registrarse"
-								action="/usuario/registrar_usuario" ajax="false" />
+								action="/usuario/modificar_usuario" ajax="false" />
 						</f:facet>
 
 					</p:panelGrid>
@@ -54,9 +53,9 @@
 							<p:menuitem value="Registrar producto"
 								action="/producto/registrar_productos" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Usuario" rendered="#{seguridadBean.usuarios}">
-							<p:menuitem value="Listar usuario"
-								action="/usuario/detalle_usuario" ajax="false" />
+						<p:submenu label="Mis datos" rendered="#{seguridadBean.usuarios}">
+							<p:menuitem value="Modificar mis datos"
+								action="/usuario/modificar_usuario" ajax="false" />
 						</p:submenu>
 					</p:menubar>
 				</h:form>

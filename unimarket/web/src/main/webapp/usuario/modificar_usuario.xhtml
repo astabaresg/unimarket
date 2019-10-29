@@ -13,7 +13,7 @@
 			<p:panelGrid columns="2">
 				<f:facet name="header">Registrar empleado</f:facet>
 				<p:outputLabel value="Cedula" />
-				<p:inputText value="#{usuarioBean.cedula}" />
+				<p:inputText value="#{seguridadBean.usuario.id}" disabled="true" />
 				<p:outputLabel value="Nombre" />
 				<p:inputText value="#{usuarioBean.nombre}" />
 				<p:outputLabel value="Numero de telefono" />
@@ -21,7 +21,9 @@
 				<p:outputLabel value="Correo" />
 				<p:inputText value="#{usuarioBean.email}" />
 				<p:outputLabel value="Clave" />
-				<p:password value="#{usuarioBean.clave}" />
+				<h:outputText value="Feedback: " />
+				<p:password id="feedback" value="#{usuarioBean.clave}"
+					feedback="true" />
 				<p:outputLabel value="Direccion" />
 				<p:inputText value="#{usuarioBean.direccion}" />
 				<f:facet name="footer">

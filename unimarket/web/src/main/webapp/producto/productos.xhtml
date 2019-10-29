@@ -8,58 +8,81 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/WEB-INF/template.xhtml">
-		<ui:define name="contenido">
-	    <h:form id="FormUsuarioProducto">
-			
+	<ui:define name="contenido">
+		<h:form id="FormUsuarioProducto">
+
 			<p:fieldset id="productos" legend="productos registrados">
-				<p:dataTable id="listaproductos" var="producto" value="#{productoBean.productos}">
-				
+				<p:dataTable id="listaproductos" var="producto"
+					value="#{productoBean.productos}">
+
 					<p:column headerText="Id">
 						<h:outputText value="#{producto.id}" />
 					</p:column>
-				
+
 					<p:column headerText="Nombre">
 						<h:outputText value="#{producto.nombre}" />
 					</p:column>
-					
+
 					<p:column headerText="Categoria">
 						<h:outputText value="#{producto.categoria}" />
 					</p:column>
-					
+
 					<p:column style="width:32px">
-	                    <p:commandButton update=":FormUsuarioProducto:display" oncomplete="PF('productoDialog').show()" icon="pi pi-search">
-	                        <f:setPropertyActionListener value="#{producto}" target="#{productoBean.producto}" />
-	                    </p:commandButton>
-                	</p:column>
-					
+						<p:commandButton update=":FormUsuarioProducto:display"
+							oncomplete="PF('productoDialog').show()" icon="pi pi-search">
+							<f:setPropertyActionListener value="#{producto}"
+								target="#{productoBean.producto}" />
+						</p:commandButton>
+					</p:column>
+
 				</p:dataTable>
 			</p:fieldset>
-			
-			
-			<p:dialog header="Detalle de producto" widgetVar="productoDialog" resizable="false" draggable="false"
-              showEffect="fade" hideEffect="fade" modal="true">
-		        <p:outputPanel id="display">
-		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty productoBean.producto}">
-		                
-		                <h:outputText value="Id" />
-		                <h:outputText value="#{productoBean.producto.id}" style="font-weight:bold"/>
-		 
-		                <h:outputText value="Nombre:" />
-		                <h:outputText value="#{productoBean.producto.nombre}" style="font-weight:bold"/>
 
-		                <h:outputText value="Categoria" />
-		                <h:outputText value="#{productoBean.producto.categoria}" style="font-weight:bold"/>
-		 		                
-		                <f:facet name="footer">
-							<p:commandButton value="Eliminar" ajax="false" action="#{productoBean.eliminar}" />
-							<p:commandButton value="Actualizar" ajax="false" action="#" />							
+
+			<p:dialog header="Detalle de producto" widgetVar="productoDialog"
+				resizable="false" draggable="false" showEffect="fade"
+				hideEffect="fade" modal="true">
+				<p:outputPanel id="display">
+					<h:panelGrid columns="2" cellpadding="4"
+						rendered="#{not empty productoBean.producto}">
+
+						<h:outputText value="Id" />
+						<h:outputText value="#{productoBean.producto.id}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Nombre:" />
+						<h:outputText value="#{productoBean.producto.nombre}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Categoria" />
+						<h:outputText value="#{productoBean.producto.categoria}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Imagenes" />
+						<p:commandButton type="button" value="Show"
+							onclick="PF('dlg').show()" icon="pi pi-home" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Eliminar" ajax="false"
+								action="#{productoBean.eliminar}" />
+							<p:commandButton value="Actualizar" ajax="false" action="#" />
 						</f:facet>
-		                
-		            </h:panelGrid>
-		        </p:outputPanel>
-    		</p:dialog>
-			
-			
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+			<p:dialog header="Imagenes" widgetVar="dlg" modal="true"
+				draggable="false" resizable="false">
+
+				<p:imageSwitch effect="fade">
+					<ui:repeat value="#{productoBean.producto.imagen}" var="image">
+						<p:graphicImage name="image" />
+					</ui:repeat>
+				</p:imageSwitch>
+			</p:dialog>
+
+
 		</h:form>
 	</ui:define>
 </ui:composition>
