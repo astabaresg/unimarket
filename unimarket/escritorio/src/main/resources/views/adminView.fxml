@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taheos.controlador.AdminController">
    <children>
       <BorderPane layoutX="214.0" layoutY="65.0" prefHeight="500.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -96,12 +97,17 @@
                   </TextField>
                   <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                      <image>
                         <Image url="@../icons/search.png" />
                      </image>
                   </ImageView>
+                  <JFXComboBox fx:id="comboBoxProductos" focusColor="WHITE" onAction="#onComboProductos" prefHeight="25.0" prefWidth="13.0" unFocusColor="WHITE">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="5.0" />
@@ -116,7 +122,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="panelGestionarUsuario" prefHeight="465.0" prefWidth="541.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="panelGestionarUsuario" prefHeight="465.0" prefWidth="541.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <GridPane prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
@@ -129,11 +135,11 @@
                            <children>
                               <TableView fx:id="tablaUsuarios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-text-fill: #FFFFFF;" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Cedula" />
-                                    <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Nombre" />
-                                    <TableColumn fx:id="columnDireccion" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Direccion" />
-                                    <TableColumn fx:id="columnEmail" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Email" />
-                                    <TableColumn fx:id="columnTelefono" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Telefono" />
+                                    <TableColumn fx:id="columnCedula" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Cedula" />
+                                    <TableColumn fx:id="columnNombre" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Nombre" />
+                                    <TableColumn fx:id="columnDireccion" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Direccion" />
+                                    <TableColumn fx:id="columnEmail" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Email" />
+                                    <TableColumn fx:id="columnTelefono" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Telefono" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
@@ -629,7 +635,7 @@
                         </GridPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="panelListaProductos" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="panelListaProductos" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="505.0" prefWidth="541.0" style="-fx-background-color: #eeeff5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
@@ -640,13 +646,13 @@
                               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="183.0" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tablaProducto" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #38404b;" GridPane.rowIndex="1">
+                              <TableView fx:id="tablaProducto" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn fx:id="columnNombreProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Nombre" />
-                                    <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Precio" />
-                                    <TableColumn fx:id="columnCategoriaProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Categoria" />
-                                    <TableColumn fx:id="columnDisponibilidadProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Disponibilidad" />
-                                    <TableColumn fx:id="columnFechaProducto" prefWidth="75.0" style="-fx-background-color: #38404b; -fx-text-fill: #FFFFFF;" text="Fecha Limite" />
+                                    <TableColumn fx:id="columnNombreProducto" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Nombre" />
+                                    <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Precio" />
+                                    <TableColumn fx:id="columnCategoriaProducto" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Categoria" />
+                                    <TableColumn fx:id="columnDisponibilidadProducto" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Disponibilidad" />
+                                    <TableColumn fx:id="columnFechaProducto" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Fecha Limite" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />

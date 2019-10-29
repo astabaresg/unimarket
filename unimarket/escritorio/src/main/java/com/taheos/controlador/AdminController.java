@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.taheos.modelo.ProductoObservable;
@@ -13,6 +14,8 @@ import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Rol;
 import com.taheos.util.Utilidades;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -173,8 +176,14 @@ public class AdminController {
 	private TableColumn<ProductoObservable, String> columnFechaProducto;
 
 	@FXML
+	private JFXComboBox<String> comboBoxProductos;
+
+	@FXML
 	private ImageView lblImagen;
 	private ManejadorEscenarios manejador;
+
+	private ObservableList<String> productosItems = FXCollections.observableArrayList("Todos","Tecnologia", "Deporte", "Moda",
+			"Libros", "Joyas");
 
 	@FXML
 	void initialize() {
@@ -185,6 +194,7 @@ public class AdminController {
 		columnEmail.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getEmail());
 		columnTelefono.setCellValueFactory(usuarioCelda -> usuarioCelda.getValue().getNum_telefono());
 
+		comboBoxProductos.setItems(productosItems);
 		mostrarDetalleUsuario(null);
 
 		tablaUsuarios.getSelectionModel().selectedItemProperty()
@@ -240,7 +250,7 @@ public class AdminController {
 			lblCategoria.setText(producto.getCategoria().getValue());
 			lblDisponibilidad.setText(producto.getDisponibilidad().getValue());
 			lblFecha.setText(producto.getFechaLimite().getValue().toString());
-			
+
 			String img = "/Users/astar/git/unimarket/unimarket/escritorio/src/main/resources/img/pc.jpg";
 			File path = new File(img);
 			createImageView(path);
@@ -404,6 +414,40 @@ public class AdminController {
 		txtCrearNombre.setText("");
 		txtCrearTelefono.setText("");
 
+	}
+
+	/**
+	 * Filtra los productos por categoria
+	 * @param event
+	 */
+	@FXML
+	void onComboProductos(ActionEvent event) {
+
+		
+		if(comboBoxProductos.getValue().equals("Todos")) {
+			
+		}
+		
+		if(comboBoxProductos.getValue().equals("Tecnologia")) {
+			
+		}
+		
+		if(comboBoxProductos.getValue().equals("Deporte")) {
+			
+		}
+		
+		if(comboBoxProductos.getValue().equals("Moda")) {
+			
+		}
+		
+		if(comboBoxProductos.getValue().equals("Libros")) {
+			
+		}
+		
+		if(comboBoxProductos.getValue().equals("Joyas")) {
+			
+		}
+		
 	}
 
 	public void actualizarTabla() {
