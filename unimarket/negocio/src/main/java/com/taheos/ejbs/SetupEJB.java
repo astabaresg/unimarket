@@ -2,6 +2,9 @@ package com.taheos.ejbs;
 
 
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -11,6 +14,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.taheos.unimarket.entidades.Administrador;
+import com.taheos.unimarket.entidades.Producto;
+import com.taheos.unimarket.enums.Categoria;
+import com.taheos.unimarket.enums.Disponibilidad;
 
 
 /**
@@ -50,6 +56,26 @@ public class SetupEJB {
 			admin.setNum_telefono("31232132");
 			
 			entityManager.persist(admin);
+			
+			String img1 = "/img/pc.jpg";
+			
+			ArrayList<String> im1 = new ArrayList<String>();
+			
+			im1.add(img1);
+			
+			Producto p1 = new Producto();
+			p1.setCantidad(5);
+			p1.setCategoria(Categoria.TECNOLOGIA);
+			p1.setDescripcion("PC gamer");
+			p1.setDisponibilidad(Disponibilidad.DISPONIBLE);
+			p1.setFecha_limite(new Date());
+			p1.setId(new Long(1));
+			p1.setImagen(im1);
+			p1.setNombre("PC Gamer");
+			p1.setPrecio(123000);
+		
+			
+			entityManager.persist(p1);
 
 		}
 	}
