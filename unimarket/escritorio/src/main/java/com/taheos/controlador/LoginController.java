@@ -42,13 +42,15 @@ public class LoginController {
     void onLoginButton(ActionEvent event) throws IOException {
 
 
-//    	if(manejador.iniciciarSesion(textUser.getText(), textPassword.getText())) {
-//
-//    	}else {
-//    		Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor verifique");
-//    	}
-    	manejador.getEscenario().close();
-    	manejador.cargarEscenarioAdmin();
+    	if(manejador.iniciciarSesion(textUser.getText(), textPassword.getText())) {
+
+        	manejador.getEscenario().close();
+        	manejador.cargarEscenarioAdmin();
+        	
+    	}else {
+    		Utilidades.mostrarMensaje("Error", "Datos incorrectos, por favor verifique");
+    	}
+
     	
     }
 
