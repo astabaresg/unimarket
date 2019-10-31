@@ -60,7 +60,7 @@ public class ProductoBean {
 	 * Numero de productos disponibles
 	 */
 	private int cantidad;
-	@EJB (beanName = "UsuarioEJB")
+	@EJB 
 	private UsuarioEJB usuarioEJB;
 	
 	private List<Usuario> usuarios;
@@ -93,7 +93,7 @@ public class ProductoBean {
 			
 			return "/producto/productos";
 		} catch (Exception e) {
-			Util.mostrarMensaje(e.getMessage(), e.getMessage());
+			Util.mostrarMensaje("Error", "Error");
 			return null;
 		}
 
@@ -104,7 +104,7 @@ public class ProductoBean {
 		try {
 			usuarioEJB.eliminarProducto(producto.getId() + "");
 
-			Util.mostrarMensaje("Exito", "Registro Existoso");
+			Util.mostrarMensaje("Exito", "Eliminar Existoso");
 
 			productos = usuarioEJB.listarProductos();
 			return "/producto/productos";
