@@ -8,6 +8,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -34,7 +35,7 @@ import javafx.collections.ObservableList;
  * @author com.taheos
  * @version 1.0
  */
-public class AdministradorDelegado  {
+public class AdministradorDelegado {
 
 	/**
 	 * instancia que representa el ejb remoto de administrador
@@ -70,10 +71,10 @@ public class AdministradorDelegado  {
 		return administradorDelegado;
 	}
 
-
-	public Persona iniciarSesion (String email, String clave) {
+	public Persona iniciarSesion(String email, String clave) {
 		return adminEJB.iniciarSesion(email, clave);
 	}
+
 	/**
 	 * pemite registar un nuevo usuario
 	 * 
@@ -88,7 +89,7 @@ public class AdministradorDelegado  {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * pemite registar un nuevo usuario
 	 * 
@@ -103,7 +104,6 @@ public class AdministradorDelegado  {
 			return false;
 		}
 	}
-
 
 	/**
 	 * devuelve la lista de usuario que estan en la base de datos
@@ -137,12 +137,13 @@ public class AdministradorDelegado  {
 
 	public boolean modificarUsuario(Usuario u) {
 		try {
-			return adminEJB.modificarUsuario(u)!=null;
+			return adminEJB.modificarUsuario(u) != null;
 		} catch (Exception e) {
 			Utilidades.mostrarMensaje("Error al modificar un usuario", e.getMessage());
 			return false;
 		}
 	}
+
 	/**
 	 * Permite listar todos los productos de una categoria
 	 * 
@@ -204,7 +205,7 @@ public class AdministradorDelegado  {
 		}
 		return productosObservables;
 	}
-	
+
 	/**
 	 * Genera una lista de productos observables por categoria
 	 * 
@@ -218,43 +219,47 @@ public class AdministradorDelegado  {
 		}
 		return productosObservables;
 	}
-	
+
 	public void enviarCorreo(String email) {
+		Properties propiedad = new Properties();
+		propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+		propiedad.setProperty("mail.smtp.starttls.enable", "true");
+		propiedad.setProperty("mail.smtp.port", "587");
 
-		   // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-	     String remitente = "herbariomasteruq";  //Para la dirección nomcuenta@gmail.com
+		Session sesion = Session.getDefaultInstance(propiedad);
+		String correoEnvia = "unimarketuq@gmail.com";
+		String contrasena = "unimarket1234";
+		String receptor = email;
+		String asunto = "Recuperacion contraseña.";
+		String mensaje;
+		try {
+			mensaje = "La contraseña asociada a la cuenta " + email + " es " + adminEJB.obtenerClave(email);
+			MimeMessage mail = new MimeMessage(sesion);
+			mail.setFrom(new InternetAddress(correoEnvia));
+			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(receptor));
+			mail.setSubject(asunto);
+			mail.setText(mensaje);
 
-	    Properties props = System.getProperties();
-	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
-	    props.put("mail.smtp.user", remitente);
-	    props.put("mail.smtp.clave", "herbariouniquindio");    //La clave de la cuenta
-	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
-	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
-	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+			Transport transportar = sesion.getTransport("smtp");
+			transportar.connect(correoEnvia, contrasena);
+			transportar.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+			transportar.close();
 
-	    Session session = Session.getDefaultInstance(props);
-	    MimeMessage message = new MimeMessage(session);
+			Utilidades.mostrarMensaje("Exito", "El correo ha sido enviado correctamente");
 
-	    try {
-	        message.setFrom(new InternetAddress(remitente));
-	        message.addRecipients(Message.RecipientType.TO, email);   //Se podrían añadir varios de la misma manera
-	        message.setSubject("Recuperacion cuenta uniMarket");
-	        message.setText("la clave asociada con el correo proporcionado es " + adminEJB.obtenerClave(email));
-	        Transport transport = session.getTransport("smtp");
-	        transport.connect("smtp.gmail.com","herbariomasteruq@gmail.com", "herbariouniquindio");
-	        transport.sendMessage(message, message.getAllRecipients());
-	        transport.close();
-	    }
-	    catch (MessagingException | ElementoNoEncontradoExcepcion me) {
-	        me.printStackTrace();   //Si se produce un error
-	    }
+		} catch (ElementoNoEncontradoExcepcion | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Utilidades.mostrarMensaje("Error", "El correo no se ha podido enviar correctamente");
+		}
+
 	}
 
-	public List<String> devolverCategorias(){
+	public List<String> devolverCategorias() {
 		return adminEJB.devolverCategorias();
 	}
 
-	public Categoria devolverCategoria (String nombre) {
+	public Categoria devolverCategoria(String nombre) {
 		return adminEJB.devolverCategoria(nombre);
 	}
 }
