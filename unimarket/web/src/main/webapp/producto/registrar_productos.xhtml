@@ -10,19 +10,21 @@
 	<ui:define name="contenido">
 		<h:form>
 			<p:panelGrid columns="2" border="1">
+				<p:outputLabel value="Nombre del usuario: " />
+				<p:outputLabel value="#{productoBean.usuario.nombre}" />
 				<p:outputLabel value="Nombre" />
 				<p:inputText value="#{productoBean.nombre}" />
 				<p:outputLabel value="Descripcion" />
 				<p:inputText value="#{productoBean.descripcion}" />
 				<p:outputLabel value="Precio" />
-				<p:inputNumber value="#{productoBean.precio}" >
-				<f:converter converterId="javax.faces.Double" />
+				<p:inputNumber value="#{productoBean.precio}">
+					<f:converter converterId="javax.faces.Double" />
 				</p:inputNumber>
 				<p:outputLabel value="Fecha limite" />
 				<p:datePicker value="#{productoBean.fecha_limite}" />
-				<p:outputLabel value="Cantidad"/>
+				<p:outputLabel value="Cantidad" />
 				<p:inputNumber value="#{productoBean.cantidad}">
-				<f:converter converterId="javax.faces.Integer" />
+					<f:converter converterId="javax.faces.Integer" />
 				</p:inputNumber>
 				<p:outputLabel value="Categoria" />
 				<p:selectOneMenu value="#{productoBean.categoria}" effect="fade"

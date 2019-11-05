@@ -10,10 +10,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Named;
+import javax.faces.annotation.ManagedProperty;
+import javax.inject.Inject;
 
 import org.primefaces.model.UploadedFile;
 
 import com.taheos.ejbs.UsuarioEJB;
+import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Disponibilidad;
@@ -67,7 +70,8 @@ public class ProductoBean {
 
 	private List<Producto> productos;
 		
-	private Usuario usuario;
+	@Inject @ManagedProperty(value = "#{seguridadBean.usuario}")
+	private Persona usuario;
 	
 	private Producto producto;
 
@@ -77,8 +81,11 @@ public class ProductoBean {
 
 		try {
 			
+			String img = "";
+			ArrayList<String> imgs = new ArrayList<String>();
+			imgs.add(img);
 			Producto p = new Producto();
-			p.setUsuario(usuario);
+			p.setUsuario((Usuario)usuario);
 			p.setPrecio(precio);
 			p.setNombre(nombre);
 			p.setFecha_limite(fecha_limite);
@@ -86,14 +93,15 @@ public class ProductoBean {
 			p.setDescripcion(descripcion);
 			p.setCategoria(usuarioEJB.devolverCategoria(categoria));
 			p.setCantidad(cantidad);
-			p.setImagen(new ArrayList<String>(imagen.getFileNames()));
+			p.setImagen(imgs);
 			p.setCalificacion(5);
 			usuarioEJB.registrarProducto(p);
 			Util.mostrarMensaje("Exito", "Registro Existoso");
-			
+			productos = usuarioEJB.listarProductos();
 			return "/producto/productos";
 		} catch (Exception e) {
-			Util.mostrarMensaje("Error", "Error");
+			Util.mostrarMensaje(e.getMessage(), e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 
@@ -184,7 +192,7 @@ public class ProductoBean {
 		this.usuarios = usuarios;
 	}
 
-	public Usuario getUsuario() {
+	public Persona getUsuario() {
 		return usuario;
 	}
 

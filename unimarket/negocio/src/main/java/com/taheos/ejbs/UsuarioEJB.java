@@ -570,16 +570,12 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	 * @throws ElementoNoEncontradoExcepcion 
 	 */
 	public Producto registrarProducto(Producto producto) throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
-		if (buscarProducto(producto.getId() + "") != null) {
-			throw new ElementoRepetidoExcepcion("Ya existe un producto con ese nombre");
-		} else {
 			try {
 				entityManager.persist(producto);
 				return producto;
 			} catch (Exception e) {
 				return null;
 			}
-		}
 	}
 
 	/**
