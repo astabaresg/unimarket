@@ -14,7 +14,7 @@
         <dependent-module archiveName="persistencia.jar" deploy-path="/lib" handle="module:/resource/persistencia/persistencia">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="web.war" deploy-path="/" handle="module:/resource/web-huq/web-huq">
+        <dependent-module archiveName="web.war" deploy-path="/" handle="module:/resource/web/web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
