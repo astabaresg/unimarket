@@ -35,7 +35,7 @@ public interface UsuarioEJBRemote {
 	 * @param usuario es la persona que desea registrarse
 	 * @throws Exception clase que nos permite lanzar una excepcion
 	 */
-	public void registrarUsuario(Usuario usuario) throws Exception;
+	Usuario registrarUsuario(Usuario usuario) throws Exception;
 
 	/**
 	 * permite buscar una personas usando su email

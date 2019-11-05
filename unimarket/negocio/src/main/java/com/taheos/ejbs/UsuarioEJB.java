@@ -99,19 +99,23 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 * Permite a un usuario registrarse s
+	 * Sirve para registrar un usuario
 	 * 
-	 * @param usuario es la persona que desea registrarse
-	 * @throws Exception clase que nos permite lanzar una excepcion
+	 * @param usuario
+	 * @return
+	 * @throws ElementoRepetidoExcepcion
 	 */
-	public void registrarUsuario(Usuario usuario) throws Exception {
-		if (entityManager.find(Usuario.class, usuario.getClave()) != null) {
-			throw new Exception("El usuario ya se encuentra registrado");
-		}
+	public Usuario registrarUsuario(Usuario usuario) throws ElementoRepetidoExcepcion {
 		if (buscarPersonaPorEmail(usuario.getCorreo()) != null) {
-			throw new Exception("El email ya se encuentra en uso");
+			throw new ElementoRepetidoExcepcion("Ya existe un usuario con ese nombre");
+		} else {
+			try {
+				entityManager.persist(usuario);
+				return usuario;
+			} catch (Exception e) {
+				return null;
+			}
 		}
-		entityManager.persist(usuario);
 	}
 
 	/**
