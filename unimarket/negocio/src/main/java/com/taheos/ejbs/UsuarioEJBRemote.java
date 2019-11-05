@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.taheos.excepciones.ElementoNoEncontradoExcepcion;
 import com.taheos.unimarket.entidades.Comentario;
 import com.taheos.unimarket.entidades.Compra;
 import com.taheos.unimarket.entidades.DetalleCompra;
@@ -158,4 +159,11 @@ public interface UsuarioEJBRemote {
 	 * @param p es la Id de el producto 
 	 */
 	public void eliminarProductoVenta(String u, Long p) ;
+	/**
+	 * Metodo que permite buscar un usuario
+	 * @param cedula
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	Usuario buscarUsuario(String cedula) throws ElementoNoEncontradoExcepcion;
 }

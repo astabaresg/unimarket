@@ -115,6 +115,24 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
+	 * Metodo que permite buscar un usuario
+	 * @param cedula
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public Usuario buscarUsuario(String cedula) throws ElementoNoEncontradoExcepcion {
+		if (entityManager.find(Persona.class, cedula) == null) {
+			throw new ElementoNoEncontradoExcepcion("El usuario que está buscando no se encuentra registrado");
+		}
+
+		try {
+			Usuario aux = entityManager.find(Usuario.class, cedula);
+			return aux;
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	/**
 	 * permite buscar una personas usando su email
 	 * 
 	 * @param email email de la presona
