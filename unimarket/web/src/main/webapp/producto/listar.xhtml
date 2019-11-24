@@ -83,63 +83,66 @@
 
 				</h:panelGrid>
 			</h:form>
-			<p:dataView var="producto" value="#{productoBean.productos}"
-				rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
-				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+			<h:form>
+				<p:dataView var="producto" value="#{productoBean.productos}"
+					rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-				<p:dataViewGridItem>
-					<p:panel header="#{producto.id}" style="text-align:center">
-						<h:panelGrid columns="1" style="width:100%">
-							<p:graphicImage name="tv.jpg" style="width:350px" />
+					<p:dataViewGridItem>
+						<p:panel header="#{producto.id}" style="text-align:center">
+							<h:panelGrid columns="1" style="width:100%">
+								<p:graphicImage name="tv.jpg" style="width:350px" />
 
-							<h:outputText value="#{producto.nombre}" />
+								<h:outputText value="#{producto.nombre}" />
 
-
-							<h:outputText value="Calificacion:" />
-							<p:rating value="#{productoBean.calificacionParcial}" stars="5"
-								cancel="false" onRate="alert('Escogiste ' + value)" />
-							<h:commandButton value="Calificar"
-								action="#{productoBean.calificarProducto}">
-								<f:setPropertyActionListener value="#{producto}"
-									target="#{productoBean.productoSelecionado}" />
-							</h:commandButton>
-						</h:panelGrid>
-					</p:panel>
-				</p:dataViewGridItem>
-
-				<p:dataViewListItem>
-					<h:panelGrid columns="3" style="width:100%"
-						columnClasses="logo,detail">
-						<p:graphicImage name="tv.jpg" style="width:300px" />
-
-						<p:outputPanel>
-							<h:panelGrid columns="2" cellpadding="5">
-								<h:outputText value="Id:" />
-								<h:outputText value="#{producto.id}" style="font-weight: bold" />
-
-								<h:outputText value="Nombre:" />
-								<h:outputText value="#{producto.nombre}"
-									style="font-weight: bold" />
-
-								<h:outputText value="Precio:" />
-								<h:outputText value="#{producto.precio}"
-									style="font-weight: bold" />
 
 								<h:outputText value="Calificacion:" />
 								<p:rating value="#{productoBean.calificacionParcial}" stars="5"
 									cancel="false" onRate="alert('Escogiste ' + value)" />
-								<h:commandButton value="Calificar"
+								<h:commandButton value="Calificar" id="c1"
 									action="#{productoBean.calificarProducto}">
 									<f:setPropertyActionListener value="#{producto}"
 										target="#{productoBean.productoSelecionado}" />
 								</h:commandButton>
+								<p:message for="c1" />
 							</h:panelGrid>
-						</p:outputPanel>
-					</h:panelGrid>
-				</p:dataViewListItem>
-			</p:dataView>
+						</p:panel>
+					</p:dataViewGridItem>
 
+					<p:dataViewListItem>
+						<h:panelGrid columns="3" style="width:100%"
+							columnClasses="logo,detail">
+							<p:graphicImage name="tv.jpg" style="width:300px" />
+
+							<p:outputPanel>
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputText value="Id:" />
+									<h:outputText value="#{producto.id}" style="font-weight: bold" />
+
+									<h:outputText value="Nombre:" />
+									<h:outputText value="#{producto.nombre}"
+										style="font-weight: bold" />
+
+									<h:outputText value="Precio:" />
+									<h:outputText value="#{producto.precio}"
+										style="font-weight: bold" />
+
+									<h:outputText value="Calificacion:" />
+									<p:rating value="#{productoBean.calificacionParcial}" stars="5"
+										cancel="false" onRate="alert('Escogiste ' + value)" />
+									<h:commandButton value="Calificar" id="c2"
+										action="#{productoBean.calificarProducto}">
+										<f:setPropertyActionListener value="#{producto}"
+											target="#{productoBean.productoSelecionado}" />
+									</h:commandButton>
+									<p:message for="c2" />
+								</h:panelGrid>
+							</p:outputPanel>
+						</h:panelGrid>
+					</p:dataViewListItem>
+				</p:dataView>
+			</h:form>
 		</h:body>
 	</ui:define>
 
