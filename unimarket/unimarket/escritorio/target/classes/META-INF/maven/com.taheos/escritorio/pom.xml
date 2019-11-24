@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.taheos</groupId>
+		<artifactId>unimarket</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>escritorio</artifactId>
+	<name>escritorio</name>
+	<description>interfaz de escritorio para la aplicacion unimarket</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>5.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfoenix</groupId>
+			<artifactId>jfoenix</artifactId>
+			<version>9.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfoenix</groupId>
+			<artifactId>jfoenix</artifactId>
+			<version>8.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taheos</groupId>
+			<artifactId>negocio</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.taheos</groupId>
+			<artifactId>persistencia</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>

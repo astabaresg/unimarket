@@ -1,0 +1,24 @@
+{
+"Calificacion":[
+	{
+	"ID_CALIFICACION": 100,
+	"PUNTAJE": 33.4,
+	"PRODUCTO_ID": 1234,
+	"USUARIO_ID": "03"
+	}
+	,
+	{
+	"ID_CALIFICACION": 101,
+	"PUNTAJE": 55.7,
+	"PRODUCTO_ID": 4321,
+	"USUARIO_ID": "03"
+	}
+	,
+	{
+	"ID_CALIFICACION": 102,
+	"PUNTAJE": 100.0,
+	"PRODUCTO_ID": 6789,
+	"USUARIO_ID": "02"
+	}
+	]
+}

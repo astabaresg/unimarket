@@ -1,0 +1,22 @@
+{
+	"COMENTARIO": [
+		{
+			"id_comentario": 1,
+			"usuario_id": "02",
+			"producto_id": 1234,
+			"texto": "El mejor"
+		},
+		{
+			"id_comentario": 2,
+			"usuario_id": "02",
+			"producto_id": 4321,
+			"texto": "El peor"
+		},
+		{
+			"id_comentario": 3,
+			"usuario_id": "03",
+			"producto_id": 6789,
+			"texto": "meh"
+		}
+	]
+}

@@ -1,0 +1,37 @@
+{
+	"PRODUCTO": [
+		{
+			"id": 1234,
+			"nombre": "Pc ASUS",
+			"descripcion": "Pc ASUS Gamer",
+			"precio": 5000000.0,
+			"disponibilidad": "DISPONIBLE",
+			"categoria": "TECNOLOGIA",
+			"fecha_limite": "2019-09-25",
+			"cantidad": 10,
+			"calificacion": 9.5
+		},
+		{
+			"id": 4321,
+			"nombre": "Celular Samsung",
+			"descripcion": "Celular Samsung s10+ nuevo",
+			"precio": 3000000.0,
+			"disponibilidad": "DISPONIBLE",
+			"categoria": "TECNOLOGIA",
+			"fecha_limite": "2019-08-25",
+			"cantidad": 20,
+			"calificacion": 9.7
+		},
+		{
+			"id": 6789,
+			"nombre": "Reloj Cassio",
+			"descripcion": "Reloj deporttivo Cassio",
+			"precio": 500000.0,
+			"disponibilidad": "DISPONIBLE",
+			"categoria": "JOYAS",
+			"fecha_limite": "2019-07-17",
+			"cantidad": 8,
+			"calificacion": 8.4
+		}
+	]
+}

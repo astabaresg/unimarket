@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//Sun Microsystems, Inc.//DTD Application Server 9.0 Resource Definitions //EN" "http://www.sun.com/software/appserver/dtds/sun-resources_1_3.dtd">
+<resources>
+	<jdbc-connection-pool name="uniMarket_pool"
+		datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
+		res-type="javax.sql.DataSource">
+		<property name="user" value="root" />
+		<property name="password" value="sebastian2616" />
+		<property name="url" value="jdbc:mysql://localhost:3306/unimarket" />
+	</jdbc-connection-pool>
+	<jdbc-resource enabled="true" jndi-name="jdbc/unimarket"
+		object-type="user" pool-name="uniMarket_pool" />
+</resources>

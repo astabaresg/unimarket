@@ -52,6 +52,8 @@
 								ajax="false" />
 							<p:menuitem value="Registrar producto"
 								action="/producto/registrar_productos" ajax="false" />
+								<p:menuitem value="Mis productos"
+								action="/producto/listarProductosUsuario" ajax="false" />
 						</p:submenu>
 						<p:submenu label="Mis datos" rendered="#{seguridadBean.usuarios}">
 							<p:menuitem value="Modificar mis datos"

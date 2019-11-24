@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: felip
+Class-Path: negocio-0.0.1-SNAPSHOT.jar javax.mail-api-1.4.7.jar activa
+ tion-1.1.jar persistencia-0.0.1-SNAPSHOT.jar
+Build-Jdk: 1.8.0_201
+Created-By: Maven Integration for Eclipse
+

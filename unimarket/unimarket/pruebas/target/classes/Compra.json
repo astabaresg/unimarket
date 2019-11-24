@@ -1,0 +1,22 @@
+{
+	"COMPRA": [
+		{
+			"id_compra": 1324,
+			"usuario_id": "02",
+			"total_compra": 20000.0,
+			"metodoPago": "EFECTIVO"
+		},
+		{
+			"id_compra": 4321,
+			"usuario_id": "03",
+			"total_compra": 30000.0,
+			"metodoPago": "CREDITO"
+		},
+		{
+			"id_compra": 12345,
+			"usuario_id": "02",
+			"total_compra": 40000.0,
+			"metodoPago": "TARJETA"
+		}
+	]
+}
