@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+	<ui:define name="contenido">
+		<h:body>
+			<h:form id="form">
+				<h:panelGrid columns="5">
+
+					<p:outputLabel for="filtro" value="Filtro: " />
+
+					<p:selectOneListbox id="filtro"
+						value="#{productoBean.seleccionFiltro}">
+						<f:selectItem itemLabel="Busqueda General" itemValue="1" />
+						<f:selectItem itemLabel="Busqueda por categoria" itemValue="2" />
+						<f:selectItem itemLabel="Busqueda por precio" itemValue="3" />
+					</p:selectOneListbox>
+					<p:message for="filtro" />
+
+					<p:commandButton value="Filtrar" id="button"
+						action="#{productoBean.cambiarLista}" update="form"
+						style="margin-right:20px;" icon="pi pi-save" />
+					<h:panelGroup rendered="#{productoBean.busqueda1}">
+
+						<p:commandButton value="Todos" id="button1"
+							action="#{productoBean.cambiarVista}" ajax="false"
+							style="margin-right:20px;" icon="pi pi-save" />
+
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{productoBean.busqueda2}">
+
+						<p:outputLabel value="Categoria: " />
+
+						<p:selectOneListbox id="categoria" value="#{productoBean.dato1}"
+							required="true" requiredMessage="Debe selecionar una opcion">
+							<f:selectItem itemLabel="TECNOLOGIA" itemValue="TECNOLOGIA" />
+							<f:selectItem itemLabel="DEPORTE" itemValue="DEPORTE" />
+							<f:selectItem itemLabel="MODA" itemValue="MODA" />
+							<f:selectItem itemLabel="LIBROS" itemValue="LIBROS" />
+							<f:selectItem itemLabel="JOYAS" itemValue="JOYAS" />
+						</p:selectOneListbox>
+
+						<p:message for="categoria" />
+
+						<p:commandButton value="Filtrar categoria" id="button2"
+							action="#{productoBean.cambiarVista}" ajax="false"
+							style="margin-right:20px;" icon="pi pi-save" />
+
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{productoBean.busqueda3}">
+
+						<p:outputLabel value="Precio inicial: " />
+						<p:inputText id="precioIni" value="#{productoBean.dato2}"
+							required="true"
+							requiredMessage="Debe introducir un precio inicial">
+							<f:validator validatorId="vPrecio" />
+						</p:inputText>
+						<p:message for="precioIni" />
+
+						<p:outputLabel value="Precio Final: " />
+						<p:inputText id="precioFin" value="#{productoBean.dato3}"
+							required="true"
+							requiredMessage="Debe introducir un precio final ">
+							<f:validator validatorId="vPrecio" />
+						</p:inputText>
+						<p:message for="precioFin" />
+
+						<p:commandButton value="Filtrar precio" id="button3"
+							action="#{productoBean.cambiarVista}" ajax="false"
+							style="margin-right:20px;" icon="pi pi-save" />
+
+
+					</h:panelGroup>
+
+				</h:panelGrid>
+			</h:form>
+			<p:dataView var="producto" value="#{productoBean.productos}"
+				rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+				<p:dataViewGridItem>
+					<p:panel header="#{producto.id}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<p:graphicImage name="tv.jpg" style="width:350px" />
+
+							<h:outputText value="#{producto.nombre}" />
+
+
+							<h:outputText value="Calificacion:" />
+							<p:rating value="#{productoBean.calificacionParcial}" stars="5"
+								cancel="false" onRate="alert('Escogiste ' + value)" />
+							<h:commandButton value="Calificar"
+								action="#{productoBean.calificarProducto}">
+								<f:setPropertyActionListener value="#{producto}"
+									target="#{productoBean.productoSelecionado}" />
+							</h:commandButton>
+						</h:panelGrid>
+					</p:panel>
+				</p:dataViewGridItem>
+
+				<p:dataViewListItem>
+					<h:panelGrid columns="3" style="width:100%"
+						columnClasses="logo,detail">
+						<p:graphicImage name="tv.jpg" style="width:300px" />
+
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputText value="Id:" />
+								<h:outputText value="#{producto.id}" style="font-weight: bold" />
+
+								<h:outputText value="Nombre:" />
+								<h:outputText value="#{producto.nombre}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Precio:" />
+								<h:outputText value="#{producto.precio}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Calificacion:" />
+								<p:rating value="#{productoBean.calificacionParcial}" stars="5"
+									cancel="false" onRate="alert('Escogiste ' + value)" />
+								<h:commandButton value="Calificar"
+									action="#{productoBean.calificarProducto}">
+									<f:setPropertyActionListener value="#{producto}"
+										target="#{productoBean.productoSelecionado}" />
+								</h:commandButton>
+							</h:panelGrid>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:dataViewListItem>
+			</p:dataView>
+
+		</h:body>
+	</ui:define>
+
+</ui:composition>
+</html>

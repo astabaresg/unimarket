@@ -393,7 +393,6 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		Calificacion nueva= new Calificacion();
 		Calificacion buscada=null; 
 		
-		nueva.setId_calificacion(104L);
 		nueva.setPuntaje(puntaje);
 		nueva.setUsuario(usu);
 		nueva.setProducto(p);

@@ -80,30 +80,47 @@ public class ProductoBean {
 	private UploadedFile imagen;
 	
 	//Datos filtro
+	/**
+	 * Sirve par saber que tipo de lista se dejara ver FILTRO
+	 */
 	private boolean busqueda1,busqueda2,busqueda3;
+	/**
+	 * Categoria seleccionada por el Usuario FILTRO
+	 */
 	@NotNull(message = "Debe seleccionar un tipo de producto")
 	private String dato1;
-    
+    /**
+     * precio inicial dado por el usuario FILTRO
+     */
 	@NotNull(message = "Debe tener un precio inicial")
 	private String dato2;
-	
+	/**
+	 * precio final escrito por el usuario FILTRO
+	 */
 	@NotNull(message = "Debe tener un precio final")
 	private String dato3;
-	
+	/**
+	 * Es el usuario que inicio sesion
+	 */
 	private Usuario usuarioIni;
-	
+	/**
+	 * Producto que esta seleccionado en la pagina
+	 */
 	@NotNull
 	private Producto productoSelecionado;
-	
+	/**
+	 * este guardara la calificacion que halla hecho el usuario para un producto
+	 */
+	private String calificacionParcial;
 	
 	/**
 	 * verificamos cual es el filtro que queremos
 	 */
+	@NotNull(message = "Debe seleccionar una calificacion ")
 	private String seleccionFiltro;
 	public String registrar() {
 
 		try {
-			
 			String img = "";
 			ArrayList<String> imgs = new ArrayList<String>();
 			imgs.add(img);
@@ -129,7 +146,23 @@ public class ProductoBean {
 		}
 
 	}
-
+	/**
+	 * calificamos un producto
+	 */
+	public void calificarProducto() {
+		try {
+			double d= Double.parseDouble(calificacionParcial);
+			usuarioEJB.calificarProducto(usuarioIni, productoSelecionado,d);
+			Util.mostrarMensaje("Exito", "Calificacion exitosa");
+		} catch (Exception e) {
+			Util.mostrarMensaje("Fallo", "Calificacion no exitosa, aun no a seleccionado la cantidad de extrellas");
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Eliminamos el producto de la tabla de productos
+	 * @return recargamos la pagina
+	 */
 	public String eliminar() {
 
 		try {
@@ -145,7 +178,10 @@ public class ProductoBean {
 		}
 
 	}
-	
+	/**
+	 * Eliminamos el producto de la lista de el usuario 
+	 * @return
+	 */
 	public String eliminarProductoUsuario() {
 
 		try {
@@ -192,7 +228,11 @@ public class ProductoBean {
 	     busqueda3=true;
 		}
 	}
-	
+	/**
+	 * Retornamos la categoria dado un String
+	 * @param valor un Enum equivalente a el String
+	 * @return el enum de el String
+	 */
 	public Categoria devolverCategoria(String valor) {
 		if(valor.equals("TECNOLOGIA")) {
 			return Categoria.TECNOLOGIA;
@@ -210,7 +250,7 @@ public class ProductoBean {
 	@PostConstruct
 	private void init() {
 		productos = usuarioEJB.listarProductos();
-		//usuarioIni=(Usuario)usuario;
+		usuarioIni=(Usuario)usuario;
 		busqueda1=false;
 		busqueda2=false;
 		busqueda3=false;
@@ -391,6 +431,13 @@ public class ProductoBean {
 	public void setProductoSelecionado(Producto productoSelecionado) {
 		this.productoSelecionado = productoSelecionado;
 	}
+	public String getCalificacionParcial() {
+		return calificacionParcial;
+	}
+	public void setCalificacionParcial(String calificacionParcial) {
+		this.calificacionParcial = calificacionParcial;
+	}
+	
 	
 	
 	
