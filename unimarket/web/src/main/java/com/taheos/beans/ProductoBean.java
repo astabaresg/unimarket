@@ -210,7 +210,7 @@ public class ProductoBean {
 	@PostConstruct
 	private void init() {
 		productos = usuarioEJB.listarProductos();
-		usuarioIni=(Usuario)usuario;
+		//usuarioIni=(Usuario)usuario;
 		busqueda1=false;
 		busqueda2=false;
 		busqueda3=false;

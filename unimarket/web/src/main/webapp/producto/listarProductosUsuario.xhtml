@@ -19,7 +19,8 @@
 					<p:selectOneListbox id="filtro"
 						value="#{usuarioProductoBean.seleccion}">
 						<f:selectItem itemLabel="Productos propios" itemValue="1" />
-						<f:selectItem itemLabel="Productos Comprados" itemValue="2" />
+						<f:selectItem itemLabel="Productos en Compras" itemValue="2" />
+						<f:selectItem itemLabel="Productos favoritos" itemValue="3" />
 					</p:selectOneListbox>
 					<p:message for="filtro" />
 
@@ -82,7 +83,7 @@
 					</p:dataView>
 				</h:panelGroup>
 
-				<h:panelGroup rendered="#{!usuarioProductoBean.esProducto}">
+				<h:panelGroup rendered="#{usuarioProductoBean.esCompra}">
 
 					<p:dataView var="compra" value="#{usuarioProductoBean.compras}"
 						rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
@@ -92,9 +93,9 @@
 						<p:dataViewGridItem>
 							<p:panel header="#{compra.id_compra}" style="text-align:center">
 								<h:panelGrid columns="1" style="width:100%">
-									<p:graphicImage name="tv.jpg" style="width:350px" />
+									<p:graphicImage name="factura.jpg" style="width:350px" />
 
-									<h:outputText value=" espacio " />
+									<h:outputText value=" Factura " />
 
 									<p:commandLink update=":form:carDetail"
 										oncomplete="PF('productoDialog').show()"
@@ -162,11 +163,67 @@
 									<p:column headerText="Precio Compra">
 										<h:outputText value="#{detalle.precioCompra}" />
 									</p:column>
+
 								</p:dataTable>
 
 							</p:panelGrid>
 						</p:outputPanel>
 					</p:dialog>
+				</h:panelGroup>
+
+
+				<h:panelGroup rendered="#{usuarioProductoBean.esFavorito}">
+
+					<p:dataView var="fav"
+						value="#{usuarioProductoBean.usuarioIni.favoritos}" rows="12"
+						paginator="true" rowsPerPageTemplate="6,12,16"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+						<p:dataViewGridItem>
+							<p:panel header="#{fav.producto.id}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:graphicImage name="tv.jpg" style="width:350px" />
+									<h:outputText value="#{fav.producto.nombre}" />
+
+									<p:commandButton
+										action="#{usuarioProductoBean.eliminarProductoFavUsuario}"
+										value="Eliminar de favoritos">
+										<f:setPropertyActionListener value="#{fav}"
+											target="#{usuarioProductoBean.favoritoSeleccionado}" />
+									</p:commandButton>
+
+								</h:panelGrid>
+							</p:panel>
+						</p:dataViewGridItem>
+
+						<p:dataViewListItem>
+							<h:panelGrid columns="3" style="width:100%"
+								columnClasses="logo,detail">
+								<p:graphicImage name="tv.jpg" style="width:250px" />
+
+								<p:outputPanel>
+									<h:panelGrid columns="2" cellpadding="5">
+										<h:outputText value="Id:" />
+										<h:outputText value="#{fav.producto.id_compra}"
+											style="font-weight: bold" />
+
+										<h:outputText value="Nombre:" />
+										<h:outputText value="#{fav.producto.nombre}"
+											style="font-weight: bold" />
+
+										<p:commandButton
+											action="#{usuarioProductoBean.eliminarProductoFavUsuario}"
+											value="Eliminar de favoritos">
+											<f:setPropertyActionListener value="#{fav}"
+												target="#{usuarioProductoBean.favoritoSeleccionado}" />
+										</p:commandButton>
+									</h:panelGrid>
+								</p:outputPanel>
+							</h:panelGrid>
+						</p:dataViewListItem>
+					</p:dataView>
+
 				</h:panelGroup>
 			</h:body>
 		</h:form>

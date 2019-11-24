@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
@@ -16,9 +17,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.taheos.unimarket.entidades.Administrador;
+import com.taheos.unimarket.entidades.Compra;
+import com.taheos.unimarket.entidades.DetalleCompra;
 import com.taheos.unimarket.entidades.Producto;
+import com.taheos.unimarket.entidades.Usuario;
 import com.taheos.unimarket.enums.Categoria;
 import com.taheos.unimarket.enums.Disponibilidad;
+import com.taheos.unimarket.enums.MetodoPago;
 
 
 /**
@@ -84,9 +89,31 @@ public class SetupEJB {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-
+			
+			Compra nueva= new Compra();
+			nueva.setUsuario(entityManager.find(Usuario.class, "123"));
+			nueva.setId_compra(3L);
+			nueva.setMetodoPago(MetodoPago.CREDITO);
+			
+			List<DetalleCompra> dCompras= new ArrayList<DetalleCompra>();
+			DetalleCompra dc= new DetalleCompra();
+			
+			dc.setCantidad(3);
+			dc.setCompra(nueva);
+			dc.setProducto(entityManager.find(Producto.class, 1L));
+			dc.setPrecioCompra(dc.getProducto().getPrecio());
+			dc.setPrecioCompra(dc.totalDetalleCompra());
+			
+			dCompras.add(dc);
+			nueva.setDetallesCompra(dCompras);
+			nueva.setTotal_compra(dc.getPrecioCompra());
+			nueva.setTotal_compra(nueva.getTotal_compra());
+			
+			entityManager.persist(nueva);
 
 		}
+		
+		
 	}
 
 }

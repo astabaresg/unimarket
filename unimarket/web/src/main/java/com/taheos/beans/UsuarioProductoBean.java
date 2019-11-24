@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import com.taheos.ejbs.UsuarioEJB;
 import com.taheos.unimarket.entidades.Comentario;
 import com.taheos.unimarket.entidades.Compra;
+import com.taheos.unimarket.entidades.Favorito;
 import com.taheos.unimarket.entidades.Persona;
 import com.taheos.unimarket.entidades.Producto;
 import com.taheos.unimarket.entidades.Usuario;
@@ -32,6 +33,7 @@ public class UsuarioProductoBean {
 	private Usuario usuarioIni;
 	@NotNull
 	private Producto productoSelecionado;
+	private Favorito favoritoSeleccionado;
 	private String seleccion;
 	@Inject @ManagedProperty(value = "#{seguridadBean.usuario}")
 	private Persona usuario;
@@ -39,6 +41,8 @@ public class UsuarioProductoBean {
 	private List<Producto> productos;
 	private List<Compra> compras; 
 	private boolean esProducto;
+	private boolean esCompra;
+	private boolean esFavorito;
 	private Compra compraSeleccionada;
 	@PostConstruct
 	private void init() {
@@ -46,11 +50,16 @@ public class UsuarioProductoBean {
 		productos = usuarioIni.getProductos();
 		compras= usuarioEJB.ListarCompras(usuarioIni.getId());
 		esProducto=true;
+		esCompra=false;
+		esFavorito=false;
 		
 	}
 	
 	
-	
+	/**
+	 * Elimina un producto de la lista de productos propios de el usuario
+	 * @return recarga  la pagina listarProductosUsuario
+	 */
 	public String eliminarProductoUsuario() {
 
 		try {
@@ -59,19 +68,48 @@ public class UsuarioProductoBean {
 			Util.mostrarMensaje("Exito", "Eliminar Existoso");
 
 			productos = usuarioEJB.listarProductos();
-			return "/producto/productos";
+			return "/producto/listarProductosUsuario";
 		} catch (Exception e) {
 			Util.mostrarMensaje(e.getMessage(), e.getMessage());
 			return null;
 		}
 
 	}
-	
+	/**
+	 * Eliminarmos un producto de la lista de fav de un usuario
+	 * @return recarga  la pagina listarProductosUsuario
+	 */
+	public String eliminarProductoFavUsuario() {
+
+		try {
+			usuarioEJB.eliminarListaFavorito(usuarioIni,favoritoSeleccionado.getProductos().getId());
+
+			Util.mostrarMensaje("Exito", "Eliminar Existoso");
+
+			productos = usuarioEJB.listarProductos();
+			return "/producto/listarProductosUsuario";
+		} catch (Exception e) {
+			Util.mostrarMensaje(e.getMessage(), e.getMessage());
+			return null;
+		}
+
+	}
+	/**
+	 * permite que una de las vistas de "listarProductosUsuario" se puedan ver
+	 */
 	public void listarProducos() {
 		if(seleccion.equals("1")) {
 			esProducto=true;
+			esCompra=false;
+			esFavorito=false;
 		}else if (seleccion.equals("2")) {
+			esCompra=true;
+			esFavorito=false;
 			esProducto=false;
+		}else if (seleccion.equals("3")) {
+			esFavorito=true;
+			esProducto=false;
+			esCompra=false;
 		}
 	}
 
@@ -176,9 +214,44 @@ public class UsuarioProductoBean {
 	}
 
 
-
 	public void setCompraSeleccionada(Compra compraSeleccionada) {
 		this.compraSeleccionada = compraSeleccionada;
+	}
+
+
+
+	public boolean isEsFavorito() {
+		return esFavorito;
+	}
+
+
+
+	public void setEsFavorito(boolean esFavorito) {
+		this.esFavorito = esFavorito;
+	}
+
+
+
+	public boolean isEsCompra() {
+		return esCompra;
+	}
+
+
+
+	public void setEsCompra(boolean esCompra) {
+		this.esCompra = esCompra;
+	}
+
+
+
+	public Favorito getFavoritoSeleccionado() {
+		return favoritoSeleccionado;
+	}
+
+
+
+	public void setFavoritoSeleccionado(Favorito favoritoSeleccionado) {
+		this.favoritoSeleccionado = favoritoSeleccionado;
 	}
 	
 	
