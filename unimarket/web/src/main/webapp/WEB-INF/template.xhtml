@@ -11,9 +11,9 @@
 <h:body>
 	<div align="center">
 		<div name="cabecera">
-					
+
 			<p:graphicImage value="#{resource['banner.png']}" stream="false" />
-			
+
 		</div>
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 			<ui:insert name="login">
@@ -23,7 +23,8 @@
 						<p:outputLabel value="Login" />
 						<p:inputText value="#{seguridadBean.usuario.correo}" />
 						<p:outputLabel value="Clave" />
-						<p:password value="#{seguridadBean.usuario.clave}" id="nonFeedback"/>
+						<p:password value="#{seguridadBean.usuario.clave}"
+							id="nonFeedback" />
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar"
 								action="#{seguridadBean.iniciarSesion}" ajax="false" />
@@ -46,22 +47,27 @@
 							<p:commandButton value="Inicio" action="/index" ajax="false" />
 							<p:commandButton value="Cerrar Sesión"
 								action="#{seguridadBean.cerrarSesion}" ajax="false" />
+							<p:commandButton value="Carrito de compras"
+								action="/compra/detalles" ajax="false" />
 						</f:facet>
 						<p:submenu label="Producto" rendered="#{seguridadBean.usuarios}">
 							<p:menuitem value="Productos" action="/producto/productos"
 								ajax="false" />
 							<p:menuitem value="Registrar producto"
 								action="/producto/registrar_productos" ajax="false" />
-								<p:menuitem value="Mis productos"
+							<p:menuitem value="Mis productos"
 								action="/producto/listarProductosUsuario" ajax="false" />
-								<p:menuitem value="Ver productos"
-								action="/producto/listar" ajax="false" />
+							<p:menuitem value="Ver productos" action="/producto/listar"
+								ajax="false" />
 						</p:submenu>
 						<p:submenu label="Mis datos" rendered="#{seguridadBean.usuarios}">
 							<p:menuitem value="Modificar mis datos"
 								action="/usuario/modificar_usuario" ajax="false" />
 						</p:submenu>
+
 					</p:menubar>
+
+
 				</h:form>
 			</ui:insert>
 			<ui:insert name="contenido" />

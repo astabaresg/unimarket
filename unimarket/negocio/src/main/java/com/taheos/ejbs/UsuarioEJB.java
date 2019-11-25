@@ -576,6 +576,71 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 				return null;
 			}
 	}
+	
+	/**
+	 * Sirve para registrar un detalleCompra
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws ElementoRepetidoExcepcion
+	 * @throws ElementoNoEncontradoExcepcion 
+	 */
+	public DetalleCompra registrarDetalleCompra(DetalleCompra detalleCompra) throws ElementoRepetidoExcepcion, ElementoNoEncontradoExcepcion {
+			try {
+				entityManager.persist(detalleCompra);
+				return detalleCompra;
+			} catch (Exception e) {
+				return null;
+			}
+	}
+	
+	
+	/**
+	 * Metodo para eliminar un detalleCompra de la base de datos
+	 * @param codigo
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public boolean eliminarDetalleCompra(String codigo) throws ElementoNoEncontradoExcepcion {
+
+		if (buscarProducto(codigo) == null) {
+			throw new ElementoNoEncontradoExcepcion(
+					"El producto con el codigo: " + codigo + "no se encuentra registrado");
+		}
+		
+		try {
+			TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.BUSCAR_POR_ID, Producto.class);
+			query.setParameter("id", Long.parseLong(codigo));
+			Producto aux = query.getSingleResult();
+			entityManager.remove(aux);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+	/**
+	 * Metodo que permite buscar un detalleCompra
+	 * @param codigo
+	 * @return
+	 * @throws ElementoNoEncontradoExcepcion
+	 */
+	public DetalleCompra buscarDetalleCompra(String codigo) throws ElementoNoEncontradoExcepcion {
+		if (entityManager.find(DetalleCompra.class, Long.parseLong(codigo)) == null) {
+			throw new ElementoNoEncontradoExcepcion("El detalleCompra que está buscando no se encuentra registrado");
+		}
+
+		try {
+			TypedQuery<DetalleCompra> detalleCompra= entityManager.createNamedQuery(DetalleCompra.BUSCAR_POR_ID, DetalleCompra.class);
+			detalleCompra.setParameter("id_detalleCompra", Long.parseLong(codigo));
+			return detalleCompra.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 	/**
 	 * Metodo para eliminar un producto de la base de datos
@@ -592,7 +657,7 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		
 		try {
 			TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.BUSCAR_POR_ID, Producto.class);
-			query.setParameter("id", Long.parseLong(codigo));
+			query.setParameter("id_detalleCompra", Long.parseLong(codigo));
 			Producto aux = query.getSingleResult();
 			entityManager.remove(aux);
 			return true;
@@ -674,6 +739,21 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		try {
 			TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.LISTAR_TODOS,
 					Producto.class);
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * Metodo que sirve para listar todos los detalleCompra registrados
+	 * @return
+	 */
+	public List<DetalleCompra> listarDetalleCompra() {
+		try {
+			TypedQuery<DetalleCompra> query = entityManager.createNamedQuery(DetalleCompra.LISTAR_TODOS,
+					DetalleCompra.class);
 			return query.getResultList();
 		} catch (NoResultException e) {
 			return null;

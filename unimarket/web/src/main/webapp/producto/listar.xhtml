@@ -106,6 +106,13 @@
 										target="#{productoBean.productoSelecionado}" />
 								</h:commandButton>
 								<p:message for="c1" />
+
+								<h:commandButton value="Agregar al carrito" id="c3"
+									action="#{compraBean.registrar}">
+								</h:commandButton>
+								<p:message for="c3" />
+
+
 							</h:panelGrid>
 						</p:panel>
 					</p:dataViewGridItem>
